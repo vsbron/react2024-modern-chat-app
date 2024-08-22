@@ -1,9 +1,14 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 body {
@@ -21,7 +26,6 @@ body {
   background: rgba(17, 25, 40, 0.75);
   backdrop-filter: blur(19px) saturate(180%);
   border: rgba(255, 255, 255, 0.125) 1px solid;
-  border-radius: 12px;
-
+  border-radius: 1rem;
   display: flex;
 }

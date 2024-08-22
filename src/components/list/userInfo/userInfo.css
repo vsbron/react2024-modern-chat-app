@@ -1,0 +1,30 @@
+.user-info {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.icons {
+  display: flex;
+  gap: 2rem;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}

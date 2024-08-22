@@ -1,0 +1,40 @@
+.chat-list {
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+
+    .search__bar {
+      flex: 1;
+      background-color: rgba(17, 25, 40, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      border-radius: 1rem;
+      padding: 1rem;
+
+      .search__input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        flex: 1;
+        height: 2rem;
+      }
+      .search__icon {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    .search__add {
+      width: 3.6rem;
+      height: 3.6rem;
+      background-color: rgba(17, 25, 40, 0.5);
+      padding: 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+  }
+}
