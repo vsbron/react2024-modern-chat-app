@@ -24,7 +24,7 @@ function ChatList() {
 
       <div className="item">
         <img src="./avatar.png" className="item__avatar" alt="" />
-        <div className="list__texts">
+        <div className="item__texts">
           <span>Jane Doe</span>
           <p>Hello</p>
         </div>
@@ -32,7 +32,7 @@ function ChatList() {
 
       <div className="item">
         <img src="./avatar.png" className="item__avatar" alt="" />
-        <div className="list__texts">
+        <div className="item__texts">
           <span>Jane Doe</span>
           <p>Hello</p>
         </div>
