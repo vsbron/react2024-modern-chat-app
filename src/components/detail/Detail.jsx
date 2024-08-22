@@ -2,7 +2,7 @@ import "./detail.css";
 
 function Detail() {
   // Returned JSX
-  return <div className="detail">Detail</div>;
+  return <section className="detail">Detail</section>;
 }
 
 export default Detail;

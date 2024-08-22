@@ -6,10 +6,10 @@ import "./list.css";
 function List() {
   // Returned JSX
   return (
-    <div className="list">
+    <section className="list">
       <UserInfo />
       <ChatList />
-    </div>
+    </section>
   );
 }
 

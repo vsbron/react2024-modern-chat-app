@@ -16,7 +16,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("./bg.jpg");
+  background-image: url("/bg.jpg");
   font-size: 1.6rem;
   color: white;
 }
