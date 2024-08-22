@@ -1,4 +1,7 @@
 .chat-list {
+  /* flex: 1; */
+  overflow: scroll;
+
   .search {
     display: flex;
     align-items: center;
@@ -35,6 +38,38 @@
       padding: 1rem;
       border-radius: 1rem;
       cursor: pointer;
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+      border-bottom: #dddddd35 1px solid;
+    }
+
+    .item__avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      /* object-fit: cover; */
+    }
+    .item__texts {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      span {
+        font-weight: 500;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 300;
+      }
     }
   }
 }

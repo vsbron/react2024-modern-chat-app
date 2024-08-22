@@ -21,6 +21,30 @@ function ChatList() {
           alt=""
         />
       </div>
+
+      <div className="item">
+        <img src="./avatar.png" className="item__avatar" alt="" />
+        <div className="list__texts">
+          <span>Jane Doe</span>
+          <p>Hello</p>
+        </div>
+      </div>
+
+      <div className="item">
+        <img src="./avatar.png" className="item__avatar" alt="" />
+        <div className="list__texts">
+          <span>Jane Doe</span>
+          <p>Hello</p>
+        </div>
+      </div>
+
+      <div className="item">
+        <img src="./avatar.png" className="item__avatar" alt="" />
+        <div className="item__texts">
+          <span>Jane Doe</span>
+          <p>Hello</p>
+        </div>
+      </div>
     </div>
   );
 }
