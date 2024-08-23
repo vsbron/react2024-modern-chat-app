@@ -1,6 +1,6 @@
 .chat-list {
-  /* flex: 1; */
-  overflow: scroll;
+  flex: 1;
+  overflow-x: hidden;
 
   .search {
     display: flex;

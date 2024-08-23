@@ -1,5 +1,5 @@
 import Chat from "./components/chat/Chat";
-import Detail from "./components/detail/Detail";
+import Details from "./components/details/Details";
 import List from "./components/list/List";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <div className="container">
       <List />
       <Chat />
-      <Detail />
+      <Details />
     </div>
   );
 };

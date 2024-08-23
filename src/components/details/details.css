@@ -1,0 +1,98 @@
+.details {
+  flex: 1;
+  overflow-x: hidden;
+
+  .details__user {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: #dddddd35 1px solid;
+
+    .details__user-avatar {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .details__user-name {
+    }
+    .details__user-text {
+    }
+  }
+  .details__info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .details__info-option {
+      .details__info-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span {
+        }
+        img {
+          background-color: rgba(17, 25, 40, 0.3);
+          width: 3rem;
+          height: 3rem;
+          padding: 1rem;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+      }
+      .details__images {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+
+        .details__images-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .details__images-details {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+
+            img {
+              width: 4rem;
+              height: 4rem;
+              border-radius: 5px;
+              /* object-fit: cover; */
+            }
+            span {
+              font-size: 1.4rem;
+              color: lightgray;
+              font-weight: 300;
+            }
+          }
+          .details__images-download {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: rgba(17, 25, 40, 0.3);
+            padding: 1rem;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .details__info-block {
+      padding: 1rem 2rem;
+      background-color: rgba(230, 74, 105, 0.553);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(220, 20, 60, 0.796);
+      }
+    }
+  }
+}

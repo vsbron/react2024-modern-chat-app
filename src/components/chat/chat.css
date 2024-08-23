@@ -55,11 +55,11 @@
   }
 
   .chat-center {
+    overflow-x: hidden;
     padding: 2rem;
-    flex: 1;
-    overflow: scroll;
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 2rem;
 
     .chat-center__message-container {
@@ -91,7 +91,6 @@
           background-color: rgba(17, 25, 40, 0.3);
           border-radius: 1rem;
         }
-
         .chat-center__tiemstamp {
           font-size: 1.3rem;
         }
@@ -100,14 +99,11 @@
       &.chat-center__message-container--own {
         align-self: end;
 
-        .chat-center__texts {
-          .chat-center__message {
-            background-color: #5183fe;
-          }
-
-          .chat-center__tiemstamp {
-            text-align: right;
-          }
+        .chat-center__message {
+          background-color: #5183fe;
+        }
+        .chat-center__tiemstamp {
+          text-align: right;
         }
       }
     }
