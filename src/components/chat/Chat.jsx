@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 
 import "./chat.css";
@@ -7,6 +7,9 @@ function Chat() {
   // State for Emoji Picker module and Input text
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
+
+  // / Reference for the end of the chat
+  const endRef = useRef(null);
 
   // useEffect for closing the Emoji picker once clicked outside or Esc key is pressed
   useEffect(() => {
@@ -28,6 +31,11 @@ function Chat() {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscKeyPress);
     };
+  }, []);
+
+  // useEffect to focus on the end of the chat
+  useEffect(() => {
+    endRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   // Click handler to open emoji window
@@ -133,6 +141,7 @@ function Chat() {
             <span className="chat-center__tiemstamp">1 minute ago</span>
           </div>
         </div>
+        <div ref={endRef}></div>
       </div>
 
       {/* Bottom part */}

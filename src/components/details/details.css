@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     border-bottom: #dddddd35 1px solid;
 
     .details__user-avatar {
@@ -25,7 +25,7 @@
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
 
     .details__info-option {
       .details__info-title {
@@ -83,7 +83,7 @@
       }
     }
     .details__info-block {
-      padding: 1rem 2rem;
+      padding: 1.5rem 2rem;
       background-color: rgba(230, 74, 105, 0.553);
       color: white;
       border: none;
@@ -93,6 +93,14 @@
       &:hover {
         background-color: rgba(220, 20, 60, 0.796);
       }
+    }
+    .details__info-logout {
+      padding: 1rem;
+      background-color: #1a73e8;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
   }
 }

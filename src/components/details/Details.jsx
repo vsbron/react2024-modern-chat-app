@@ -8,7 +8,7 @@ function Details() {
         <img src="./avatar.png" className="details__user-avatar" alt="" />
         <h2 className="details__user-name">Jane Doe</h2>
         <p className="details__user-text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum, dolor sit amet consectetur.
         </p>
       </div>
       <div className="details__info">
@@ -81,6 +81,7 @@ function Details() {
           </div>
         </div>
         <button className="details__info-block">Block user</button>
+        <button className="details__info-logout">Logout</button>
       </div>
     </section>
   );
