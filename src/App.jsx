@@ -6,7 +6,7 @@ import Notifications from "./components/notifications/Notifications";
 
 const App = () => {
   // User const, for testing
-  const user = false;
+  const user = true;
 
   // Returned JSX
   return (

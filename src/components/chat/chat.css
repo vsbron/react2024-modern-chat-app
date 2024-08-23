@@ -22,7 +22,7 @@
         width: 6rem;
         height: 6rem;
         border-radius: 50%;
-        /* object-fit: cover; */
+        object-fit: cover;
       }
 
       .chat-top__texts {
@@ -71,7 +71,7 @@
         width: 3rem;
         height: 3rem;
         border-radius: 50%;
-        /* object-fit: cover; */
+        object-fit: cover;
       }
       .chat-center__texts {
         flex: 1;
@@ -83,7 +83,7 @@
           max-width: 100%;
           align-self: end;
           border-radius: 1rem;
-          /* object-fit: cover; */
+          object-fit: cover;
         }
 
         .chat-center__message {

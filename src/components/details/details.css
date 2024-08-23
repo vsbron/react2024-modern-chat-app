@@ -63,7 +63,7 @@
               width: 4rem;
               height: 4rem;
               border-radius: 5px;
-              /* object-fit: cover; */
+              object-fit: cover;
             }
             span {
               font-size: 1.4rem;

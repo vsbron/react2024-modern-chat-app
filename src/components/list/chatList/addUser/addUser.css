@@ -1,0 +1,60 @@
+.add-user {
+  position: absolute;
+  inset: 0;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  padding: 3rem;
+  background-color: rgba(17, 25, 40, 0.75);
+  border-radius: 1rem;
+
+  .add-user__form {
+    display: flex;
+    gap: 2rem;
+
+    input {
+      padding: 2rem;
+      border-radius: 1rem;
+      border: none;
+      outline: none;
+    }
+    .add-user__search-button {
+      padding: 2rem;
+      background-color: #1a73e8;
+      color: white;
+      border-radius: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .add-user__user {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .add-user__user-details {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .add-user__user-avatar {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .add-user__user-name {
+      }
+    }
+    .add-user__user-button {
+      padding: 1rem;
+      background-color: #1a73e8;
+      color: white;
+      border-radius: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}

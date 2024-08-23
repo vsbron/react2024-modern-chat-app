@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./chatList.css";
+import AddUser from "./addUser/AddUser";
 
 function ChatList() {
   // State for adding user mode
@@ -9,6 +10,7 @@ function ChatList() {
   // Returned JSX
   return (
     <div className="chat-list">
+      {/* Search bar */}
       <div className="search">
         <div className="search__bar">
           <img src="/search.png" className="search__icon" alt="" />
@@ -22,6 +24,7 @@ function ChatList() {
         />
       </div>
 
+      {/* List of chats */}
       <div className="item">
         <img src="./avatar.png" className="item__avatar" alt="" />
         <div className="item__texts">
@@ -45,6 +48,9 @@ function ChatList() {
           <p>Hello</p>
         </div>
       </div>
+
+      {/* Conditional add user modal window */}
+      {addMode && <AddUser />}
     </div>
   );
 }
