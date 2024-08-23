@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./login.css";
+import { toast } from "react-toastify";
 
 function Login() {
   // State for an avatar image
@@ -18,13 +19,20 @@ function Login() {
       });
   };
 
+  // Login handler for the form
+  const handleLogin = (e) => {
+    // Preventing default behaviour
+    e.preventDefault();
+    toast.success("Test");
+  };
+
   // Returned JSX
   return (
     <section className="login">
       {/* Signing in part */}
       <div className="login__item">
         <h2>Welcome back,</h2>
-        <form className="login__form">
+        <form className="login__form" onSubmit={handleLogin}>
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
           <button className="login__button">Sign In</button>
