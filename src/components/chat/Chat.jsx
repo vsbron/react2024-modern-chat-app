@@ -63,7 +63,77 @@ function Chat() {
       </div>
 
       {/* Center part */}
-      <div className="chat-center"></div>
+      <div className="chat-center">
+        <div className="chat-center__message-container">
+          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <div className="chat-center__texts">
+            <p className="chat-center__message">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
+              odio illum distinctio nobis exercitationem ad omnis accusantium
+              ipsam numquam delectus tempora dignissimos.
+            </p>
+            <span className="chat-center__tiemstamp">1 minute ago</span>
+          </div>
+        </div>
+        <div className="chat-center__message-container chat-center__message-container--own">
+          <div className="chat-center__texts">
+            <p className="chat-center__message">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
+              odio illum distinctio nobis exercitationem ad omnis accusantium
+              ipsam numquam delectus tempora dignissimos.
+            </p>
+            <span className="chat-center__tiemstamp">1 minute ago</span>
+          </div>
+        </div>
+        <div className="chat-center__message-container">
+          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <div className="chat-center__texts">
+            <p className="chat-center__message">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
+              odio illum distinctio nobis exercitationem ad omnis accusantium
+              ipsam numquam delectus tempora dignissimos.
+            </p>
+            <span className="chat-center__tiemstamp">1 minute ago</span>
+          </div>
+        </div>
+        <div className="chat-center__message-container">
+          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <div className="chat-center__texts">
+            <p className="chat-center__message">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
+              odio illum distinctio nobis exercitationem ad omnis accusantium
+              ipsam numquam delectus tempora dignissimos.
+            </p>
+            <span className="chat-center__tiemstamp">1 minute ago</span>
+          </div>
+        </div>
+        <div className="chat-center__message-container chat-center__message-container--own">
+          <div className="chat-center__texts">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s"
+              className="chat-center__img"
+              alt=""
+            />
+            <p className="chat-center__message">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
+              odio illum distinctio nobis exercitationem ad omnis accusantium
+              ipsam numquam delectus tempora dignissimos.
+            </p>
+            <span className="chat-center__tiemstamp">1 minute ago</span>
+          </div>
+        </div>
+        <div className="chat-center__message-container">
+          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <div className="chat-center__texts">
+            <p className="chat-center__message">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
+              odio illum distinctio nobis exercitationem ad omnis accusantium
+              ipsam numquam delectus tempora dignissimos.
+            </p>
+            <span className="chat-center__tiemstamp">1 minute ago</span>
+          </div>
+        </div>
+      </div>
 
       {/* Bottom part */}
       <div className="chat-bottom">
@@ -87,7 +157,7 @@ function Chat() {
             alt=""
           />
           <div className="chat-bottom__emoji-picker">
-            {openEmoji && <EmojiPicker onEmojiClick={handleEmoji} />}
+            <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji} />
           </div>
         </div>
         <button className="chat-bottom__send-button">Send</button>
