@@ -1,7 +1,7 @@
 .chat {
   flex: 2;
-  border-left: #dddddd35 1px solid;
-  border-right: #dddddd35 1px solid;
+  border-left: var(--border-default);
+  border-right: var(--border-default);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: #dddddd35 1px solid;
+    border-bottom: var(--border-default);
 
     .chat-top__user {
       display: flex;
@@ -21,7 +21,7 @@
       .chat-top__avatar {
         width: 6rem;
         height: 6rem;
-        border-radius: 50%;
+        border-radius: var(--border-radius-round);
         object-fit: cover;
       }
 
@@ -70,7 +70,7 @@
       .chat-center__avatar {
         width: 3rem;
         height: 3rem;
-        border-radius: 50%;
+        border-radius: var(--border-radius-round);
         object-fit: cover;
       }
       .chat-center__texts {
@@ -82,14 +82,14 @@
         .chat-center__img {
           max-width: 100%;
           align-self: end;
-          border-radius: 1rem;
+          border-radius: var(--border-radius-sm);
           object-fit: cover;
         }
 
         .chat-center__message {
           padding: 2rem;
-          background-color: rgba(17, 25, 40, 0.3);
-          border-radius: 1rem;
+          background-color: rgba(var(--color-main), 0.3);
+          border-radius: var(--border-radius-sm);
         }
         .chat-center__tiemstamp {
           font-size: 1.3rem;
@@ -100,7 +100,7 @@
         align-self: end;
 
         .chat-center__message {
-          background-color: #5183fe;
+          background-color: var(--color-blue-light-1);
         }
         .chat-center__tiemstamp {
           text-align: right;
@@ -114,7 +114,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: #dddddd35 1px solid;
+    border-top: var(--border-default);
     gap: 2rem;
 
     .chat-bottom__icons {
@@ -131,12 +131,12 @@
 
     .chat-bottom__input {
       flex: 1;
-      background-color: rgba(17, 25, 40, 0.5);
+      background-color: rgba(var(--color-main), 0.5);
       border: none;
       outline: none;
-      color: #fff;
+      color: var(--color-white);
       padding: 2rem;
-      border-radius: 1rem;
+      border-radius: var(--border-radius-sm);
       font-size: 1.6rem;
     }
 
@@ -147,12 +147,17 @@
     }
 
     .chat-bottom__send-button {
-      background-color: #5183fe;
-      color: #fff;
+      background-color: var(--color-blue-light-1);
+      color: var(--color-white);
       padding: 1rem 2rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: var(--border-radius-xs);
       cursor: pointer;
+      transition: var(--transition-bg-default);
+
+      &:hover {
+        background-color: var(--color-blue-light-2);
+      }
     }
   }
 }

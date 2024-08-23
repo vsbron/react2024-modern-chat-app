@@ -6,6 +6,24 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+:root {
+  --color-main: 17, 24, 39;
+  --color-blue-1: #1d4ed8;
+  --color-blue-2: #2563eb;
+  --color-blue-light-1: #3b82f6;
+  --color-blue-light-2: #60a5fa;
+  --color-red: 239, 68, 68;
+  --color-white: #f3f4f6;
+  --color-border: #e5e7eb35;
+
+  --border-default: var(--color-border) 1px solid;
+  --border-radius-xs: 0.5rem;
+  --border-radius-sm: 1rem;
+  --border-radius-round: 50%;
+
+  --transition-bg-default: background-color 0.2s ease-out;
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
@@ -19,15 +37,15 @@ body {
   justify-content: center;
   background-image: url("/bg.jpg");
   font-size: 1.6rem;
-  color: white;
+  color: var(--color-white);
 }
 
 .container {
   width: 80vw;
   height: 90vh;
-  background: rgba(17, 25, 40, 0.75);
+  background-color: rgba(var(--color-main), 0.75);
   backdrop-filter: blur(19px) saturate(180%);
   border: rgba(255, 255, 255, 0.125) 1px solid;
-  border-radius: 1rem;
+  border-radius: var(--border-radius-sm);
   display: flex;
 }

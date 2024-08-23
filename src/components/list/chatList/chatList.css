@@ -10,18 +10,18 @@
 
     .search__bar {
       flex: 1;
-      background-color: rgba(17, 25, 40, 0.5);
+      background-color: rgba(var(--color-main), 0.5);
       display: flex;
       align-items: center;
       gap: 2rem;
-      border-radius: 1rem;
+      border-radius: var(--border-radius-sm);
       padding: 1rem;
 
       .search__input {
         background-color: transparent;
         border: none;
         outline: none;
-        color: #fff;
+        color: var(--color-white);
         flex: 1;
         height: 2rem;
       }
@@ -34,9 +34,9 @@
     .search__add {
       width: 3.6rem;
       height: 3.6rem;
-      background-color: rgba(17, 25, 40, 0.5);
+      background-color: rgba(var(--color-main), 0.5);
       padding: 1rem;
-      border-radius: 1rem;
+      border-radius: var(--border-radius-sm);
       cursor: pointer;
     }
   }
@@ -49,13 +49,13 @@
     cursor: pointer;
 
     &:not(:last-of-type) {
-      border-bottom: #dddddd35 1px solid;
+      border-bottom: var(--border-default);
     }
 
     .item__avatar {
       width: 5rem;
       height: 5rem;
-      border-radius: 50%;
+      border-radius: var(--border-radius-round);
       object-fit: cover;
     }
     .item__texts {

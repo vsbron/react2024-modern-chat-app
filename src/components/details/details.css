@@ -8,12 +8,12 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    border-bottom: #dddddd35 1px solid;
+    border-bottom: var(--border-default);
 
     .details__user-avatar {
       width: 10rem;
       height: 10rem;
-      border-radius: 50%;
+      border-radius: var(--border-radius-round);
       object-fit: cover;
     }
     .details__user-name {
@@ -35,11 +35,11 @@
         span {
         }
         img {
-          background-color: rgba(17, 25, 40, 0.3);
+          background-color: rgba(var(--color-main), 0.3);
           width: 3rem;
           height: 3rem;
           padding: 1rem;
-          border-radius: 50%;
+          border-radius: var(--border-radius-round);
           cursor: pointer;
         }
       }
@@ -62,7 +62,7 @@
             img {
               width: 4rem;
               height: 4rem;
-              border-radius: 5px;
+              border-radius: var(--border-radius-xs);
               object-fit: cover;
             }
             span {
@@ -74,8 +74,8 @@
           .details__images-download {
             width: 3rem;
             height: 3rem;
-            border-radius: 50%;
-            background-color: rgba(17, 25, 40, 0.3);
+            border-radius: var(--border-radius-round);
+            background-color: rgba(var(--color-main), 0.3);
             padding: 1rem;
             cursor: pointer;
           }
@@ -84,23 +84,29 @@
     }
     .details__info-block {
       padding: 1.5rem 2rem;
-      background-color: rgba(230, 74, 105, 0.553);
-      color: white;
+      background-color: rgba(var(--color-red), 0.5);
+      color: var(--color-white);
       border: none;
-      border-radius: 5px;
+      border-radius: var(--border-radius-xs);
       cursor: pointer;
+      transition: var(--transition-bg-default);
 
       &:hover {
-        background-color: rgba(220, 20, 60, 0.796);
+        background-color: rgba(var(--color-red), 0.8);
       }
     }
     .details__info-logout {
       padding: 1rem;
-      background-color: #1a73e8;
-      color: #fff;
+      background-color: var(--color-blue-1);
+      color: var(--color-white);
       border: none;
-      border-radius: 5px;
+      border-radius: var(--border-radius-xs);
       cursor: pointer;
+      transition: var(--transition-bg-default);
+
+      &:hover {
+        background-color: var(--color-blue-2);
+      }
     }
   }
 }

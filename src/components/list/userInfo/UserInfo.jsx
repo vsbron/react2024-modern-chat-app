@@ -1,6 +1,7 @@
 import "./userInfo.css";
 
 function UserInfo() {
+  // Returned JSX
   return (
     <div className="user-info">
       <div className="user">

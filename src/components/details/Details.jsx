@@ -4,6 +4,7 @@ function Details() {
   // Returned JSX
   return (
     <section className="details">
+      {/* User info */}
       <div className="details__user">
         <img src="./avatar.png" className="details__user-avatar" alt="" />
         <h2 className="details__user-name">Jane Doe</h2>
@@ -11,6 +12,8 @@ function Details() {
           Lorem ipsum, dolor sit amet consectetur.
         </p>
       </div>
+
+      {/* Various settings for the chat */}
       <div className="details__info">
         <div className="details__info-option">
           <div className="details__info-title">
@@ -80,6 +83,8 @@ function Details() {
             <img src="./arrowUp.png" alt="" />
           </div>
         </div>
+
+        {/* Buttons to block user and to log out? */}
         <button className="details__info-block">Block user</button>
         <button className="details__info-logout">Logout</button>
       </div>

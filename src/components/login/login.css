@@ -24,9 +24,9 @@
         padding: 2rem;
         border: none;
         outline: none;
-        background-color: rgba(17, 25, 40, 0.6);
-        color: white;
-        border-radius: 0.5rem;
+        background-color: rgba(var(--color-main), 0.6);
+        color: var(--color-white);
+        border-radius: var(--border-radius-xs);
       }
     }
     .login__avatar {
@@ -40,7 +40,7 @@
       img {
         width: 5rem;
         height: 5rem;
-        border-radius: 1rem;
+        border-radius: var(--border-radius-sm);
         object-fit: cover;
         opacity: 0.6;
       }
@@ -49,16 +49,21 @@
       width: 100%;
       padding: 2rem;
       border: none;
-      background-color: #1f8ef1;
-      color: white;
-      border-radius: 0.5rem;
+      background-color: var(--color-blue-light-1);
+      color: var(--color-white);
+      border-radius: var(--border-radius-xs);
       cursor: pointer;
       font-weight: 500;
+      transition: var(--transition-bg-default);
+
+      &:hover {
+        background-color: var(--color-blue-light-2);
+      }
     }
   }
   .login__separator {
     height: 80%;
     width: 0.2rem;
-    background-color: #dddddd35;
+    background-color: var(--color-border);
   }
 }
