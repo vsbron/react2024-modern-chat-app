@@ -1,0 +1,17 @@
+.emoji-modal {
+  position: absolute;
+  bottom: 5rem;
+  left: 0;
+  animation: fadeRight 0.2s ease-out forwards;
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

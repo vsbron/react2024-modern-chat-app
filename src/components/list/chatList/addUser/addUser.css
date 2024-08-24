@@ -7,7 +7,7 @@
   padding: 3rem;
   background-color: rgba(var(--color-main), 0.8);
   border-radius: var(--border-radius-sm);
-  animation: appear 0.3s ease-out forwards;
+  animation: appear 0.2s ease-out forwards;
 
   .add-user__form {
     display: flex;

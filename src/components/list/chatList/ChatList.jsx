@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import AddUser from "./addUser/AddUser";
 
-import Avatar from "../../ui/avatar/Avatar";
+import Avatar from "../../../ui/avatar/Avatar";
 
 import "./chatList.css";
 
@@ -55,7 +55,7 @@ function ChatList() {
       </div>
 
       {/* Conditional add user modal window */}
-      {addMode && <AddUser />}
+      {addMode && <AddUser setAddMode={setAddMode} />}
     </>
   );
 }

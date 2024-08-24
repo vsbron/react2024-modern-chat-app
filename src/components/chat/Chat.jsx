@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import EmojiPicker from "emoji-picker-react";
 
-import Avatar from "../ui/avatar/Avatar";
-import Button from "../ui/button/Button";
+import Avatar from "../../ui/avatar/Avatar";
+import Button from "../../ui/button/Button";
 
 import "./chat.css";
+import EmojiModal from "./emojiModal/EmojiModal";
 
 function Chat() {
   // State for Emoji Picker module and Input text
@@ -14,28 +14,6 @@ function Chat() {
   // / Reference for the end of the chat
   const endRef = useRef(null);
 
-  // useEffect for closing the Emoji picker once clicked outside or Esc key is pressed
-  useEffect(() => {
-    // Outside click handler
-    const handleClickOutside = (e) =>
-      !e.target.closest(".chat-bottom__emoji-picker") &&
-      !e.target.className.includes("test") &&
-      setOpenEmoji(false);
-
-    //Escape key press handler
-    const handleEscKeyPress = (e) => e.key === "Escape" && setOpenEmoji(false);
-
-    // Add event listeners
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscKeyPress);
-
-    // Remove event listeners on unmount
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscKeyPress);
-    };
-  }, []);
-
   // useEffect to focus on the end of the chat
   useEffect(() => {
     endRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,12 +22,6 @@ function Chat() {
   // Click handler to open emoji window
   const handleClick = () => {
     setOpenEmoji((open) => !open);
-  };
-
-  // Click handler that adds the emoji after clicking it in the module
-  const handleEmoji = (e) => {
-    setInputText((currentText) => currentText + e.emoji);
-    setOpenEmoji(false);
   };
 
   // Returned JSX
@@ -164,13 +136,16 @@ function Chat() {
         <div className="chat-bottom__icons">
           <img
             src="./emoji.png"
-            className="test"
+            className="emoji-trigger"
             onClick={handleClick}
             alt=""
           />
-          <div className="chat-bottom__emoji-picker">
-            <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji} />
-          </div>
+          {openEmoji && (
+            <EmojiModal
+              setInputText={setInputText}
+              setOpenEmoji={setOpenEmoji}
+            />
+          )}
         </div>
         <Button padding="1rem 2rem">Send</Button>
       </div>

@@ -1,9 +1,18 @@
-import Avatar from "../../../ui/avatar/Avatar";
-import Button from "../../../ui/button/Button";
+import useCloseModal from "../../../../utils/useCloseModal";
+
+import Avatar from "../../../../ui/avatar/Avatar";
+import Button from "../../../../ui/button/Button";
 
 import "./addUser.css";
 
-function AddUser() {
+function AddUser({ setAddMode }) {
+  // Custom hook that adds the click handlers that will close the Add User module
+  useCloseModal({
+    setter: setAddMode,
+    triggerClass: "search__add",
+    modalClass: "add-user",
+  });
+
   // Returned JSX
   return (
     <div className="add-user">

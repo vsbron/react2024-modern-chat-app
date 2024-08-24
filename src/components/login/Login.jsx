@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import Avatar from "../ui/avatar/Avatar";
+import Avatar from "../../ui/avatar/Avatar";
 
 import "./login.css";
 

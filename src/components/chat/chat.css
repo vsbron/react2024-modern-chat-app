@@ -126,11 +126,5 @@
       border-radius: var(--border-radius-sm);
       font-size: 1.6rem;
     }
-
-    .chat-bottom__emoji-picker {
-      position: absolute;
-      bottom: 5rem;
-      left: 0;
-    }
   }
 }
