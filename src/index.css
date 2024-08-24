@@ -14,9 +14,9 @@
   --color-blue-light-2: #60a5fa;
   --color-red: 239, 68, 68;
   --color-white: #f3f4f6;
-  --color-border: #e5e7eb35;
+  --color-gray: #e5e7eb35;
 
-  --border-default: var(--color-border) 1px solid;
+  --border-default: var(--color-gray) 1px solid;
   --border-radius-xs: 0.5rem;
   --border-radius-sm: 1rem;
   --border-radius-round: 50%;

@@ -8,6 +8,7 @@ import { auth, db } from "../../lib/firebase";
 import Avatar from "../../ui/avatar/Avatar";
 
 import "./login.css";
+import upload from "../../lib/upload";
 
 function Login() {
   // State for an avatar image
@@ -15,6 +16,9 @@ function Login() {
     file: null,
     src: "",
   });
+
+  // State for the loading state
+  const [loading, setLoading] = useState(false);
 
   // Image upload handler
   const handleAvatar = (e) => {
@@ -39,18 +43,25 @@ function Login() {
     // Preventing default behavior
     e.preventDefault();
 
+    // Enabling the loading state
+    setLoading(true);
+
     // Getting the form values from form to constants
     const formData = new FormData(e.target);
-    const { username, email, password } = Object.fromEntries(formData);
+    const { username, email, password, avatar } = Object.fromEntries(formData);
 
     try {
       // Sending the request to create a new user
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
+      // Uploading the avatar to the storage
+      const imgUrl = await upload(avatar);
+
       // Creating the entry in the user database with username, email, id and blocked users
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
+        avatar: imgUrl,
         id: res.user.uid,
         blocked: [],
       });
@@ -65,6 +76,9 @@ function Login() {
     } catch (err) {
       console.error(err);
       toast.error(err.message);
+    } finally {
+      // Disabling the loading state
+      setLoading(false);
     }
   };
 
@@ -77,7 +91,9 @@ function Login() {
         <form className="login__form" onSubmit={handleLogin}>
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
-          <button className="login__button">Sign In</button>
+          <button className="login__button" disabled={loading}>
+            {loading ? "Loading..." : "Sign In"}
+          </button>
         </form>
       </div>
 
@@ -97,11 +113,14 @@ function Login() {
             id="file"
             style={{ display: "none" }}
             onChange={handleAvatar}
+            name="avatar"
           />
           <input type="text" placeholder="Username" name="username" />
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
-          <button className="login__button">Sign Up</button>
+          <button className="login__button" disabled={loading}>
+            {loading ? "Loading..." : "Sign Up"}
+          </button>
         </form>
       </div>
     </section>
