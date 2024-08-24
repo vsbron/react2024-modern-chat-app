@@ -9,13 +9,6 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-
-  img {
-    width: 5rem;
-    height: 5rem;
-    border-radius: var(--border-radius-round);
-    object-fit: cover;
-  }
 }
 
 .icons {

@@ -1,0 +1,4 @@
+.avatar {
+  border-radius: var(--border-radius-round);
+  object-fit: cover;
+}

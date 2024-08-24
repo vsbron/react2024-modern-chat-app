@@ -1,7 +1,10 @@
 import { useState } from "react";
 
-import "./chatList.css";
 import AddUser from "./addUser/AddUser";
+
+import Avatar from "../../ui/avatar/Avatar";
+
+import "./chatList.css";
 
 function ChatList() {
   // State for adding user mode
@@ -27,7 +30,7 @@ function ChatList() {
 
         {/* List of chats */}
         <div className="item">
-          <img src="./avatar.png" className="item__avatar" alt="" />
+          <Avatar size="5rem" />
           <div className="item__texts">
             <span>Jane Doe</span>
             <p>Hello</p>
@@ -35,7 +38,7 @@ function ChatList() {
         </div>
 
         <div className="item">
-          <img src="./avatar.png" className="item__avatar" alt="" />
+          <Avatar size="5rem" />
           <div className="item__texts">
             <span>Jane Doe</span>
             <p>Hello</p>
@@ -43,7 +46,7 @@ function ChatList() {
         </div>
 
         <div className="item">
-          <img src="./avatar.png" className="item__avatar" alt="" />
+          <Avatar size="5rem" />
           <div className="item__texts">
             <span>Jane Doe</span>
             <p>Hello</p>

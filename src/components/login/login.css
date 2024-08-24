@@ -3,7 +3,6 @@
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 10rem;
 
   .login__item {
     flex: 1;
@@ -36,15 +35,8 @@
       justify-content: space-between;
       cursor: pointer;
       text-decoration: underline;
-
-      img {
-        width: 5rem;
-        height: 5rem;
-        border-radius: var(--border-radius-sm);
-        object-fit: cover;
-        opacity: 0.6;
-      }
     }
+
     .login__button {
       width: 100%;
       padding: 2rem;

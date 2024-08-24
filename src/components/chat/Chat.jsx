@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 
+import Avatar from "../ui/avatar/Avatar";
+import Button from "../ui/button/Button";
+
 import "./chat.css";
 
 function Chat() {
@@ -55,7 +58,7 @@ function Chat() {
       {/* Top part */}
       <div className="chat-top">
         <div className="chat-top__user">
-          <img src="./avatar.png" className="chat-top__avatar" alt="" />
+          <Avatar size="6rem" />
           <div className="chat-top__texts">
             <span className="chat-top__user-name">Jane Doe</span>
             <p className="chat-top__user-description">
@@ -73,7 +76,7 @@ function Chat() {
       {/* Center part */}
       <div className="chat-center">
         <div className="chat-center__message-container">
-          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <Avatar size="3rem" />
           <div className="chat-center__texts">
             <p className="chat-center__message">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
@@ -94,7 +97,7 @@ function Chat() {
           </div>
         </div>
         <div className="chat-center__message-container">
-          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <Avatar size="3rem" />
           <div className="chat-center__texts">
             <p className="chat-center__message">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
@@ -105,7 +108,7 @@ function Chat() {
           </div>
         </div>
         <div className="chat-center__message-container">
-          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <Avatar size="3rem" />
           <div className="chat-center__texts">
             <p className="chat-center__message">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
@@ -131,7 +134,7 @@ function Chat() {
           </div>
         </div>
         <div className="chat-center__message-container">
-          <img src="./avatar.png" className="chat-center__avatar" alt="" />
+          <Avatar size="3rem" />
           <div className="chat-center__texts">
             <p className="chat-center__message">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
@@ -169,7 +172,7 @@ function Chat() {
             <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji} />
           </div>
         </div>
-        <button className="chat-bottom__send-button">Send</button>
+        <Button padding="1rem 2rem">Send</Button>
       </div>
     </section>
   );

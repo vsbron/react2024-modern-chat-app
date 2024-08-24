@@ -1,0 +1,12 @@
+.button {
+  background-color: var(--color-blue-light-1);
+  color: var(--color-white);
+  border-radius: var(--border-radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-bg-default);
+
+  &:hover {
+    background-color: var(--color-blue-light-2);
+  }
+}

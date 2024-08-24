@@ -1,3 +1,5 @@
+import Avatar from "../ui/avatar/Avatar";
+
 import "./details.css";
 
 function Details() {
@@ -6,7 +8,7 @@ function Details() {
     <section className="details">
       {/* User info */}
       <div className="details__user">
-        <img src="./avatar.png" className="details__user-avatar" alt="" />
+        <Avatar size="10rem" />
         <h2 className="details__user-name">Jane Doe</h2>
         <p className="details__user-text">
           Lorem ipsum, dolor sit amet consectetur.

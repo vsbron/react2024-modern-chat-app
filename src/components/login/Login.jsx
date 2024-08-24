@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+
+import Avatar from "../ui/avatar/Avatar";
 
 import "./login.css";
-import { toast } from "react-toastify";
 
 function Login() {
   // State for an avatar image
@@ -47,7 +49,7 @@ function Login() {
         <h2>Create an Account</h2>
         <form className="login__form">
           <label htmlFor="file" className="login__avatar">
-            <img src={avatar.url || "./avatar.png"} alt="" />
+            <Avatar size="5rem" avatarUrl={avatar.url} />
             Upload an image
           </label>
           <input

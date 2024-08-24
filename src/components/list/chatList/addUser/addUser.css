@@ -20,19 +20,6 @@
       outline: none;
       min-width: 30rem;
     }
-    .add-user__search-button {
-      padding: 2rem;
-      background-color: var(--color-blue-light-1);
-      color: var(--color-white);
-      border-radius: var(--border-radius-sm);
-      border: none;
-      cursor: pointer;
-      transition: var(--transition-bg-default);
-
-      &:hover {
-        background-color: var(--color-blue-light-2);
-      }
-    }
   }
 
   .add-user__user {
@@ -46,26 +33,7 @@
       align-items: center;
       gap: 2rem;
 
-      .add-user__user-avatar {
-        width: 5rem;
-        height: 5rem;
-        border-radius: var(--border-radius-round);
-        object-fit: cover;
-      }
       .add-user__user-name {
-      }
-    }
-    .add-user__user-button {
-      padding: 1rem;
-      background-color: var(--color-blue-light-1);
-      color: var(--color-white);
-      border-radius: var(--border-radius-sm);
-      border: none;
-      cursor: pointer;
-      transition: var(--transition-bg-default);
-
-      &:hover {
-        background-color: var(--color-blue-light-2);
       }
     }
   }

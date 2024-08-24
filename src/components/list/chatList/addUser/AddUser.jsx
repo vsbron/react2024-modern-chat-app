@@ -1,3 +1,6 @@
+import Avatar from "../../../ui/avatar/Avatar";
+import Button from "../../../ui/button/Button";
+
 import "./addUser.css";
 
 function AddUser() {
@@ -7,16 +10,16 @@ function AddUser() {
       {/* Input field for searching users */}
       <form action="" className="add-user__form">
         <input type="text" placeholder="Username" name="username" />
-        <button className="add-user__search-button">Search</button>
+        <Button padding="2rem">Search</Button>
       </form>
 
       {/* Found users list */}
       <div className="add-user__user">
         <div className="add-user__user-details">
-          <img src="./avatar.png" className="add-user__user-avatar" alt="" />
+          <Avatar size="5rem" />
           <span className="add-user__user-name">Jane Doe</span>
         </div>
-        <button className="add-user__user-button">Add user</button>
+        <Button padding="1rem">Add user</Button>
       </div>
     </div>
   );

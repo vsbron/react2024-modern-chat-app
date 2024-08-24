@@ -18,13 +18,6 @@
       align-items: center;
       gap: 2rem;
 
-      .chat-top__avatar {
-        width: 6rem;
-        height: 6rem;
-        border-radius: var(--border-radius-round);
-        object-fit: cover;
-      }
-
       .chat-top__texts {
         display: flex;
         flex-direction: column;
@@ -67,12 +60,6 @@
       display: flex;
       gap: 2rem;
 
-      .chat-center__avatar {
-        width: 3rem;
-        height: 3rem;
-        border-radius: var(--border-radius-round);
-        object-fit: cover;
-      }
       .chat-center__texts {
         flex: 1;
         display: flex;
@@ -144,20 +131,6 @@
       position: absolute;
       bottom: 5rem;
       left: 0;
-    }
-
-    .chat-bottom__send-button {
-      background-color: var(--color-blue-light-1);
-      color: var(--color-white);
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: var(--border-radius-xs);
-      cursor: pointer;
-      transition: var(--transition-bg-default);
-
-      &:hover {
-        background-color: var(--color-blue-light-2);
-      }
     }
   }
 }

@@ -10,12 +10,6 @@
     gap: 1.5rem;
     border-bottom: var(--border-default);
 
-    .details__user-avatar {
-      width: 10rem;
-      height: 10rem;
-      border-radius: var(--border-radius-round);
-      object-fit: cover;
-    }
     .details__user-name {
     }
     .details__user-text {

@@ -1,3 +1,5 @@
+import Avatar from "../../ui/avatar/Avatar";
+
 import "./userInfo.css";
 
 function UserInfo() {
@@ -5,7 +7,7 @@ function UserInfo() {
   return (
     <div className="user-info">
       <div className="user">
-        <img src="./avatar.png" alt="" />
+        <Avatar size="5rem" />
         <h2>John Doe</h2>
       </div>
       <div className="icons">
