@@ -3,12 +3,10 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
 
 const upload = async (file) => {
-  const date = Date.now();
-
   // Creating the storage reference with the image name
   const storageRef = ref(
     storage,
-    `images/${date}-${file.name.toLowerCase().replaceAll(" ", "-")}`
+    `images/${Date.now()}-${file.name.toLowerCase().replaceAll(" ", "-")}`
   );
 
   // Uploading the file we got in the form

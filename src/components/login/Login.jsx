@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 import { auth, db } from "../../lib/firebase";
+import upload from "../../lib/upload";
 
 import Avatar from "../../ui/avatar/Avatar";
 
 import "./login.css";
-import upload from "../../lib/upload";
 
 function Login() {
+  console.log(auth);
   // State for an avatar image
   const [avatar, setAvatar] = useState({
     file: null,
@@ -30,12 +34,30 @@ function Login() {
   };
 
   // Login handler for the form
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     // Preventing default behavior
     e.preventDefault();
 
-    // Showing the message
-    toast.success("Test");
+    // Enabling the loading state
+    setLoading(true);
+
+    // Getting the form values from form to constants
+    const formData = new FormData(e.target);
+    const { email, password } = Object.fromEntries(formData);
+
+    try {
+      // Sending the request to authenticate with the user
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // Showing success message
+      toast.success("You have successfully logged in");
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message);
+    } finally {
+      // Disabling the loading state
+      setLoading(false);
+    }
   };
 
   // Registration handler that creates the user in the database
