@@ -20,7 +20,7 @@ const App = () => {
       fetchUserInfo(user?.uid);
     });
 
-    // Cleanup function when app unmounts
+    // Cleanup function when component unmounts
     return () => {
       unSub();
     };
