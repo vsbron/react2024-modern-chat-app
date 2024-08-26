@@ -1,8 +1,15 @@
+import { auth } from "../../lib/firebase";
+
 import Avatar from "../../ui/avatar/Avatar";
 
 import "./details.css";
 
 function Details() {
+  // Click handler for logout button
+  const logoutHandle = () => {
+    auth.signOut();
+  };
+
   // Returned JSX
   return (
     <section className="details">
@@ -88,7 +95,9 @@ function Details() {
 
         {/* Buttons to block user and to log out? */}
         <button className="details__info-block">Block user</button>
-        <button className="details__info-logout">Logout</button>
+        <button className="details__info-logout" onClick={logoutHandle}>
+          Logout
+        </button>
       </div>
     </section>
   );

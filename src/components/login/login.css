@@ -60,6 +60,6 @@
   .login__separator {
     height: 80%;
     width: 0.2rem;
-    background-color: var(--color-border);
+    background-color: var(--color-gray);
   }
 }

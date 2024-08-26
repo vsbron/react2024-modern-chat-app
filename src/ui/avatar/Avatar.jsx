@@ -1,9 +1,10 @@
 import "./avatar.css";
 
-function Avatar({ avatarUrl = "./avatar.png", alt, size }) {
+function Avatar({ src = "./avatar.png", alt, size }) {
+  // Returned JSX
   return (
     <img
-      src={`${avatarUrl}`}
+      src={src}
       className="avatar"
       style={{ width: size, height: size }}
       alt={alt}

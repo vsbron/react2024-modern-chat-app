@@ -49,3 +49,10 @@ body {
   border-radius: var(--border-radius-sm);
   display: flex;
 }
+
+.loading {
+  padding: 5rem;
+  font-size: 3.6rem;
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(var(--color-main), 0.9);
+}

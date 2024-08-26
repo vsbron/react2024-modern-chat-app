@@ -15,6 +15,7 @@ Little chat app SPA written on React with the use of Firebase service
 - Signing Up and Logging In are handled via Firebase service;
 - Styles are handled via Vanilla CSS with BEM;
 - Notifications are handled via Toastify library;
+- State management is handled via Zustand;
 
 ### Live version
 
