@@ -5,7 +5,7 @@ import AddUser from "./addUser/AddUser";
 import Avatar from "../../../ui/avatar/Avatar";
 
 import "./chatList.css";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 import { useUserStore } from "../../../lib/userStore";
 
@@ -19,9 +19,31 @@ function ChatList() {
 
   useEffect(() => {
     // Getting the chats data from the user id in the real time
-    const unSub = onSnapshot(doc(db, "userchats", currentUser.id), (doc) => {
-      setChats(doc.data()); // Setting the chats state
-    });
+    const unSub = onSnapshot(
+      doc(db, "userchats", currentUser.id),
+      // Getting the chats data
+      async (res) => {
+        const items = res.data().chats;
+
+        // From each chat we also need to get the user id using receiverID
+        const promises = items.map(async (item) => {
+          const userDocRef = doc(db, "users", item.receiverId);
+          const userDocSnap = await getDoc(userDocRef);
+
+          // Setting all the user info inside the user const
+          const user = userDocSnap.data();
+
+          // Returning the new object with all the chat data plus the user object
+          return { ...item, user };
+        });
+
+        // Getting all the data form all the promises
+        const chatData = await Promise.all(promises);
+
+        // Setting the chatData state while also sorting it by date
+        setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+      }
+    );
 
     // Cleanup function when component unmounts
     return () => {
