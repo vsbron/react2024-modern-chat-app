@@ -21,7 +21,6 @@ import Avatar from "../../ui/avatar/Avatar";
 import "./login.css";
 
 function Login() {
-  console.log(auth);
   // State for an avatar image
   const [avatar, setAvatar] = useState({
     file: null,
@@ -72,9 +71,6 @@ function Login() {
     // Preventing default behavior
     e.preventDefault();
 
-    // Enabling the loading state
-    setLoading(true);
-
     // Getting the form values from form to constants
     const formData = new FormData(e.target);
     const { username, email, password, avatar } = Object.fromEntries(formData);
@@ -82,7 +78,7 @@ function Login() {
     // Input validation
     if (!username || !email || !password)
       return toast.warn("Please enter inputs!");
-    if (!avatar.file) return toast.warn("Please upload an avatar!");
+    if (!avatar.name) return toast.warn("Please upload an avatar!");
 
     // Checking if username is unique
     const usersRef = collection(db, "users");
@@ -91,6 +87,9 @@ function Login() {
     if (!querySnapshot.empty) {
       return toast.warn("Select another username");
     }
+
+    // Enabling the loading state
+    setLoading(true);
 
     try {
       // Sending the request to create a new user
@@ -147,7 +146,7 @@ function Login() {
         <h2>Create an Account</h2>
         <form className="login__form" onSubmit={handleRegister}>
           <label htmlFor="file" className="login__avatar">
-            <Avatar size="5rem" avatarUrl={avatar.url} />
+            <Avatar size="5rem" src={avatar.url} />
             Upload an image
           </label>
           <input

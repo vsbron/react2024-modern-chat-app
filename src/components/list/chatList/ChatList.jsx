@@ -71,15 +71,15 @@ function ChatList() {
 
         {/* List of chats */}
         {chats.length > 0 &&
-          chats.map((chat, i) => {
+          chats.map((chat, i) => (
             <div className="item" key={i}>
-              <Avatar size="5rem" />
+              <Avatar src={chat.user.avatar} size="5rem" />
               <div className="item__texts">
-                <span>Jane Doe</span>
-                <p>Hello</p>
+                <span>{chat.user.username}</span>
+                {chat.lastMessage && <p>{chat.lastMessage}</p>}
               </div>
-            </div>;
-          })}
+            </div>
+          ))}
       </div>
       {/* Conditional add user modal window */}
       {addMode && <AddUser setAddMode={setAddMode} />}

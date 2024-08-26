@@ -1,7 +1,18 @@
 import { useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
 import { db } from "../../../../lib/firebase";
+import { useUserStore } from "../../../../lib/userStore";
 import useCloseModal from "../../../../utils/useCloseModal";
 
 import Avatar from "../../../../ui/avatar/Avatar";
@@ -10,8 +21,11 @@ import Button from "../../../../ui/button/Button";
 import "./addUser.css";
 
 function AddUser({ setAddMode }) {
+  // Getting the current user from the store
+  const { currentUser } = useUserStore();
+
   // Setting the state for the user
-  const [user, setUser] = useState(null);
+  const [searchedUser, setSearchedUser] = useState(null);
 
   // Custom hook that adds the click handlers that will close the Add User module
   useCloseModal({
@@ -36,10 +50,50 @@ function AddUser({ setAddMode }) {
 
       // If found user, set the state with user data
       if (!querySnapshot.empty) {
-        setUser(querySnapshot.docs[0].data());
+        setSearchedUser(querySnapshot.docs[0].data());
       }
     } catch (err) {
       console.error(err.message);
+    }
+  };
+
+  // Add user handler
+  const handleAddUser = async () => {
+    // Getting the reference to the database tables
+    const chatRef = collection(db, "chats");
+    const userChatsRef = collection(db, "userchats");
+
+    try {
+      // Creating the new chat reference
+      const newChatRef = doc(chatRef);
+
+      // Setting the new chat with the needed chat details
+      await setDoc(newChatRef, {
+        createdAt: serverTimestamp(),
+        messages: [],
+      });
+
+      // Adding the chat to our chat list
+      await updateDoc(doc(userChatsRef, searchedUser.id), {
+        chats: arrayUnion({
+          chatId: newChatRef.id,
+          lastMessage: "",
+          receiverId: currentUser.id,
+          updatedAt: Date.now(),
+        }),
+      });
+
+      // Adding the chat to the searched user chat list
+      await updateDoc(doc(userChatsRef, currentUser.id), {
+        chats: arrayUnion({
+          chatId: newChatRef.id,
+          lastMessage: "",
+          receiverId: searchedUser.id,
+          updatedAt: Date.now(),
+        }),
+      });
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -53,13 +107,15 @@ function AddUser({ setAddMode }) {
       </form>
 
       {/* Found users list */}
-      {user && (
+      {searchedUser && (
         <div className="add-user__user">
           <div className="add-user__user-details">
-            <Avatar src={user.avatar} size="5rem" />
-            <span className="add-user__user-name">{user.username}</span>
+            <Avatar src={searchedUser.avatar} size="5rem" />
+            <span className="add-user__user-name">{searchedUser.username}</span>
           </div>
-          <Button padding="1rem">Add user</Button>
+          <Button padding="1rem" onClick={handleAddUser}>
+            Add user
+          </Button>
         </div>
       )}
     </div>

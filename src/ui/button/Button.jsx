@@ -1,8 +1,8 @@
 import "./button.css";
 
-function Button({ children, padding }) {
+function Button({ children, padding, onClick }) {
   return (
-    <button className={"button"} style={{ padding: padding }}>
+    <button className={"button"} style={{ padding: padding }} onClick={onClick}>
       {children}
     </button>
   );
