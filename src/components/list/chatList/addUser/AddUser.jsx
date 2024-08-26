@@ -11,7 +11,7 @@ import "./addUser.css";
 
 function AddUser({ setAddMode }) {
   // Setting the state for the user
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   // Custom hook that adds the click handlers that will close the Add User module
   useCloseModal({
