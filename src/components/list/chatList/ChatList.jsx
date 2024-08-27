@@ -21,8 +21,6 @@ function ChatList() {
   // Getting the block/unblock function from the store
   const { chatId, changeChat } = useChatStore();
 
-  console.log(chatId);
-
   useEffect(() => {
     // Getting the chats data from the user id in the real time
     const unSub = onSnapshot(
@@ -58,8 +56,6 @@ function ChatList() {
   }, [currentUser.id]);
 
   const handleSelect = async (chat) => {
-    console.log(chat);
-
     // Calling the change chat function
     changeChat(chat.chatId, chat.user);
   };

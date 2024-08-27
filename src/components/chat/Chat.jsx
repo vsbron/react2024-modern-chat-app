@@ -67,75 +67,22 @@ function Chat() {
 
       {/* Center part */}
       <div className="chat-center">
-        <div className="chat-center__message-container">
-          <Avatar size="3rem" />
-          <div className="chat-center__texts">
-            <p className="chat-center__message">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
-              odio illum distinctio nobis exercitationem ad omnis accusantium
-              ipsam numquam delectus tempora dignissimos.
-            </p>
-            <span className="chat-center__tiemstamp">1 minute ago</span>
-          </div>
-        </div>
-        <div className="chat-center__message-container chat-center__message-container--own">
-          <div className="chat-center__texts">
-            <p className="chat-center__message">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
-              odio illum distinctio nobis exercitationem ad omnis accusantium
-              ipsam numquam delectus tempora dignissimos.
-            </p>
-            <span className="chat-center__tiemstamp">1 minute ago</span>
-          </div>
-        </div>
-        <div className="chat-center__message-container">
-          <Avatar size="3rem" />
-          <div className="chat-center__texts">
-            <p className="chat-center__message">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
-              odio illum distinctio nobis exercitationem ad omnis accusantium
-              ipsam numquam delectus tempora dignissimos.
-            </p>
-            <span className="chat-center__tiemstamp">1 minute ago</span>
-          </div>
-        </div>
-        <div className="chat-center__message-container">
-          <Avatar size="3rem" />
-          <div className="chat-center__texts">
-            <p className="chat-center__message">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
-              odio illum distinctio nobis exercitationem ad omnis accusantium
-              ipsam numquam delectus tempora dignissimos.
-            </p>
-            <span className="chat-center__tiemstamp">1 minute ago</span>
-          </div>
-        </div>
-        <div className="chat-center__message-container chat-center__message-container--own">
-          <div className="chat-center__texts">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s"
-              className="chat-center__img"
-              alt=""
-            />
-            <p className="chat-center__message">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
-              odio illum distinctio nobis exercitationem ad omnis accusantium
-              ipsam numquam delectus tempora dignissimos.
-            </p>
-            <span className="chat-center__tiemstamp">1 minute ago</span>
-          </div>
-        </div>
-        <div className="chat-center__message-container">
-          <Avatar size="3rem" />
-          <div className="chat-center__texts">
-            <p className="chat-center__message">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut unde
-              odio illum distinctio nobis exercitationem ad omnis accusantium
-              ipsam numquam delectus tempora dignissimos.
-            </p>
-            <span className="chat-center__tiemstamp">1 minute ago</span>
-          </div>
-        </div>
+        {chat?.messages?.map((message) => {
+          <div
+            className="chat-center__message-container chat-center__message-container--own"
+            key={message?.createdAt}
+          >
+            <div className="chat-center__texts">
+              {message.img && (
+                <img src={message.img} className="chat-center__img" alt="" />
+              )}
+              <p className="chat-center__message">{message.text}</p>
+              {/* <span className="chat-center__timestamp">
+                {message.createdAt}
+              </span> */}
+            </div>
+          </div>;
+        })}
         <div ref={endRef}></div>
       </div>
 
