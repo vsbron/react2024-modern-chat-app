@@ -16,12 +16,17 @@ import Button from "../../ui/button/Button";
 import EmojiModal from "./emojiModal/EmojiModal";
 
 import "./chat.css";
+import upload from "../../lib/upload";
 
 function Chat() {
   // State for Active chat, Emoji Picker module and Input text
   const [chat, setChat] = useState("");
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
+  const [img, setImg] = useState({
+    file: null,
+    url: "",
+  });
 
   // Getting the current user, other user and chat id variables from the store
   const { currentUser } = useUserStore();
@@ -52,17 +57,27 @@ function Chat() {
     setOpenEmoji((open) => !open);
   };
 
+  // Sending message handler
   const handleSendMessage = async () => {
     // Guard clause
     if (inputText === "") return;
 
+    // Create a imgUrl variable
+    let imgUrl = null;
+
     try {
+      // If file provided - upload it
+      if (img.file) {
+        imgUrl = await upload(img.file);
+      }
+
       // Add the sent message to the messages array in the database
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
           senderId: currentUser.id,
           text: inputText,
           createdAt: new Date(),
+          ...(imgUrl && { img: imgUrl }),
         }),
       });
 
@@ -92,8 +107,23 @@ function Chat() {
     } catch (err) {
       console.error(err.message);
     } finally {
+      // Reset img state
+      setImg({
+        file: null,
+        url: "",
+      });
+      // Reset input state
       setInputText("");
     }
+  };
+
+  // Image handler
+  const handleImage = (e) => {
+    e.target.files[0] &&
+      setImg({
+        file: e.target.files[0],
+        url: URL.createObjectURL(e.target.files[0]),
+      });
   };
 
   // Returned JSX
@@ -135,13 +165,29 @@ function Chat() {
             </div>
           </div>
         ))}
+
+        {img && (
+          <div className="chat-center__message-container chat-center__message-container--own">
+            <div className="chat-center__texts">
+              <img src={img.url} alt="" />
+            </div>
+          </div>
+        )}
         <div ref={endRef}></div>
       </div>
 
       {/* Bottom part */}
       <div className="chat-bottom">
         <div className="chat-bottom__icons">
-          <img src="./img.png" alt="" />
+          <label htmlFor="file">
+            <img src="./img.png" alt="" />
+          </label>
+          <input
+            type="file"
+            id="file"
+            style={{ display: "none" }}
+            onChange={handleImage}
+          />
           <img src="./camera.png" alt="" />
           <img src="./mic.png" alt="" />
         </div>
