@@ -1,13 +1,42 @@
-import { auth } from "../../lib/firebase";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useChatStore } from "../../lib/chatStore";
+import { auth, db } from "../../lib/firebase";
+import { useUserStore } from "../../lib/userStore";
 
 import Avatar from "../../ui/avatar/Avatar";
 
 import "./details.css";
 
 function Details() {
+  // Get the current user, other user and blocking constants from the store
+  const { currentUser } = useUserStore();
+  const { user, changeBlocked, isReceiverBlocked, isCurrentUserBlocked } =
+    useChatStore();
+
   // Click handler for logout button
-  const logoutHandle = () => {
+  const handleLogout = () => {
     auth.signOut();
+  };
+
+  // Block user handler
+  const handleBlock = async () => {
+    // If user blocked you, button does nothing
+    if (!user) return;
+
+    // Get a reference to the user
+    const userDocRef = doc(db, "users", currentUser.id);
+
+    // Update the blocked list
+    try {
+      await updateDoc(userDocRef, {
+        blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
+      });
+
+      // Use the function from the store
+      changeBlocked();
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   // Returned JSX
@@ -15,8 +44,8 @@ function Details() {
     <section className="details">
       {/* User info */}
       <div className="details__user">
-        <Avatar size="10rem" />
-        <h2 className="details__user-name">Jane Doe</h2>
+        <Avatar src={user?.avatar} size="10rem" />
+        <h2 className="details__user-name">{user?.username || "User"}</h2>
         <p className="details__user-text">
           Lorem ipsum, dolor sit amet consectetur.
         </p>
@@ -94,8 +123,14 @@ function Details() {
         </div>
 
         {/* Buttons to block user and to log out? */}
-        <button className="details__info-block">Block user</button>
-        <button className="details__info-logout" onClick={logoutHandle}>
+        <button className="details__info-block" onClick={handleBlock}>
+          {isCurrentUserBlocked
+            ? "You are blocked"
+            : isReceiverBlocked
+            ? "User blocked"
+            : "Block user"}
+        </button>
+        <button className="details__info-logout" onClick={handleLogout}>
           Logout
         </button>
       </div>

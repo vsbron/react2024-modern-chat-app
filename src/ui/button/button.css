@@ -9,4 +9,8 @@
   &:hover {
     background-color: var(--color-blue-light-2);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }

@@ -10,13 +10,13 @@ import {
 import { db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
+import upload from "../../lib/upload";
 
 import Avatar from "../../ui/avatar/Avatar";
 import Button from "../../ui/button/Button";
 import EmojiModal from "./emojiModal/EmojiModal";
 
 import "./chat.css";
-import upload from "../../lib/upload";
 
 function Chat() {
   // State for Active chat, Emoji Picker module and Input text
@@ -30,7 +30,8 @@ function Chat() {
 
   // Getting the current user, other user and chat id variables from the store
   const { currentUser } = useUserStore();
-  const { chatId, user } = useChatStore();
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } =
+    useChatStore();
 
   // / Reference for the end of the chat
   const endRef = useRef(null);
@@ -132,9 +133,11 @@ function Chat() {
       {/* Top part */}
       <div className="chat-top">
         <div className="chat-top__user">
-          <Avatar size="6rem" />
+          <Avatar src={user?.avatar} size="6rem" />
           <div className="chat-top__texts">
-            <span className="chat-top__user-name">Jane Doe</span>
+            <span className="chat-top__user-name">
+              {user?.username || "User"}
+            </span>
             <p className="chat-top__user-description">
               Lorem ipsum dolor sit, amet consectetur.
             </p>
@@ -197,9 +200,14 @@ function Chat() {
         <input
           type="text"
           className="chat-bottom__input"
-          placeholder="Type a message"
+          placeholder={
+            isCurrentUserBlocked || isReceiverBlocked
+              ? "You cannot send a message"
+              : "Type a message"
+          }
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
+          disabled={isCurrentUserBlocked || isReceiverBlocked}
         />
         <div className="chat-bottom__icons">
           <img
@@ -215,7 +223,11 @@ function Chat() {
             />
           )}
         </div>
-        <Button padding="1rem 2rem" onClick={handleSendMessage}>
+        <Button
+          padding="1rem 2rem"
+          onClick={handleSendMessage}
+          disabled={isCurrentUserBlocked || isReceiverBlocked}
+        >
           Send
         </Button>
       </div>

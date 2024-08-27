@@ -126,6 +126,11 @@
       padding: 2rem;
       border-radius: var(--border-radius-sm);
       font-size: 1.6rem;
+
+      &:disabled {
+        background-color: #5182feb4;
+        cursor: not-allowed;
+      }
     }
   }
 }

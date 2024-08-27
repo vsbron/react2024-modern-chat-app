@@ -117,9 +117,20 @@ function ChatList() {
                 backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
               }}
             >
-              <Avatar src={chat.user.avatar} size="5rem" />
+              <Avatar
+                src={
+                  chat.user.blocked.includes(currentUser.id)
+                    ? "./avatar.png"
+                    : chat?.user?.avatar
+                }
+                size="5rem"
+              />
               <div className="item__texts">
-                <span>{chat.user.username}</span>
+                <span>
+                  {chat.user.blocked.includes(currentUser.id)
+                    ? "User"
+                    : chat.user.username}
+                </span>
                 {chat.lastMessage && <p>{chat.lastMessage}</p>}
               </div>
             </div>
