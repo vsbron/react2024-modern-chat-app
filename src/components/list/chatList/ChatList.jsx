@@ -80,19 +80,22 @@ function ChatList() {
 
         {/* List of chats */}
         {chats.length > 0 &&
-          chats.map((chat) => (
-            <div
-              className="item"
-              key={chat.id}
-              onClick={() => handleSelect(chat)}
-            >
-              <Avatar src={chat.user.avatar} size="5rem" />
-              <div className="item__texts">
-                <span>{chat.user.username}</span>
-                {chat.lastMessage && <p>{chat.lastMessage}</p>}
+          chats.map((chat) => {
+            console.log(chat);
+            return (
+              <div
+                className="item"
+                key={chat.id}
+                onClick={() => handleSelect(chat)}
+              >
+                <Avatar src={chat.user.avatar} size="5rem" />
+                <div className="item__texts">
+                  <span>{chat.user.username}</span>
+                  {chat.lastMessage && <p>{chat.lastMessage}</p>}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
       </div>
       {/* Conditional add user modal window */}
       {addMode && <AddUser setAddMode={setAddMode} />}

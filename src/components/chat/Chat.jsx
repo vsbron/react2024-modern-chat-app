@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 
 import { db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
+import { useUserStore } from "../../lib/userStore";
 
 import Avatar from "../../ui/avatar/Avatar";
 import Button from "../../ui/button/Button";
@@ -16,8 +23,9 @@ function Chat() {
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
 
-  // Getting the current chat id variable
-  const { chatId } = useChatStore();
+  // Getting the current user, other user and chat id variables from the store
+  const { currentUser } = useUserStore();
+  const { chatId, user } = useChatStore();
 
   // / Reference for the end of the chat
   const endRef = useRef(null);
@@ -44,6 +52,50 @@ function Chat() {
     setOpenEmoji((open) => !open);
   };
 
+  const handleSendMessage = async () => {
+    // Guard clause
+    if (inputText === "") return;
+
+    try {
+      // Add the sent message to the messages array in the database
+      await updateDoc(doc(db, "chats", chatId), {
+        messages: arrayUnion({
+          senderId: currentUser.id,
+          text: inputText,
+          createdAt: new Date(),
+        }),
+      });
+
+      // Create an array of both IDs to loop through them
+      const userIds = [currentUser.id, user.id];
+
+      // Update each chat in the userchats with the last message, seen and updatedAt data
+      userIds.forEach(async (id) => {
+        const userChatsRef = doc(db, "userchats", id);
+        const userChatsSnapshot = await getDoc(userChatsRef);
+
+        if (userChatsSnapshot.exists()) {
+          const userChatsData = userChatsSnapshot.data();
+
+          const chatIndex = userChatsData.chats.findIndex(
+            (c) => c.chatId === chatId
+          );
+
+          userChatsData.chats[chatIndex].lastMessage = inputText;
+          userChatsData.chats[chatIndex].isSeen =
+            id === currentUser.id ? true : false;
+          userChatsData.chats[chatIndex].updatedAt = Date.now();
+
+          await updateDoc(userChatsRef, { chats: userChatsData.chats });
+        }
+      });
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setInputText("");
+    }
+  };
+
   // Returned JSX
   return (
     <section className="chat">
@@ -67,7 +119,7 @@ function Chat() {
 
       {/* Center part */}
       <div className="chat-center">
-        {chat?.messages?.map((message) => {
+        {chat?.messages?.map((message) => (
           <div
             className="chat-center__message-container chat-center__message-container--own"
             key={message?.createdAt}
@@ -81,8 +133,8 @@ function Chat() {
                 {message.createdAt}
               </span> */}
             </div>
-          </div>;
-        })}
+          </div>
+        ))}
         <div ref={endRef}></div>
       </div>
 
@@ -114,7 +166,9 @@ function Chat() {
             />
           )}
         </div>
-        <Button padding="1rem 2rem">Send</Button>
+        <Button padding="1rem 2rem" onClick={handleSendMessage}>
+          Send
+        </Button>
       </div>
     </section>
   );
