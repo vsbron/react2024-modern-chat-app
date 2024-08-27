@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 
 import { db } from "../../../lib/firebase";
 import { useChatStore } from "../../../lib/chatStore";
@@ -55,9 +55,37 @@ function ChatList() {
     };
   }, [currentUser.id]);
 
+  // Select chat handler
   const handleSelect = async (chat) => {
-    // Calling the change chat function
-    changeChat(chat.chatId, chat.user);
+    // Getting the chat lists minus user data
+    const userChats = chats.map((item) => {
+      // eslint-disable-next-line no-unused-vars
+      const { user, ...rest } = item;
+      return rest;
+    });
+
+    // Searching for a chat we want to open
+    const chatIndex = userChats.findIndex(
+      (item) => item.chatId === chat.chatId
+    );
+
+    // Setting the last message to "seen" if it wasn't
+    userChats[chatIndex].isSeen = true;
+
+    // Getting the reference to the user's chats
+    const userChatsRef = doc(db, "userchats", currentUser.id);
+
+    try {
+      // Updating the document in the database
+      await updateDoc(userChatsRef, {
+        chats: userChats,
+      });
+
+      // Calling the change chat function to display a chat
+      changeChat(chat.chatId, chat.user);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   // Returned JSX
@@ -80,22 +108,22 @@ function ChatList() {
 
         {/* List of chats */}
         {chats.length > 0 &&
-          chats.map((chat) => {
-            console.log(chat);
-            return (
-              <div
-                className="item"
-                key={chat.id}
-                onClick={() => handleSelect(chat)}
-              >
-                <Avatar src={chat.user.avatar} size="5rem" />
-                <div className="item__texts">
-                  <span>{chat.user.username}</span>
-                  {chat.lastMessage && <p>{chat.lastMessage}</p>}
-                </div>
+          chats.map((chat) => (
+            <div
+              className="item"
+              key={chatId}
+              onClick={() => handleSelect(chat)}
+              style={{
+                backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
+              }}
+            >
+              <Avatar src={chat.user.avatar} size="5rem" />
+              <div className="item__texts">
+                <span>{chat.user.username}</span>
+                {chat.lastMessage && <p>{chat.lastMessage}</p>}
               </div>
-            );
-          })}
+            </div>
+          ))}
       </div>
       {/* Conditional add user modal window */}
       {addMode && <AddUser setAddMode={setAddMode} />}
