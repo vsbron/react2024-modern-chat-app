@@ -2,25 +2,34 @@ import { useEffect, useRef, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 
 import { db } from "../../lib/firebase";
+import { useChatStore } from "../../lib/chatStore";
 
 import Avatar from "../../ui/avatar/Avatar";
 import Button from "../../ui/button/Button";
-
-import "./chat.css";
 import EmojiModal from "./emojiModal/EmojiModal";
 
+import "./chat.css";
+
 function Chat() {
-  // State for Emoji Picker module and Input text
+  // State for Active chat, Emoji Picker module and Input text
   const [chat, setChat] = useState("");
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
+
+  // Getting the current chat id variable
+  const { chatId } = useChatStore();
 
   // / Reference for the end of the chat
   const endRef = useRef(null);
 
   // useEffect to focus on the end of the chat
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", "nGv7r21hEFIUCKLNGClh"), (res) =>
+    endRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  // useEffect to focus on the end of the chat
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
       setChat(res.data())
     );
 
@@ -28,12 +37,7 @@ function Chat() {
     return () => {
       unSub();
     };
-  }, []);
-
-  // useEffect to focus on the end of the chat
-  useEffect(() => {
-    endRef?.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [chatId]);
 
   // Click handler to open emoji window
   const handleClick = () => {

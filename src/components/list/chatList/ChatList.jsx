@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+
+import { db } from "../../../lib/firebase";
+import { useChatStore } from "../../../lib/chatStore";
+import { useUserStore } from "../../../lib/userStore";
 
 import AddUser from "./addUser/AddUser";
-
 import Avatar from "../../../ui/avatar/Avatar";
 
 import "./chatList.css";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
-import { db } from "../../../lib/firebase";
-import { useUserStore } from "../../../lib/userStore";
 
 function ChatList() {
   // State for adding user mode and the chats list
@@ -16,6 +17,11 @@ function ChatList() {
 
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
+
+  // Getting the block/unblock function from the store
+  const { chatId, changeChat } = useChatStore();
+
+  console.log(chatId);
 
   useEffect(() => {
     // Getting the chats data from the user id in the real time
@@ -51,6 +57,13 @@ function ChatList() {
     };
   }, [currentUser.id]);
 
+  const handleSelect = async (chat) => {
+    console.log(chat);
+
+    // Calling the change chat function
+    changeChat(chat.chatId, chat.user);
+  };
+
   // Returned JSX
   return (
     <>
@@ -72,7 +85,11 @@ function ChatList() {
         {/* List of chats */}
         {chats.length > 0 &&
           chats.map((chat) => (
-            <div className="item" key={chat.id}>
+            <div
+              className="item"
+              key={chat.id}
+              onClick={() => handleSelect(chat)}
+            >
               <Avatar src={chat.user.avatar} size="5rem" />
               <div className="item__texts">
                 <span>{chat.user.username}</span>

@@ -9,10 +9,14 @@ import Details from "./components/details/Details";
 import List from "./components/list/List";
 import Login from "./components/login/Login";
 import Notifications from "./components/notifications/Notifications";
+import { useChatStore } from "./lib/chatStore";
 
 const App = () => {
-  // Getting the user, loading state and fetch function from the zustand store
+  // Getting the user, loading state and fetch function from the store
   const { currentUser, isLoading, fetchUserInfo } = useUserStore();
+
+  // Getting the chatId from the store
+  const { chatId } = useChatStore();
 
   // useEffect with event listener for the auth change state
   useEffect(() => {
@@ -35,8 +39,8 @@ const App = () => {
       {currentUser ? (
         <>
           <List />
-          <Chat />
-          <Details />
+          {chatId && <Chat />}
+          {chatId && <Details />}
         </>
       ) : (
         <Login />
