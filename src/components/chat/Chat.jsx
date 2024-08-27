@@ -151,7 +151,10 @@ function Chat() {
       <div className="chat-center">
         {chat?.messages?.map((message) => (
           <div
-            className="chat-center__message-container chat-center__message-container--own"
+            className={`chat-center__message-container ${
+              message.senderId === currentUser.id &&
+              "chat-center__message-container--own"
+            }`}
             key={message?.createdAt}
           >
             <div className="chat-center__texts">
