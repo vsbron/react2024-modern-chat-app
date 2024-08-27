@@ -44,12 +44,15 @@ function Login() {
     // Preventing default behavior
     e.preventDefault();
 
-    // Enabling the loading state
-    setLoading(true);
-
     // Getting the form values from form to constants
     const formData = new FormData(e.target);
     const { email, password } = Object.fromEntries(formData);
+
+    // Log in input validation
+    if (!email || !password) return toast.warn("Please enter log in inputs!");
+
+    // Enabling the loading state
+    setLoading(true);
 
     try {
       // Sending the request to authenticate with the user
@@ -75,9 +78,9 @@ function Login() {
     const formData = new FormData(e.target);
     const { username, email, password, avatar } = Object.fromEntries(formData);
 
-    // Input validation
+    // Register input validation
     if (!username || !email || !password)
-      return toast.warn("Please enter inputs!");
+      return toast.warn("Please enter register inputs!");
     if (!avatar.name) return toast.warn("Please upload an avatar!");
 
     // Checking if username is unique

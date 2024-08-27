@@ -71,8 +71,8 @@ function ChatList() {
 
         {/* List of chats */}
         {chats.length > 0 &&
-          chats.map((chat, i) => (
-            <div className="item" key={i}>
+          chats.map((chat) => (
+            <div className="item" key={chat.id}>
               <Avatar src={chat.user.avatar} size="5rem" />
               <div className="item__texts">
                 <span>{chat.user.username}</span>

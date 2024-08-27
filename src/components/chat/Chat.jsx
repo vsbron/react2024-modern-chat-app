@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+
+import { db } from "../../lib/firebase";
 
 import Avatar from "../../ui/avatar/Avatar";
 import Button from "../../ui/button/Button";
@@ -8,11 +11,24 @@ import EmojiModal from "./emojiModal/EmojiModal";
 
 function Chat() {
   // State for Emoji Picker module and Input text
+  const [chat, setChat] = useState("");
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
 
   // / Reference for the end of the chat
   const endRef = useRef(null);
+
+  // useEffect to focus on the end of the chat
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", "nGv7r21hEFIUCKLNGClh"), (res) =>
+      setChat(res.data())
+    );
+
+    // Cleanup function when component unmounts
+    return () => {
+      unSub();
+    };
+  }, []);
 
   // useEffect to focus on the end of the chat
   useEffect(() => {

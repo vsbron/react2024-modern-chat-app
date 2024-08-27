@@ -92,6 +92,8 @@ function AddUser({ setAddMode }) {
           updatedAt: Date.now(),
         }),
       });
+
+      setAddMode(false);
     } catch (err) {
       console.error(err);
     }
