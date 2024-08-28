@@ -11,9 +11,10 @@ import Avatar from "../../../ui/avatar/Avatar";
 import "./chatList.css";
 
 function ChatList() {
-  // State for adding user mode and the chats list
+  // State for adding user mode, the chats list and search input
   const [addMode, setAddMode] = useState(false);
   const [chats, setChats] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
@@ -54,6 +55,11 @@ function ChatList() {
       unSub();
     };
   }, [currentUser.id]);
+
+  // Creating a filtered chat list based on the search input
+  const filteredChats = chats.filter((c) =>
+    c.user.username.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   // Select chat handler
   const handleSelect = async (chat) => {
@@ -96,7 +102,15 @@ function ChatList() {
         <div className="search">
           <div className="search__bar">
             <img src="/search.png" className="search__icon" alt="" />
-            <input type="text" className="search__input" placeholder="Search" />
+            <input
+              type="text"
+              className="search__input"
+              placeholder="Search"
+              value={searchInput}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
+            />
           </div>
           <img
             src={addMode ? "./minus.png" : "./plus.png"}
@@ -107,8 +121,8 @@ function ChatList() {
         </div>
 
         {/* List of chats */}
-        {chats.length > 0 &&
-          chats.map((chat) => (
+        {filteredChats.length > 0 &&
+          filteredChats.map((chat) => (
             <div
               className="item"
               key={chatId}
