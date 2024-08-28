@@ -80,7 +80,7 @@
           border-radius: var(--border-radius-sm);
         }
         .chat-center__timestamp {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
         }
       }
 
@@ -90,7 +90,7 @@
         .chat-center__message {
           background-color: var(--color-blue-light-1);
         }
-        .chat-center__tiemstamp {
+        .chat-center__timestamp {
           text-align: right;
         }
       }

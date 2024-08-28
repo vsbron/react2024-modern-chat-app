@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { format } from "timeago.js";
 import {
   arrayUnion,
   doc,
@@ -39,7 +40,7 @@ function Chat() {
   // useEffect to focus on the end of the chat
   useEffect(() => {
     endRef?.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [chat.messages]);
 
   // useEffect to focus on the end of the chat
   useEffect(() => {
@@ -165,9 +166,9 @@ function Chat() {
                 <img src={message.img} className="chat-center__img" alt="" />
               )}
               <p className="chat-center__message">{message.text}</p>
-              {/* <span className="chat-center__timestamp">
-                {message.createdAt}
-              </span> */}
+              <span className="chat-center__timestamp">
+                {format(message.createdAt.toDate())}
+              </span>
             </div>
           </div>
         ))}
