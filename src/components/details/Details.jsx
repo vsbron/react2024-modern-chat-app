@@ -10,12 +10,18 @@ import "./details.css";
 function Details() {
   // Get the current user, other user and blocking constants from the store
   const { currentUser } = useUserStore();
-  const { user, changeBlocked, isReceiverBlocked, isCurrentUserBlocked } =
-    useChatStore();
+  const {
+    user,
+    changeBlocked,
+    isReceiverBlocked,
+    isCurrentUserBlocked,
+    resetChat,
+  } = useChatStore();
 
   // Click handler for logout button
   const handleLogout = () => {
     auth.signOut();
+    resetChat();
   };
 
   // Block user handler
