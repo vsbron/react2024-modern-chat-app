@@ -2,6 +2,7 @@
   position: absolute;
   bottom: 5rem;
   left: 0;
+  z-index: 200;
   animation: fadeRight 0.2s ease-out forwards;
 }
 
