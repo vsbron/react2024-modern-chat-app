@@ -19,6 +19,7 @@ Little chat app SPA written on React with the use of Firebase service
 - Center section shows the currently selected chat with the info of the interlocutor;
 - Current chat allows to send and receive text/emojis as well as a emojis;
 - Right section lists chat's details including some settings, images, and some buttons;
+- Image part shows all images that were sent in the chat with the option to download them individually;
 - Right section buttons are for logging out and blocking user, disabling the option to chat with him;
 
 ## Details

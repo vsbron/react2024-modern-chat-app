@@ -31,6 +31,9 @@ function Details() {
     resetChat,
   } = useChatStore();
 
+  // Getting all the messages with images
+  const messagesWithImg = chat?.messages?.filter((msg) => msg.img).reverse();
+
   // useEffect to set the current chat
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
@@ -102,18 +105,18 @@ function Details() {
             <img src="./arrowDown.png" alt="" />
           </div>
           <div className="details__images">
-            {chat?.messages?.map(
+            {messagesWithImg?.map(
               (message, i) =>
                 message.img && (
-                  <div className="details__images-item" key={i}>
+                  <div
+                    className="details__images-item"
+                    key={i}
+                    onClick={() => {
+                      saveAs(message.img, "image.jpg");
+                    }}
+                  >
                     <div className="details__images-container">
-                      <img
-                        src={message.img}
-                        alt=""
-                        onClick={() => {
-                          saveAs(message.img, "image.jpg");
-                        }}
-                      />
+                      <img src={message.img} alt="" />
                       <div className="details__images-overlay"></div>
                     </div>
                   </div>

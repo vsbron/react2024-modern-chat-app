@@ -62,7 +62,7 @@ function Chat() {
   // Sending message handler
   const handleSendMessage = async () => {
     // Guard clause
-    if (inputText === "") return;
+    if (inputText === "" && !img) return;
 
     // Create a imgUrl variable
     let imgUrl = null;
@@ -170,7 +170,9 @@ function Chat() {
                   alt=""
                 />
               )}
-              <p className="chat-center__message">{message.text}</p>
+              {message.text && (
+                <p className="chat-center__message">{message.text}</p>
+              )}
               <span className="chat-center__timestamp">
                 {format(message.createdAt.toDate())}
               </span>
@@ -181,7 +183,7 @@ function Chat() {
         {img && (
           <div className="chat-center__message-container chat-center__message-container--own">
             <div className="chat-center__texts">
-              <img src={img.url} alt="" />
+              <img src={img.url} height={80} alt="" />
             </div>
           </div>
         )}
