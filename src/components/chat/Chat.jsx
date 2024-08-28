@@ -13,9 +13,9 @@ import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
 import upload from "../../lib/upload";
 
+import EmojiModal from "./emojiModal/EmojiModal";
 import Avatar from "../../ui/avatar/Avatar";
 import Button from "../../ui/button/Button";
-import EmojiModal from "./emojiModal/EmojiModal";
 
 import "./chat.css";
 

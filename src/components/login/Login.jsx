@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import {
   collection,
   doc,
   getDocs,
@@ -8,10 +12,6 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 
 import { auth, db } from "../../lib/firebase";
 import upload from "../../lib/upload";

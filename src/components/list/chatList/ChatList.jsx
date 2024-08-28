@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 
-import { db } from "../../../lib/firebase";
 import { useChatStore } from "../../../lib/chatStore";
+import { db } from "../../../lib/firebase";
 import { useUserStore } from "../../../lib/userStore";
 
 import AddUser from "./addUser/AddUser";
