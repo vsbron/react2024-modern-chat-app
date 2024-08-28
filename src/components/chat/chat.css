@@ -68,7 +68,6 @@
         gap: 0.5rem;
 
         .chat-center__img {
-          max-width: 20rem;
           align-self: end;
           border-radius: var(--border-radius-sm);
           object-fit: cover;

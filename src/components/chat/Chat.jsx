@@ -42,7 +42,7 @@ function Chat() {
     endRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat.messages]);
 
-  // useEffect to focus on the end of the chat
+  // useEffect to show the chosen chat
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
       setChat(res.data())
@@ -163,7 +163,12 @@ function Chat() {
           >
             <div className="chat-center__texts">
               {message.img && (
-                <img src={message.img} className="chat-center__img" alt="" />
+                <img
+                  src={message.img}
+                  className="chat-center__img"
+                  height={80}
+                  alt=""
+                />
               )}
               <p className="chat-center__message">{message.text}</p>
               <span className="chat-center__timestamp">

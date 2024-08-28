@@ -1,4 +1,12 @@
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { saveAs } from "file-saver";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 
 import { useChatStore } from "../../lib/chatStore";
 import { auth, db } from "../../lib/firebase";
@@ -9,15 +17,31 @@ import Avatar from "../../ui/avatar/Avatar";
 import "./details.css";
 
 function Details() {
+  // Setting the state for the current chat
+  const [chat, setChat] = useState("");
+
   // Get the current user, other user and blocking constants from the store
   const { currentUser } = useUserStore();
   const {
+    chatId,
     user,
     changeBlocked,
     isReceiverBlocked,
     isCurrentUserBlocked,
     resetChat,
   } = useChatStore();
+
+  // useEffect to set the current chat
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
+      setChat(res.data())
+    );
+
+    // Cleanup function when component unmounts
+    return () => {
+      unSub();
+    };
+  }, [chatId]);
 
   // Click handler for logout button
   const handleLogout = () => {
@@ -78,48 +102,23 @@ function Details() {
             <img src="./arrowDown.png" alt="" />
           </div>
           <div className="details__images">
-            <div className="details__images-item">
-              <div className="details__images-details">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s"
-                  alt=""
-                />
-                <span>Image #1</span>
-              </div>
-              <img
-                src="./download.png"
-                className="details__images-download"
-                alt=""
-              />
-            </div>
-            <div className="details__images-item">
-              <div className="details__images-details">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s"
-                  alt=""
-                />
-                <span>Image #2</span>
-              </div>
-              <img
-                src="./download.png"
-                className="details__images-download"
-                alt=""
-              />
-            </div>
-            <div className="details__images-item">
-              <div className="details__images-details">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s"
-                  alt=""
-                />
-                <span>Image #3</span>
-              </div>
-              <img
-                src="./download.png"
-                className="details__images-download"
-                alt=""
-              />
-            </div>
+            {chat?.messages?.map(
+              (message, i) =>
+                message.img && (
+                  <div className="details__images-item" key={i}>
+                    <div className="details__images-container">
+                      <img
+                        src={message.img}
+                        alt=""
+                        onClick={() => {
+                          saveAs(message.img, "image.jpg");
+                        }}
+                      />
+                      <div className="details__images-overlay"></div>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </div>
         <div className="details__info-option">
