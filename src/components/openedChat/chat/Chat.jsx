@@ -13,6 +13,7 @@ import Button from "../../../ui/button/Button";
 
 import "./chat.css";
 
+// Initial state for an empty image
 const imgInitialState = {
   file: null,
   url: "",
@@ -37,6 +38,12 @@ function Chat({ chat }) {
   useEffect(() => {
     endRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat.messages]);
+
+  // useEffect to reset the input and image when chat is changed
+  useEffect(() => {
+    resetImage();
+    setInputText("");
+  }, [chatId]);
 
   // Click handler to open emoji window
   const handleClick = () => {
@@ -206,7 +213,6 @@ function Chat({ chat }) {
               style={{ display: "none" }}
               onChange={handleImage}
             />
-            <img src="./camera.png" alt="" />
           </div>
           <input
             type="text"

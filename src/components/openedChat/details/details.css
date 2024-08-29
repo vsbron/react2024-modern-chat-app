@@ -46,6 +46,8 @@
         flex-wrap: wrap;
         gap: 1rem;
         margin-top: 1rem;
+        overflow: hidden;
+        animation: rollDown 5s ease forwards;
 
         .details__images-item {
           display: flex;
@@ -106,5 +108,15 @@
         background-color: rgba(var(--color-red), 0.9);
       }
     }
+  }
+}
+
+/* Animation for smooth images/files section opening */
+@keyframes rollDown {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 1000vh;
   }
 }

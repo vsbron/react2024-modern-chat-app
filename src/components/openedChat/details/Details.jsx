@@ -1,5 +1,6 @@
-import { saveAs } from "file-saver";
+import { useState } from "react";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { saveAs } from "file-saver";
 
 import { useChatStore } from "../../../lib/chatStore";
 import { db } from "../../../lib/firebase";
@@ -10,6 +11,9 @@ import Avatar from "../../../ui/avatar/Avatar";
 import "./details.css";
 
 function Details({ chat }) {
+  const [showImages, setShowImages] = useState(false);
+  const [showFiles, setShowFiles] = useState(false);
+
   // Get the current user, other user and blocking constants from the store
   const { currentUser } = useUserStore();
   const { user, changeBlocked, isReceiverBlocked, isCurrentUserBlocked } =
@@ -39,6 +43,16 @@ function Details({ chat }) {
     }
   };
 
+  // Show/hide images toggler
+  const toggleImages = () => {
+    setShowImages((show) => !show);
+  };
+
+  // Show/hide files toggler
+  const toggleFiles = () => {
+    setShowFiles((show) => !show);
+  };
+
   // Returned JSX
   return (
     <section className="details">
@@ -52,38 +66,70 @@ function Details({ chat }) {
         </p>
       </div>
 
-      {/* Various settings for the chat */}
+      {/* Togglers to show all images and files in the chat */}
       <div className="details__info">
         <div className="details__info-option">
           <div className="details__info-title">
             <span>Shared images</span>
-            <img src="./arrowDown.png" alt="" />
+            <img
+              src={showImages ? "./arrowUp.png" : "./arrowDown.png"}
+              alt=""
+              onClick={toggleImages}
+            />
           </div>
-          <div className="details__images">
-            {messagesWithImg?.map(
-              (message, i) =>
-                message.img && (
-                  <div
-                    className="details__images-item"
-                    key={i}
-                    onClick={() => {
-                      saveAs(message.img, "image.jpg");
-                    }}
-                  >
-                    <div className="details__images-container">
-                      <img src={message.img} alt="" />
-                      <div className="details__images-overlay"></div>
+          {showImages && (
+            <div className="details__images">
+              {messagesWithImg?.map(
+                (message, i) =>
+                  message.img && (
+                    <div
+                      className="details__images-item"
+                      key={i}
+                      onClick={() => {
+                        saveAs(message.img, "image.jpg");
+                      }}
+                    >
+                      <div className="details__images-container">
+                        <img src={message.img} alt="" />
+                        <div className="details__images-overlay"></div>
+                      </div>
                     </div>
-                  </div>
-                )
-            )}
-          </div>
+                  )
+              )}
+            </div>
+          )}
         </div>
         <div className="details__info-option">
           <div className="details__info-title">
             <span>Shared files</span>
-            <img src="./arrowUp.png" alt="" />
+            <img
+              src={showFiles ? "./arrowUp.png" : "./arrowDown.png"}
+              alt=""
+              onClick={toggleFiles}
+            />
           </div>
+          {showFiles && (
+            <div></div>
+            // <div className="details__images">
+            //   {messagesWithImg?.map(
+            //     (message, i) =>
+            //       message.img && (
+            //         <div
+            //           className="details__images-item"
+            //           key={i}
+            //           onClick={() => {
+            //             saveAs(message.img, "image.jpg");
+            //           }}
+            //         >
+            //           <div className="details__images-container">
+            //             <img src={message.img} alt="" />
+            //             <div className="details__images-overlay"></div>
+            //           </div>
+            //         </div>
+            //       )
+            //   )}
+            // </div>
+          )}
         </div>
 
         {/* Block user button */}
