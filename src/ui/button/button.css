@@ -1,5 +1,5 @@
 .button {
-  background-color: var(--color-blue-light-1);
+  background-color: var(--color-violet-light-1);
   color: var(--color-white);
   border-radius: var(--border-radius-sm);
   border: none;
@@ -7,7 +7,7 @@
   transition: var(--transition-bg-default);
 
   &:hover {
-    background-color: var(--color-blue-light-2);
+    background-color: var(--color-violet-light-2);
   }
 
   &:disabled {
@@ -15,7 +15,7 @@
     opacity: 0.5;
 
     &:hover {
-      background-color: var(--color-blue-light-1);
+      background-color: var(--color-violet-light-1);
     }
   }
 }

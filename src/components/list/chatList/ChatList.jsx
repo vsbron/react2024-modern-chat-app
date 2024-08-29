@@ -129,9 +129,9 @@ function ChatList() {
               onClick={() => handleSelect(chat)}
               style={{
                 backgroundColor: !chat?.isSeen
-                  ? "#5183fe"
+                  ? "var(--color-unread)"
                   : chat.chatId === chatId
-                  ? "var(--color-blue-1)"
+                  ? "var(--color-violet-1)"
                   : "",
               }}
             >
@@ -151,7 +151,10 @@ function ChatList() {
                 </span>
                 {chat.lastMessage && (
                   <p>
-                    {chat.lastMessage.split(" ").slice(0, 9).join(" ") + "..."}
+                    {chat.lastMessage.split(" ").length > 9
+                      ? chat.lastMessage.split(" ").slice(0, 9).join(" ") +
+                        "..."
+                      : chat.lastMessage}
                   </p>
                 )}
               </div>

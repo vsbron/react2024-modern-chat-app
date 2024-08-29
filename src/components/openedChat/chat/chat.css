@@ -87,7 +87,7 @@
         align-self: end;
 
         .chat-center__message {
-          background-color: var(--color-blue-light-1);
+          background-color: var(--color-violet-light-1);
         }
         .chat-center__timestamp {
           text-align: right;
