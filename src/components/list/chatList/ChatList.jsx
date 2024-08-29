@@ -7,7 +7,6 @@ import { useUserStore } from "../../../lib/userStore";
 
 import AddUser from "./addUser/AddUser";
 import Avatar from "../../../ui/avatar/Avatar";
-import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
 import "./chatList.css";
 
@@ -16,7 +15,6 @@ function ChatList() {
   const [addMode, setAddMode] = useState(false);
   const [chats, setChats] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
@@ -29,9 +27,6 @@ function ChatList() {
     const unSub = onSnapshot(
       doc(db, "userchats", currentUser.id),
       async (res) => {
-        // Enable loading state
-        setIsLoading(true);
-
         // Getting the chats data
         const items = res.data().chats;
 
@@ -52,9 +47,6 @@ function ChatList() {
 
         // Setting the chatData state while also sorting it by date
         setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
-
-        // Disable loading state
-        setIsLoading(false);
       }
     );
 
@@ -129,10 +121,7 @@ function ChatList() {
         </div>
 
         {/* List of chats */}
-        {isLoading ? (
-          <LoaderSmall />
-        ) : (
-          filteredChats.length > 0 &&
+        {filteredChats.length > 0 &&
           filteredChats.map((chat, i) => (
             <div
               className="item"
@@ -167,8 +156,7 @@ function ChatList() {
                 )}
               </div>
             </div>
-          ))
-        )}
+          ))}
       </div>
       {/* Conditional add user modal window */}
       {addMode && <AddUser setAddMode={setAddMode} />}

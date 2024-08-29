@@ -41,7 +41,10 @@ function Chat({ chat }) {
   };
 
   // Sending message handler
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (e) => {
+    // Preventing default behavior
+    e.preventDefault();
+
     // Guard clause
     if (inputText === "" && !img) return;
 
@@ -175,51 +178,52 @@ function Chat({ chat }) {
 
       {/* Bottom part */}
       <div className="chat-bottom">
-        <div className="chat-bottom__icons">
-          <label htmlFor="file">
-            <img src="./img.png" alt="" />
-          </label>
-          <input
-            type="file"
-            id="file"
-            style={{ display: "none" }}
-            onChange={handleImage}
-          />
-          <img src="./camera.png" alt="" />
-        </div>
-        <input
-          type="text"
-          className="chat-bottom__input"
-          placeholder={
-            isCurrentUserBlocked || isReceiverBlocked
-              ? "You cannot send a message"
-              : "Type a message"
-          }
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          disabled={isCurrentUserBlocked || isReceiverBlocked}
-        />
-        <div className="chat-bottom__icons">
-          <img
-            src="./emoji.png"
-            className="emoji-trigger"
-            onClick={handleClick}
-            alt=""
-          />
-          {openEmoji && (
-            <EmojiModal
-              setInputText={setInputText}
-              setOpenEmoji={setOpenEmoji}
+        <form onSubmit={handleSendMessage}>
+          <div className="chat-bottom__icons">
+            <label htmlFor="file">
+              <img src="./img.png" alt="" />
+            </label>
+            <input
+              type="file"
+              id="file"
+              style={{ display: "none" }}
+              onChange={handleImage}
             />
-          )}
-        </div>
-        <Button
-          padding="1rem 2rem"
-          onClick={handleSendMessage}
-          disabled={isCurrentUserBlocked || isReceiverBlocked}
-        >
-          Send
-        </Button>
+            <img src="./camera.png" alt="" />
+          </div>
+          <input
+            type="text"
+            className="chat-bottom__input"
+            placeholder={
+              isCurrentUserBlocked || isReceiverBlocked
+                ? "You cannot send a message"
+                : "Type a message"
+            }
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            disabled={isCurrentUserBlocked || isReceiverBlocked}
+          />
+          <div className="chat-bottom__icons">
+            <img
+              src="./emoji.png"
+              className="emoji-trigger"
+              onClick={handleClick}
+              alt=""
+            />
+            {openEmoji && (
+              <EmojiModal
+                setInputText={setInputText}
+                setOpenEmoji={setOpenEmoji}
+              />
+            )}
+          </div>
+          <Button
+            padding="1rem 2rem"
+            disabled={isCurrentUserBlocked || isReceiverBlocked}
+          >
+            Send
+          </Button>
+        </form>
       </div>
     </section>
   );

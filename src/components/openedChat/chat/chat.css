@@ -104,6 +104,10 @@
     border-top: var(--border-default);
     gap: 2rem;
 
+    form {
+      display: contents;
+    }
+
     .chat-bottom__icons {
       display: flex;
       gap: 2rem;
