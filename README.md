@@ -16,6 +16,7 @@ Little chat app SPA written on React with the use of Firebase service
 - Chat list section contains the main user info, search bar and the list of available chats;
 - Search bar features an input to filter out the current chat list and Add User button;
 - Add user modal lets user to search other users and start chat with them;
+- Already added users cannot be added to the chat list again;
 - Center section shows the currently selected chat with the info of the interlocutor;
 - Current chat allows to send and receive text/emojis as well as a emojis;
 - Right section lists chat's details including some settings, images, and some buttons;

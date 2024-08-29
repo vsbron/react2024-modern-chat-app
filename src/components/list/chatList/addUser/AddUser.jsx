@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   serverTimestamp,
@@ -24,8 +25,9 @@ function AddUser({ setAddMode }) {
   // Getting the current user from the store
   const { currentUser } = useUserStore();
 
-  // Setting the state for the user
+  // Setting the state for the user and whether he's already added to chat list
   const [searchedUser, setSearchedUser] = useState(null);
+  const [isAlreadyAdded, setIsAlreadyAdded] = useState(false);
 
   // Custom hook that adds the click handlers that will close the Add User module
   useCloseModal({
@@ -34,6 +36,27 @@ function AddUser({ setAddMode }) {
     modalClass: "add-user",
   });
 
+  // Use effect that check every found user whether he exists in the chat list already
+  useEffect(() => {
+    if (searchedUser) {
+      checkIfUserIsAlreadyAdded();
+    }
+  }, [searchedUser]);
+
+  const checkIfUserIsAlreadyAdded = async () => {
+    // Get the current user's chat list
+    const userChatsDoc = await getDoc(doc(db, "userchats", currentUser.id));
+    const userChats = userChatsDoc.data()?.chats || [];
+
+    // Check if the searched user is already in the chat list
+    const alreadyAdded = userChats.some(
+      (chat) => chat.receiverId === searchedUser.id
+    );
+
+    // Update the state to reflect if the user is already added
+    setIsAlreadyAdded(alreadyAdded);
+  };
+
   // Search submit handle
   const handleSearch = async (e) => {
     // Prevent default behavior
@@ -41,16 +64,29 @@ function AddUser({ setAddMode }) {
 
     // Getting the form data and the username
     const formData = new FormData(e.target);
-    const username = formData.get("username");
+    const searchInput = formData.get("username");
 
     try {
       const userRef = collection(db, "users"); // Getting the users from database
-      const q = query(userRef, where("username", "==", username)); // Query for the username search
-      const querySnapshot = await getDocs(q); // Searching for the username that we entered
 
-      // If found user, set the state with user data
-      if (!querySnapshot.empty) {
-        setSearchedUser(querySnapshot.docs[0].data());
+      // Queries to search by username or email
+      const usernameQuery = query(
+        userRef,
+        where("username", "==", searchInput)
+      );
+      const emailQuery = query(userRef, where("email", "==", searchInput));
+
+      // Execute both queries
+      const usernameSnapshot = await getDocs(usernameQuery);
+      const emailSnapshot = await getDocs(emailQuery);
+
+      // If a user is found by username or email, set the state with user data
+      if (!usernameSnapshot.empty) {
+        setSearchedUser(usernameSnapshot.docs[0].data());
+      } else if (!emailSnapshot.empty) {
+        setSearchedUser(emailSnapshot.docs[0].data());
+      } else {
+        setSearchedUser(null);
       }
     } catch (err) {
       console.error(err.message);
@@ -104,19 +140,30 @@ function AddUser({ setAddMode }) {
     <div className="add-user">
       {/* Input field for searching users */}
       <form className="add-user__form" onSubmit={handleSearch}>
-        <input type="text" placeholder="Username" name="username" />
+        <input type="text" placeholder="Username or email" name="username" />
         <Button padding="2rem">Search</Button>
       </form>
 
       {/* Found users list */}
       {searchedUser && (
         <div className="add-user__user">
-          <div className="add-user__user-details">
+          <div
+            className={`add-user__user-details ${
+              isAlreadyAdded && "add-user__user-added"
+            }`}
+          >
             <Avatar src={searchedUser.avatar} size="5rem" />
-            <span className="add-user__user-name">{searchedUser.username}</span>
+            <div className="add-user__user-name">
+              <span>{searchedUser.username}</span>
+              <span>{searchedUser.email}</span>
+            </div>
           </div>
-          <Button padding="1rem" onClick={handleAddUser}>
-            Add user
+          <Button
+            padding="1rem"
+            onClick={handleAddUser}
+            disabled={isAlreadyAdded}
+          >
+            {!isAlreadyAdded ? "Add user" : "Added"}
           </Button>
         </div>
       )}

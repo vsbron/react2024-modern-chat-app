@@ -34,6 +34,18 @@
       gap: 2rem;
 
       .add-user__user-name {
+        display: flex;
+        flex-direction: column;
+
+        & span:last-of-type {
+          font-size: 1.4rem;
+          color: var(--color-gray-light);
+        }
+      }
+
+      &.add-user__user-added {
+        opacity: 0.5;
+        pointer-events: none;
       }
     }
   }
