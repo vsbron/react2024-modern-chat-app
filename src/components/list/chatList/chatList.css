@@ -24,6 +24,10 @@
         color: var(--color-white);
         flex: 1;
         height: 2rem;
+
+        @media screen and (max-width: 1400px) {
+          width: 100%;
+        }
       }
       .search__icon {
         width: 2rem;

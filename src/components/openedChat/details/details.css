@@ -1,6 +1,7 @@
 .details {
   flex: 1;
   overflow-x: hidden;
+  min-width: 23rem;
 
   .details__user {
     padding: 3rem 2rem;

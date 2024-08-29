@@ -61,3 +61,10 @@ body {
   border-radius: var(--border-radius-sm);
   background-color: rgba(var(--color-main), 0.9);
 }
+
+@media screen and (max-width: 1400px) {
+  .container {
+    width: 93vw;
+    height: 95vh;
+  }
+}

@@ -28,6 +28,10 @@
   align-items: flex-end;
   font-size: 1.4rem;
 
+  @media screen and (max-width: 1400px) {
+    font-size: 1.1rem;
+  }
+
   .copyright__container {
     padding: 2rem 3rem;
     text-align: right;

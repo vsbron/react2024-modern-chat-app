@@ -30,6 +30,8 @@ Little chat app SPA written on React with the use of Firebase service
 - Styles are handled via Vanilla CSS with BEM;
 - Notifications are handled via Toastify library;
 - State management is handled via Zustand;
+- A big number of improvements were added to the layout and some logic of the original project;
+- Responsive design supporting mobile devices with a width of at least 1200px;
 
 ### Live version
 
