@@ -8,11 +8,11 @@
 
 :root {
   --color-main: 17, 24, 39;
-  --color-blue-1: #1d4ed8;
-  --color-blue-2: #2563eb;
-  --color-blue-light-1: #3b82f6;
-  --color-blue-light-2: #60a5fa;
-  --color-red: 239, 68, 68;
+  --color-blue-1: #6d28d9;
+  --color-blue-2: #7c3aed;
+  --color-blue-light-1: #8b5cf6;
+  --color-blue-light-2: #a78bfa;
+  --color-red: 220, 38, 38;
   --color-white: #f3f4f6;
   --color-gray: #e5e7eb35;
 
@@ -36,7 +36,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("/bg.jpg");
+  background: url("/bg.png") no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
   font-size: 1.6rem;
   color: var(--color-white);
 }

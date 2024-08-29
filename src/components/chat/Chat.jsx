@@ -139,14 +139,10 @@ function Chat() {
             <span className="chat-top__user-name">
               {user?.username || "User"}
             </span>
-            <p className="chat-top__user-description">
-              Lorem ipsum dolor sit, amet consectetur.
-            </p>
+            <p className="chat-top__user-email">{user?.email || ""}</p>
           </div>
         </div>
         <div className="chat-top__icons">
-          <img src="./phone.png" alt="" />
-          <img src="./video.png" alt="" />
           <img src="./info.png" alt="" />
         </div>
       </div>
@@ -203,7 +199,6 @@ function Chat() {
             onChange={handleImage}
           />
           <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
         </div>
         <input
           type="text"

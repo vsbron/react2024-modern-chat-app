@@ -93,7 +93,7 @@
     }
     .details__info-block {
       padding: 1.5rem 2rem;
-      background-color: rgba(var(--color-red), 0.5);
+      background-color: rgba(var(--color-red), 0.7);
       color: var(--color-white);
       border: none;
       border-radius: var(--border-radius-xs);
@@ -101,7 +101,7 @@
       transition: var(--transition-bg-default);
 
       &:hover {
-        background-color: rgba(var(--color-red), 0.8);
+        background-color: rgba(var(--color-red), 0.9);
       }
     }
     .details__info-logout {
