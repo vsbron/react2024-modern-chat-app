@@ -1,27 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { format } from "timeago.js";
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 
-import { db } from "../../lib/firebase";
-import { useChatStore } from "../../lib/chatStore";
-import { useUserStore } from "../../lib/userStore";
-import upload from "../../lib/upload";
+import { db } from "../../../lib/firebase";
+import { useChatStore } from "../../../lib/chatStore";
+import { useUserStore } from "../../../lib/userStore";
+import upload from "../../../lib/upload";
 
 import EmojiModal from "./emojiModal/EmojiModal";
-import Avatar from "../../ui/avatar/Avatar";
-import Button from "../../ui/button/Button";
+import Avatar from "../../../ui/avatar/Avatar";
+import Button from "../../../ui/button/Button";
 
 import "./chat.css";
 
-function Chat() {
-  // State for Active chat, Emoji Picker module and Input text
-  const [chat, setChat] = useState("");
+function Chat({ chat }) {
+  // State for Emoji Picker module, Input text and uploaded image
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
   const [img, setImg] = useState({
@@ -41,18 +34,6 @@ function Chat() {
   useEffect(() => {
     endRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat.messages]);
-
-  // useEffect to show the chosen chat
-  useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
-      setChat(res.data())
-    );
-
-    // Cleanup function when component unmounts
-    return () => {
-      unSub();
-    };
-  }, [chatId]);
 
   // Click handler to open emoji window
   const handleClick = () => {

@@ -1,29 +1,18 @@
-import { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 
-import { useChatStore } from "../../lib/chatStore";
-import { auth, db } from "../../lib/firebase";
-import { useUserStore } from "../../lib/userStore";
+import { useChatStore } from "../../../lib/chatStore";
+import { auth, db } from "../../../lib/firebase";
+import { useUserStore } from "../../../lib/userStore";
 
-import Avatar from "../../ui/avatar/Avatar";
+import Avatar from "../../../ui/avatar/Avatar";
 
 import "./details.css";
 
-function Details() {
-  // Setting the state for the current chat
-  const [chat, setChat] = useState("");
-
+function Details({ chat }) {
   // Get the current user, other user and blocking constants from the store
   const { currentUser } = useUserStore();
   const {
-    chatId,
     user,
     changeBlocked,
     isReceiverBlocked,
@@ -33,18 +22,6 @@ function Details() {
 
   // Getting all the messages with images
   const messagesWithImg = chat?.messages?.filter((msg) => msg.img).reverse();
-
-  // useEffect to set the current chat
-  useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
-      setChat(res.data())
-    );
-
-    // Cleanup function when component unmounts
-    return () => {
-      unSub();
-    };
-  }, [chatId]);
 
   // Click handler for logout button
   const handleLogout = () => {

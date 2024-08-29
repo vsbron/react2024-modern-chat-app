@@ -40,6 +40,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   font-size: 1.6rem;
+  line-height: 1.4;
   color: var(--color-white);
 }
 

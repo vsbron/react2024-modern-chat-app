@@ -1,6 +1,6 @@
 import EmojiPicker from "emoji-picker-react";
 
-import useCloseModal from "../../../utils/useCloseModal";
+import useCloseModal from "../../../../utils/useCloseModal";
 
 import "./emojiModal.css";
 
