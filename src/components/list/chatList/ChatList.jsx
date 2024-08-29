@@ -7,14 +7,16 @@ import { useUserStore } from "../../../lib/userStore";
 
 import AddUser from "./addUser/AddUser";
 import Avatar from "../../../ui/avatar/Avatar";
+import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
 import "./chatList.css";
 
 function ChatList() {
-  // State for adding user mode, the chats list and search input
+  // State for adding user mode, the chats list, search input and loading state
   const [addMode, setAddMode] = useState(false);
   const [chats, setChats] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
@@ -26,8 +28,11 @@ function ChatList() {
     // Getting the chats data from the user id in the real time
     const unSub = onSnapshot(
       doc(db, "userchats", currentUser.id),
-      // Getting the chats data
       async (res) => {
+        // Enable loading state
+        setIsLoading(true);
+
+        // Getting the chats data
         const items = res.data().chats;
 
         // From each chat we also need to get the user id using receiverID
@@ -47,6 +52,9 @@ function ChatList() {
 
         // Setting the chatData state while also sorting it by date
         setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+
+        // Disable loading state
+        setIsLoading(false);
       }
     );
 
@@ -121,7 +129,10 @@ function ChatList() {
         </div>
 
         {/* List of chats */}
-        {filteredChats.length > 0 &&
+        {isLoading ? (
+          <LoaderSmall />
+        ) : (
+          filteredChats.length > 0 &&
           filteredChats.map((chat) => (
             <div
               className="item"
@@ -148,7 +159,8 @@ function ChatList() {
                 {chat.lastMessage && <p>{chat.lastMessage}</p>}
               </div>
             </div>
-          ))}
+          ))
+        )}
       </div>
       {/* Conditional add user modal window */}
       {addMode && <AddUser setAddMode={setAddMode} />}

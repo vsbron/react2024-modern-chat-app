@@ -10,6 +10,7 @@ import Login from "./components/login/Login";
 import Notifications from "./components/notifications/Notifications";
 import OpenedChat from "./components/openedChat/OpenedChat";
 import ClosedChat from "./components/closedChat/ClosedChat";
+import Loader from "./ui/loader/Loader";
 
 const App = () => {
   // Getting the user, loading state and fetch function from the store
@@ -31,7 +32,7 @@ const App = () => {
   }, [fetchUserInfo]);
 
   // Show loader if data is loading
-  if (isLoading) return <div className="loading">Loading...</div>;
+  if (isLoading) return <Loader />;
 
   // Returned JSX
   return (

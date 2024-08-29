@@ -1,0 +1,25 @@
+.loader {
+  width: 5rem;
+  height: 5rem;
+  padding: 1rem;
+  border-radius: var(--border-radius-round);
+  background: var(--color-white);
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  mask: var(--_m);
+  mask-composite: subtract;
+  animation: rotate 1.25s infinite linear;
+
+  &.loader-small {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    margin: 2rem auto;
+    animation-duration: 1s;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
