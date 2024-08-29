@@ -1,4 +1,5 @@
 .avatar {
   border-radius: var(--border-radius-round);
   object-fit: cover;
+  border: var(--color-gray-light) 2px solid;
 }

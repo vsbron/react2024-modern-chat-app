@@ -133,13 +133,17 @@ function ChatList() {
           <LoaderSmall />
         ) : (
           filteredChats.length > 0 &&
-          filteredChats.map((chat) => (
+          filteredChats.map((chat, i) => (
             <div
               className="item"
-              key={chatId}
+              key={i}
               onClick={() => handleSelect(chat)}
               style={{
-                backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
+                backgroundColor: !chat?.isSeen
+                  ? "#5183fe"
+                  : chat.chatId === chatId
+                  ? "var(--color-blue-1)"
+                  : "",
               }}
             >
               <Avatar
@@ -156,7 +160,11 @@ function ChatList() {
                     ? "User"
                     : chat.user.username}
                 </span>
-                {chat.lastMessage && <p>{chat.lastMessage}</p>}
+                {chat.lastMessage && (
+                  <p>
+                    {chat.lastMessage.split(" ").slice(0, 9).join(" ") + "..."}
+                  </p>
+                )}
               </div>
             </div>
           ))
