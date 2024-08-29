@@ -24,7 +24,7 @@ function Chat({ chat }) {
 
   // Getting the current user, other user and chat id variables from the store
   const { currentUser } = useUserStore();
-  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } =
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, resetChat } =
     useChatStore();
 
   // / Reference for the end of the chat
@@ -124,7 +124,13 @@ function Chat({ chat }) {
           </div>
         </div>
         <div className="chat-top__icons">
-          <img src="./info.png" alt="" />
+          <img
+            src="./close.png"
+            alt=""
+            onClick={() => {
+              resetChat();
+            }}
+          />
         </div>
       </div>
 
