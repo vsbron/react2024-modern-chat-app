@@ -97,15 +97,27 @@
   }
 
   .chat-bottom {
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     border-top: var(--border-default);
-    gap: 2rem;
+
+    .chat-bottom__img-preview {
+      padding: 1rem 2rem;
+      border-bottom: var(--border-default);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .chat-bottom__img-close {
+        margin-left: auto;
+        cursor: pointer;
+      }
+    }
 
     form {
-      display: contents;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
     }
 
     .chat-bottom__icons {

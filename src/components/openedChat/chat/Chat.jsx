@@ -13,14 +13,17 @@ import Button from "../../../ui/button/Button";
 
 import "./chat.css";
 
+const imgInitialState = {
+  file: null,
+  url: "",
+};
+
 function Chat({ chat }) {
   // State for Emoji Picker module, Input text and uploaded image
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
-  const [img, setImg] = useState({
-    file: null,
-    url: "",
-  });
+  const [img, setImg] = useState(imgInitialState);
+  const [isSending, setIsSending] = useState(false);
 
   // Getting the current user, other user and chat id variables from the store
   const { currentUser } = useUserStore();
@@ -50,6 +53,9 @@ function Chat({ chat }) {
 
     // Create a imgUrl variable
     let imgUrl = null;
+
+    // Enabling sending state
+    setIsSending(true);
 
     try {
       // If file provided - upload it
@@ -94,12 +100,13 @@ function Chat({ chat }) {
       console.error(err.message);
     } finally {
       // Reset img state
-      setImg({
-        file: null,
-        url: "",
-      });
+      resetImage();
+
       // Reset input state
       setInputText("");
+
+      // Disabling sending state
+      setIsSending(false);
     }
   };
 
@@ -110,6 +117,11 @@ function Chat({ chat }) {
         file: e.target.files[0],
         url: URL.createObjectURL(e.target.files[0]),
       });
+  };
+
+  // Helper function that resets the attached image
+  const resetImage = () => {
+    setImg(imgInitialState);
   };
 
   // Returned JSX
@@ -166,18 +178,23 @@ function Chat({ chat }) {
           </div>
         ))}
 
-        {img && (
-          <div className="chat-center__message-container chat-center__message-container--own">
-            <div className="chat-center__texts">
-              <img src={img.url} height={80} alt="" />
-            </div>
-          </div>
-        )}
         <div ref={endRef}></div>
       </div>
 
       {/* Bottom part */}
       <div className="chat-bottom">
+        {img.file !== null && (
+          <div className="chat-bottom__img-preview">
+            Attached image:
+            <img src={img.url} height={40} alt="" />
+            <img
+              src="./close.png"
+              className="chat-bottom__img-close"
+              onClick={resetImage}
+              height={20}
+            />
+          </div>
+        )}
         <form onSubmit={handleSendMessage}>
           <div className="chat-bottom__icons">
             <label htmlFor="file">
@@ -201,7 +218,7 @@ function Chat({ chat }) {
             }
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            disabled={isCurrentUserBlocked || isReceiverBlocked}
+            disabled={isSending || isCurrentUserBlocked || isReceiverBlocked}
           />
           <div className="chat-bottom__icons">
             <img
@@ -219,7 +236,7 @@ function Chat({ chat }) {
           </div>
           <Button
             padding="1rem 2rem"
-            disabled={isCurrentUserBlocked || isReceiverBlocked}
+            disabled={isSending || isCurrentUserBlocked || isReceiverBlocked}
           >
             Send
           </Button>
