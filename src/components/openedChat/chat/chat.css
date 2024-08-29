@@ -21,7 +21,6 @@
       .chat-top__texts {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
 
         .chat-top__user-name {
           font-size: 1.8rem;
@@ -31,7 +30,7 @@
         .chat-top__user-email {
           font-size: 1.4rem;
           font-weight: 300;
-          color: #a5a5a5;
+          color: var(--color-gray-light);
         }
       }
     }
