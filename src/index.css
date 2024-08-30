@@ -19,6 +19,7 @@
   --color-gray-light: #a5a5a5;
 
   --border-default: var(--color-gray) 1px solid;
+  --border-dashed: var(--color-gray) 2px dashed;
   --border-radius-xs: 0.5rem;
   --border-radius-sm: 1rem;
   --border-radius-round: 50%;

@@ -3,10 +3,14 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
 
 const upload = async (file) => {
+  // Determine the folder based on file type
+  const isImage = file.type.startsWith("image/");
+  const folder = isImage ? "images" : "files";
+
   // Creating the storage reference with the image name
   const storageRef = ref(
     storage,
-    `images/${Date.now()}-${file.name.toLowerCase().replaceAll(" ", "-")}`
+    `${folder}/${Date.now()}-${file.name.toLowerCase().replaceAll(" ", "-")}`
   );
 
   // Uploading the file we got in the form
@@ -34,4 +38,5 @@ const upload = async (file) => {
     );
   });
 };
+
 export default upload;

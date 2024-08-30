@@ -11,6 +11,7 @@ import Avatar from "../../../ui/avatar/Avatar";
 import "./details.css";
 
 function Details({ chat }) {
+  // State for the images and files sections
   const [showImages, setShowImages] = useState(false);
   const [showFiles, setShowFiles] = useState(false);
 
@@ -19,8 +20,9 @@ function Details({ chat }) {
   const { user, changeBlocked, isReceiverBlocked, isCurrentUserBlocked } =
     useChatStore();
 
-  // Getting all the messages with images
-  const messagesWithImg = chat?.messages?.filter((msg) => msg.img).reverse();
+  // Getting all the messages with images and files
+  const messagesWithImages = chat?.messages?.filter((msg) => msg.img).reverse();
+  const messagesWithFiles = chat?.messages?.filter((msg) => msg.file).reverse();
 
   // Block user handler
   const handleBlock = async () => {
@@ -69,17 +71,16 @@ function Details({ chat }) {
       {/* Togglers to show all images and files in the chat */}
       <div className="details__info">
         <div className="details__info-option">
-          <div className="details__info-title">
+          <div className="details__info-title" onClick={toggleImages}>
             <span>Shared images</span>
             <img
               src={showImages ? "./arrowUp.png" : "./arrowDown.png"}
               alt=""
-              onClick={toggleImages}
             />
           </div>
           {showImages && (
             <div className="details__images">
-              {messagesWithImg?.map(
+              {messagesWithImages?.map(
                 (message, i) =>
                   message.img && (
                     <div
@@ -100,35 +101,30 @@ function Details({ chat }) {
           )}
         </div>
         <div className="details__info-option">
-          <div className="details__info-title">
+          <div className="details__info-title" onClick={toggleFiles}>
             <span>Shared files</span>
-            <img
-              src={showFiles ? "./arrowUp.png" : "./arrowDown.png"}
-              alt=""
-              onClick={toggleFiles}
-            />
+            <img src={showFiles ? "./arrowUp.png" : "./arrowDown.png"} alt="" />
           </div>
           {showFiles && (
-            <div></div>
-            // <div className="details__images">
-            //   {messagesWithImg?.map(
-            //     (message, i) =>
-            //       message.img && (
-            //         <div
-            //           className="details__images-item"
-            //           key={i}
-            //           onClick={() => {
-            //             saveAs(message.img, "image.jpg");
-            //           }}
-            //         >
-            //           <div className="details__images-container">
-            //             <img src={message.img} alt="" />
-            //             <div className="details__images-overlay"></div>
-            //           </div>
-            //         </div>
-            //       )
-            //   )}
-            // </div>
+            <div className="details__images">
+              {messagesWithFiles?.map(
+                (message, i) =>
+                  message.file && (
+                    <div
+                      className="details__images-item"
+                      key={i}
+                      onClick={() => {
+                        saveAs(message.file, "image.jpg");
+                      }}
+                    >
+                      <div className="details__images-container">
+                        <img src="./file.png" alt="" />
+                        <div className="details__images-overlay"></div>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
           )}
         </div>
 

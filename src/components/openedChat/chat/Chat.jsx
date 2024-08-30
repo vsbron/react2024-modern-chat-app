@@ -13,17 +13,18 @@ import Button from "../../../ui/button/Button";
 
 import "./chat.css";
 
-// Initial state for an empty image
-const imgInitialState = {
+// Initial state for an empty file
+const fileInitialState = {
   file: null,
   url: "",
+  type: "",
 };
 
 function Chat({ chat }) {
-  // State for Emoji Picker module, Input text and uploaded image
+  // State for Emoji Picker module, Input text and uploaded file
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
-  const [img, setImg] = useState(imgInitialState);
+  const [file, setFile] = useState(fileInitialState);
   const [isSending, setIsSending] = useState(false);
 
   // Getting the current user, other user and chat id variables from the store
@@ -56,18 +57,18 @@ function Chat({ chat }) {
     e.preventDefault();
 
     // Guard clause
-    if (inputText === "" && !img) return;
-
-    // Create a imgUrl variable
-    let imgUrl = null;
+    if (inputText === "" && !file.file) return;
 
     // Enabling sending state
     setIsSending(true);
 
     try {
-      // If file provided - upload it
-      if (img.file) {
-        imgUrl = await upload(img.file);
+      console.log(file);
+
+      // Upload the file if provided
+      let fileUrl = null;
+      if (file.file) {
+        fileUrl = await upload(file.file);
       }
 
       // Add the sent message to the messages array in the database
@@ -76,7 +77,9 @@ function Chat({ chat }) {
           senderId: currentUser.id,
           text: inputText,
           createdAt: new Date(),
-          ...(imgUrl && { img: imgUrl }),
+          ...(fileUrl && file.type.startsWith("image/")
+            ? { img: fileUrl }
+            : { file: fileUrl, fileName: file.file.name }),
         }),
       });
 
@@ -117,18 +120,19 @@ function Chat({ chat }) {
     }
   };
 
-  // Image handler
+  // File handler
   const handleImage = (e) => {
     e.target.files[0] &&
-      setImg({
+      setFile({
         file: e.target.files[0],
         url: URL.createObjectURL(e.target.files[0]),
+        type: e.target.files[0].type,
       });
   };
 
-  // Helper function that resets the attached image
+  // Helper function that resets the attached file
   const resetImage = () => {
-    setImg(imgInitialState);
+    setFile(fileInitialState);
   };
 
   // Returned JSX
@@ -167,17 +171,32 @@ function Chat({ chat }) {
             key={message?.createdAt}
           >
             <div className="chat-center__texts">
+              {/* Display attached file */}
+              {message.file && (
+                <div className="chat-center__file">
+                  <span>{message.fileName}</span>
+                  <img
+                    src="./file.png"
+                    className="chat-center__attached"
+                    height={40}
+                    alt=""
+                  />
+                </div>
+              )}
+              {/* Display attached img */}
               {message.img && (
                 <img
                   src={message.img}
-                  className="chat-center__img"
+                  className="chat-center__attached"
                   height={80}
                   alt=""
                 />
               )}
+              {/* Display sent text */}
               {message.text && (
                 <p className="chat-center__message">{message.text}</p>
               )}
+              {/* Display the timestamp */}
               <span className="chat-center__timestamp">
                 {format(message.createdAt.toDate())}
               </span>
@@ -190,10 +209,20 @@ function Chat({ chat }) {
 
       {/* Bottom part */}
       <div className="chat-bottom">
-        {img.file !== null && (
-          <div className="chat-bottom__img-preview">
-            Attached image:
-            <img src={img.url} height={40} alt="" />
+        {file.file !== null && (
+          <div className="chat-bottom__file-preview">
+            Attached file:
+            {file.type.startsWith("image/") ? (
+              <>
+                <img src={file.url} height={40} alt="" />
+                <span className="chat-bottom__file-name">{file.file.name}</span>
+              </>
+            ) : (
+              <>
+                <img src={"./file.png"} height={40} alt="" />
+                <span className="chat-bottom__file-name">{file.file.name}</span>
+              </>
+            )}
             <img
               src="./close.png"
               className="chat-bottom__img-close"
@@ -205,7 +234,7 @@ function Chat({ chat }) {
         <form onSubmit={handleSendMessage}>
           <div className="chat-bottom__icons">
             <label htmlFor="file">
-              <img src="./img.png" alt="" />
+              <img src="./attach.png" alt="" />
             </label>
             <input
               type="file"
