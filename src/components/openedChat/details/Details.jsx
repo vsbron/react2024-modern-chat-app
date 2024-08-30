@@ -87,7 +87,7 @@ function Details({ chat }) {
                       className="details__images-item"
                       key={i}
                       onClick={() => {
-                        saveAs(message.img, "image.jpg");
+                        saveAs(message.img);
                       }}
                     >
                       <div className="details__images-container">
@@ -106,21 +106,24 @@ function Details({ chat }) {
             <img src={showFiles ? "./arrowUp.png" : "./arrowDown.png"} alt="" />
           </div>
           {showFiles && (
-            <div className="details__images">
+            <div className="details__files">
               {messagesWithFiles?.map(
                 (message, i) =>
                   message.file && (
-                    <div
-                      className="details__images-item"
-                      key={i}
-                      onClick={() => {
-                        saveAs(message.file, "image.jpg");
-                      }}
-                    >
-                      <div className="details__images-container">
-                        <img src="./file.png" alt="" />
-                        <div className="details__images-overlay"></div>
-                      </div>
+                    <div className="details__files-container" key={i}>
+                      <img src="./file.png" alt="" />
+                      <span className="details__filename">
+                        {message.fileName}
+                      </span>
+                      <img
+                        src="./download.png"
+                        className="details__files-download"
+                        height={20}
+                        alt=""
+                        onClick={() => {
+                          saveAs(message.file);
+                        }}
+                      />
                     </div>
                   )
               )}

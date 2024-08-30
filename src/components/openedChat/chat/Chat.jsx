@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { format } from "timeago.js";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import { saveAs } from "file-saver";
 
 import { db } from "../../../lib/firebase";
 import { useChatStore } from "../../../lib/chatStore";
@@ -180,6 +181,9 @@ function Chat({ chat }) {
                     className="chat-center__attached"
                     height={40}
                     alt=""
+                    onClick={() => {
+                      saveAs(message.file);
+                    }}
                   />
                 </div>
               )}
@@ -190,6 +194,9 @@ function Chat({ chat }) {
                   className="chat-center__attached"
                   height={80}
                   alt=""
+                  onClick={() => {
+                    saveAs(message.img);
+                  }}
                 />
               )}
               {/* Display sent text */}

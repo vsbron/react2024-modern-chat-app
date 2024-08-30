@@ -85,6 +85,7 @@
           align-self: end;
           border-radius: var(--border-radius-sm);
           object-fit: cover;
+          cursor: pointer;
         }
 
         .chat-center__message {
