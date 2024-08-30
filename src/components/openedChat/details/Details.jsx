@@ -74,7 +74,7 @@ function Details({ chat }) {
           <div className="details__info-title" onClick={toggleImages}>
             <span>Shared images</span>
             <img
-              src={showImages ? "./arrowUp.png" : "./arrowDown.png"}
+              src={showImages ? "./arrowUp.svg" : "./arrowDown.svg"}
               alt="Toggle shared images"
               title="Toggle shared images"
             />
@@ -105,7 +105,7 @@ function Details({ chat }) {
           <div className="details__info-title" onClick={toggleFiles}>
             <span>Shared files</span>
             <img
-              src={showFiles ? "./arrowUp.png" : "./arrowDown.png"}
+              src={showFiles ? "./arrowUp.svg" : "./arrowDown.svg"}
               alt="Toggle shared files"
               title="Toggle shared files"
             />
@@ -116,12 +116,12 @@ function Details({ chat }) {
                 (message, i) =>
                   message.file && (
                     <div className="details__files-container" key={i}>
-                      <img src="./file.png" alt="Shared file" />
+                      <img src="./file.svg" alt="Shared file" />
                       <span className="details__filename">
                         {message.fileName}
                       </span>
                       <img
-                        src="./download.png"
+                        src="./download.svg"
                         className="details__files-download"
                         height={20}
                         alt="Download file"

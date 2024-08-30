@@ -152,7 +152,7 @@ function Chat({ chat }) {
         </div>
         <div className="chat-top__icons">
           <img
-            src="./close.png"
+            src="./close.svg"
             alt={`Close chat with ${user.username}`}
             title={`Close chat with ${user.username}`}
             onClick={() => {
@@ -178,7 +178,7 @@ function Chat({ chat }) {
                 <div className="chat-center__file">
                   <span>{message.fileName}</span>
                   <img
-                    src="./file.png"
+                    src="./file.svg"
                     className="chat-center__attached"
                     height={40}
                     alt="Attached file"
@@ -227,12 +227,12 @@ function Chat({ chat }) {
               </>
             ) : (
               <>
-                <img src={"./file.png"} height={40} alt={file.file.name} />
+                <img src={"./file.svg"} height={40} alt={file.file.name} />
                 <span className="chat-bottom__file-name">{file.file.name}</span>
               </>
             )}
             <img
-              src="./close.png"
+              src="./close.svg"
               className="chat-bottom__img-close"
               onClick={resetImage}
               height={20}
@@ -242,7 +242,7 @@ function Chat({ chat }) {
         <form onSubmit={handleSendMessage}>
           <div className="chat-bottom__icons">
             <label htmlFor="file">
-              <img src="./attach.png" alt="Attach file" title="Attach file" />
+              <img src="./attach.svg" alt="Attach file" title="Attach file" />
             </label>
             <input
               type="file"
@@ -265,7 +265,7 @@ function Chat({ chat }) {
           />
           <div className="chat-bottom__icons">
             <img
-              src="./emoji.png"
+              src="./emoji.svg"
               className="emoji-trigger"
               onClick={handleClick}
               alt="Add an Emoji"

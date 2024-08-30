@@ -32,9 +32,9 @@ function UserInfo() {
         </div>
       </div>
       <div className="icons">
-        <img src="./more.png" alt="Settings" title="Settings" />
+        <img src="./settings.svg" alt="Settings" title="Settings" />
         <img
-          src="./logout.png"
+          src="./logout.svg"
           alt="Log out"
           title="Log out"
           onClick={handleLogout}

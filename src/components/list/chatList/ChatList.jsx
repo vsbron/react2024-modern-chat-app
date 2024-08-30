@@ -102,7 +102,7 @@ function ChatList() {
         <div className="search">
           <div className="search__bar">
             <img
-              src="/search.png"
+              src="/search.svg"
               className="search__icon"
               alt="Search users"
             />
@@ -117,7 +117,7 @@ function ChatList() {
             />
           </div>
           <img
-            src={addMode ? "./minus.png" : "./plus.png"}
+            src={addMode ? "./minus.svg" : "./plus.svg"}
             className="search__add"
             onClick={() => setAddMode((mode) => !mode)}
             alt="Add user"

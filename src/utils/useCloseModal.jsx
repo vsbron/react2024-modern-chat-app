@@ -6,7 +6,7 @@ function useCloseModal({ setter, triggerClass, modalClass }) {
     // Outside click handler
     const handleClickOutside = (e) =>
       !e.target.closest("." + modalClass) &&
-      !e.target.className.includes("." + triggerClass) &&
+      !e.target.className.includes(triggerClass) &&
       setter(false);
 
     //Escape key press handler

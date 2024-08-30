@@ -37,7 +37,7 @@
           background-color: rgba(var(--color-main), 0.3);
           width: 3rem;
           height: 3rem;
-          padding: 1rem;
+          padding: 0.5rem;
           border-radius: var(--border-radius-round);
         }
       }
@@ -70,9 +70,9 @@
               opacity: 0;
               position: absolute;
               inset: 0;
-              background: rgba(0, 0, 0, 0.7) url("./download.png") no-repeat
+              background: rgba(0, 0, 0, 0.7) url("./download.svg") no-repeat
                 center center;
-              background-size: 2rem;
+              background-size: 3rem;
               z-index: 100;
               transition: opacity 0.2s var(--transition-easing);
             }
