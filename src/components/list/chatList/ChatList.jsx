@@ -101,7 +101,11 @@ function ChatList() {
         {/* Search bar */}
         <div className="search">
           <div className="search__bar">
-            <img src="/search.png" className="search__icon" alt="" />
+            <img
+              src="/search.png"
+              className="search__icon"
+              alt="Search users"
+            />
             <input
               type="text"
               className="search__input"
@@ -116,7 +120,8 @@ function ChatList() {
             src={addMode ? "./minus.png" : "./plus.png"}
             className="search__add"
             onClick={() => setAddMode((mode) => !mode)}
-            alt=""
+            alt="Add user"
+            title="Open user search"
           />
         </div>
 
@@ -142,6 +147,7 @@ function ChatList() {
                     : chat?.user?.avatar
                 }
                 size="5rem"
+                altTitle={chat?.user?.username}
               />
               <div className="item__texts">
                 <span>

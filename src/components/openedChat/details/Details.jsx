@@ -60,7 +60,7 @@ function Details({ chat }) {
     <section className="details">
       {/* User info */}
       <div className="details__user">
-        <Avatar src={user?.avatar} size="10rem" />
+        <Avatar src={user?.avatar} size="10rem" altTitle={user?.username} />
         <h2 className="details__user-name">{user?.username || "User"}</h2>
         <p className="details__email">{user?.email || "User"}</p>
         <p className="details__user-text">
@@ -75,7 +75,8 @@ function Details({ chat }) {
             <span>Shared images</span>
             <img
               src={showImages ? "./arrowUp.png" : "./arrowDown.png"}
-              alt=""
+              alt="Toggle shared images"
+              title="Toggle shared images"
             />
           </div>
           {showImages && (
@@ -91,7 +92,7 @@ function Details({ chat }) {
                       }}
                     >
                       <div className="details__images-container">
-                        <img src={message.img} alt="" />
+                        <img src={message.img} alt="Shared image" />
                         <div className="details__images-overlay"></div>
                       </div>
                     </div>
@@ -103,7 +104,11 @@ function Details({ chat }) {
         <div className="details__info-option">
           <div className="details__info-title" onClick={toggleFiles}>
             <span>Shared files</span>
-            <img src={showFiles ? "./arrowUp.png" : "./arrowDown.png"} alt="" />
+            <img
+              src={showFiles ? "./arrowUp.png" : "./arrowDown.png"}
+              alt="Toggle shared files"
+              title="Toggle shared files"
+            />
           </div>
           {showFiles && (
             <div className="details__files">
@@ -111,7 +116,7 @@ function Details({ chat }) {
                 (message, i) =>
                   message.file && (
                     <div className="details__files-container" key={i}>
-                      <img src="./file.png" alt="" />
+                      <img src="./file.png" alt="Shared file" />
                       <span className="details__filename">
                         {message.fileName}
                       </span>
@@ -119,7 +124,8 @@ function Details({ chat }) {
                         src="./download.png"
                         className="details__files-download"
                         height={20}
-                        alt=""
+                        alt="Download file"
+                        title={`Download ${message.fileName}`}
                         onClick={() => {
                           saveAs(message.file);
                         }}

@@ -152,7 +152,11 @@ function AddUser({ setAddMode }) {
               isAlreadyAdded && "add-user__user-added"
             }`}
           >
-            <Avatar src={searchedUser.avatar} size="5rem" />
+            <Avatar
+              src={searchedUser.avatar}
+              altTitle={searchedUser.username}
+              size="5rem"
+            />
             <div className="add-user__user-name">
               <span>{searchedUser.username}</span>
               <span>{searchedUser.email}</span>

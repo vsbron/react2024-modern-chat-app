@@ -142,7 +142,7 @@ function Chat({ chat }) {
       {/* Top part */}
       <div className="chat-top">
         <div className="chat-top__user">
-          <Avatar src={user?.avatar} size="6rem" />
+          <Avatar src={user?.avatar} size="6rem" altTitle={user?.username} />
           <div className="chat-top__texts">
             <span className="chat-top__user-name">
               {user?.username || "User"}
@@ -153,7 +153,8 @@ function Chat({ chat }) {
         <div className="chat-top__icons">
           <img
             src="./close.png"
-            alt=""
+            alt={`Close chat with ${user.username}`}
+            title={`Close chat with ${user.username}`}
             onClick={() => {
               resetChat();
             }}
@@ -180,7 +181,7 @@ function Chat({ chat }) {
                     src="./file.png"
                     className="chat-center__attached"
                     height={40}
-                    alt=""
+                    alt="Attached file"
                     onClick={() => {
                       saveAs(message.file);
                     }}
@@ -193,7 +194,7 @@ function Chat({ chat }) {
                   src={message.img}
                   className="chat-center__attached"
                   height={80}
-                  alt=""
+                  alt="Attached image"
                   onClick={() => {
                     saveAs(message.img);
                   }}
@@ -221,12 +222,12 @@ function Chat({ chat }) {
             Attached file:
             {file.type.startsWith("image/") ? (
               <>
-                <img src={file.url} height={40} alt="" />
+                <img src={file.url} height={40} alt={file.file.name} />
                 <span className="chat-bottom__file-name">{file.file.name}</span>
               </>
             ) : (
               <>
-                <img src={"./file.png"} height={40} alt="" />
+                <img src={"./file.png"} height={40} alt={file.file.name} />
                 <span className="chat-bottom__file-name">{file.file.name}</span>
               </>
             )}
@@ -241,7 +242,7 @@ function Chat({ chat }) {
         <form onSubmit={handleSendMessage}>
           <div className="chat-bottom__icons">
             <label htmlFor="file">
-              <img src="./attach.png" alt="" />
+              <img src="./attach.png" alt="Attach file" title="Attach file" />
             </label>
             <input
               type="file"
@@ -267,7 +268,8 @@ function Chat({ chat }) {
               src="./emoji.png"
               className="emoji-trigger"
               onClick={handleClick}
-              alt=""
+              alt="Add an Emoji"
+              title="Add an Emoji"
             />
             {openEmoji && (
               <EmojiModal

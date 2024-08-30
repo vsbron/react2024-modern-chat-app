@@ -21,15 +21,24 @@ function UserInfo() {
   return (
     <div className="user-info">
       <div className="user">
-        <Avatar src={currentUser.avatar} size="5rem" />
+        <Avatar
+          src={currentUser.avatar}
+          size="5rem"
+          altTitle={currentUser.username}
+        />
         <div>
           <h2>{currentUser.username}</h2>
           <p>{currentUser.email}</p>
         </div>
       </div>
       <div className="icons">
-        <img src="./more.png" alt="" />
-        <img src="./logout.png" alt="" onClick={handleLogout} />
+        <img src="./more.png" alt="Settings" title="Settings" />
+        <img
+          src="./logout.png"
+          alt="Log out"
+          title="Log out"
+          onClick={handleLogout}
+        />
       </div>
     </div>
   );
