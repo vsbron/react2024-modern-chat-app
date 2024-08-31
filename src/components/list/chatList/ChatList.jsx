@@ -133,28 +133,23 @@ function ChatList() {
               key={i}
               onClick={() => handleSelect(chat)}
               style={{
-                backgroundColor: !chat?.isSeen
-                  ? "var(--color-unread)"
-                  : chat.chatId === chatId
-                  ? "var(--color-violet-1)"
-                  : "",
+                backgroundColor:
+                  chat.chatId === chatId
+                    ? "var(--color-violet-1)"
+                    : chat.user.blocked.includes(currentUser.id)
+                    ? "rgb(var(--color-red),.3)"
+                    : !chat.isSeen
+                    ? "var(--color-unread)"
+                    : "",
               }}
             >
               <Avatar
-                src={
-                  chat.user.blocked.includes(currentUser.id)
-                    ? "./avatar.png"
-                    : chat?.user?.avatar
-                }
+                src={chat.user.avatar}
                 size="5rem"
-                altTitle={chat?.user?.username}
+                altTitle={chat.user.username}
               />
               <div className="item__texts">
-                <span>
-                  {chat.user.blocked.includes(currentUser.id)
-                    ? "User"
-                    : chat.user.username}
-                </span>
+                <span>{chat.user.username}</span>
                 {chat.lastMessage && (
                   <p>
                     {chat.lastMessage.split(" ").length > 9

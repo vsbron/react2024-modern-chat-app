@@ -13,11 +13,11 @@ export const useChatStore = create((set) => ({
   changeChat: (chatId, userInfo) => {
     const currentUser = useUserStore.getState().currentUser;
 
-    // Check if user is blocked current user
+    // Check if other user is blocked current user
     if (userInfo.blocked.includes(currentUser.id)) {
       return set({
         chatId,
-        user: null,
+        user: userInfo,
         isCurrentUserBlocked: true,
         isReceiverBlocked: false,
       });

@@ -60,9 +60,9 @@ function Details({ chat }) {
     <section className="details">
       {/* User info */}
       <div className="details__user">
-        <Avatar src={user?.avatar} size="10rem" altTitle={user?.username} />
-        <h2 className="details__user-name">{user?.username || "User"}</h2>
-        <p className="details__email">{user?.email || "User"}</p>
+        <Avatar src={user.avatar} size="10rem" altTitle={user.username} />
+        <h2 className="details__user-name">{user.username || "User"}</h2>
+        <p className="details__email">{user.email || "User"}</p>
         <p className="details__user-text">
           Lorem ipsum, dolor sit amet consectetur.
         </p>

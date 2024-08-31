@@ -166,7 +166,7 @@
       font-size: 1.6rem;
 
       &:disabled {
-        background-color: #5182feb4;
+        background-color: var(--color-gray);
         cursor: not-allowed;
       }
     }

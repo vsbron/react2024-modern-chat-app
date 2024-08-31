@@ -58,30 +58,38 @@ function Chat({ chat }) {
     e.preventDefault();
 
     // Guard clause
-    if (inputText === "" && !file.file) return;
+    if (inputText.trim() === "" && !file?.file) return;
 
     // Enabling sending state
     setIsSending(true);
 
     try {
-      console.log(file);
-
       // Upload the file if provided
       let fileUrl = null;
-      if (file.file) {
+      if (file?.file) {
         fileUrl = await upload(file.file);
+      }
+
+      // Prepare the message data
+      const messageData = {
+        senderId: currentUser.id,
+        text: inputText,
+        createdAt: new Date(),
+      };
+
+      // Add the file data if fileUrl exists
+      if (fileUrl !== null) {
+        if (file.type.startsWith("image/")) {
+          messageData.img = fileUrl;
+        } else {
+          messageData.file = fileUrl;
+          messageData.fileName = file.file.name;
+        }
       }
 
       // Add the sent message to the messages array in the database
       await updateDoc(doc(db, "chats", chatId), {
-        messages: arrayUnion({
-          senderId: currentUser.id,
-          text: inputText,
-          createdAt: new Date(),
-          ...(fileUrl && file.type.startsWith("image/")
-            ? { img: fileUrl }
-            : { file: fileUrl, fileName: file.file.name }),
-        }),
+        messages: arrayUnion(messageData),
       });
 
       // Create an array of both IDs to loop through them
@@ -142,12 +150,12 @@ function Chat({ chat }) {
       {/* Top part */}
       <div className="chat-top">
         <div className="chat-top__user">
-          <Avatar src={user?.avatar} size="6rem" altTitle={user?.username} />
+          <Avatar src={user.avatar} size="6rem" altTitle={user.username} />
           <div className="chat-top__texts">
             <span className="chat-top__user-name">
-              {user?.username || "User"}
+              {user.username || "User"}
             </span>
-            <p className="chat-top__user-email">{user?.email || ""}</p>
+            <p className="chat-top__user-email">{user.email || ""}</p>
           </div>
         </div>
         <div className="chat-top__icons">
@@ -164,13 +172,13 @@ function Chat({ chat }) {
 
       {/* Center part */}
       <div className="chat-center">
-        {chat?.messages?.map((message) => (
+        {chat.messages?.map((message) => (
           <div
             className={`chat-center__message-container ${
               message.senderId === currentUser.id &&
               "chat-center__message-container--own"
             }`}
-            key={message?.createdAt}
+            key={message.createdAt}
           >
             <div className="chat-center__texts">
               {/* Display attached file */}
