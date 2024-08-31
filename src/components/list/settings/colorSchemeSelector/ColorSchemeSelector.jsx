@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useUserStore } from "../../../../lib/userStore";
 import { COLORS } from "../../../../utils/constants";
@@ -11,6 +11,11 @@ function ColorSchemeSelector() {
 
   // Creating the state for the selected color
   const [selectedColor, setSelectedColor] = useState(currentUser.color);
+
+  useEffect(() => {
+    // Apply the color scheme class to the body or a root element
+    document.body.className = `color-scheme-${selectedColor}`;
+  }, [selectedColor]);
 
   // Handle color change
   const handleColorChange = async (color) => {

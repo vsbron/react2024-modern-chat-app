@@ -15,6 +15,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 - The main chat page is divided into three columns: Chat List, Main Chat Section, and Details Section;
 - The Chat List section contains the main user information, settings icon, log out button, a search bar, and a list of available chats;
 - Settings menu allows user to update his avatar, username, password, description and password;
+- Color scheme can also be selected at the bottom of the Settings menu;
 - The search bar features an input to filter the current chat list and an Add User button;
 - The Add User modal allows users to search for others and start a chat with them;
 - The center section displays the currently selected chat, including information about the interlocutor;
@@ -42,6 +43,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 - Settings menu with profile customizations;
 - In the Add Users feature, users can be found by their username or email;
 - Users cannot add themselves or others who are already in their chat list;
+- Color scheme selector at the bottom of Settings menu;
 - If a user has blocked the current user, their name and avatar are still visible;
 - When a chat is open, an "X" icon allows users to close it and return to the start section;
 - The Add User and Emoji modals now close when clicking outside or pressing the Esc key;

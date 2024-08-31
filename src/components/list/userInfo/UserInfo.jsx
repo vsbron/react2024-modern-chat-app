@@ -15,6 +15,7 @@ function UserInfo({ setShowSettings }) {
   const handleLogout = () => {
     auth.signOut();
     resetChat();
+    document.body.className = "";
   };
 
   // Returned JSX
