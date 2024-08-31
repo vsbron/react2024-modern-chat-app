@@ -5,7 +5,7 @@
   height: max-content;
   margin: auto;
   padding: 3rem;
-  background-color: rgba(var(--color-main), 0.8);
+  background-color: var(--color-main-bg);
   border-radius: var(--border-radius-sm);
   animation: appear 0.2s ease-out forwards;
 

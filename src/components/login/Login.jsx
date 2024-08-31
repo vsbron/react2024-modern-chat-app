@@ -19,6 +19,7 @@ import upload from "../../lib/upload";
 import Avatar from "../../ui/avatar/Avatar";
 
 import "./login.css";
+import Button from "../../ui/button/Button";
 
 function Login() {
   // State for an avatar image
@@ -135,9 +136,9 @@ function Login() {
         <form className="login__form" onSubmit={handleLogin}>
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
-          <button className="login__button" disabled={loading}>
+          <Button padding="2rem" disabled={loading}>
             {loading ? "Loading..." : "Sign In"}
-          </button>
+          </Button>
         </form>
       </div>
 
@@ -162,9 +163,9 @@ function Login() {
           <input type="text" placeholder="Username" name="username" />
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
-          <button className="login__button" disabled={loading}>
+          <Button padding="2rem" disabled={loading}>
             {loading ? "Loading..." : "Sign Up"}
-          </button>
+          </Button>
         </form>
       </div>
     </section>

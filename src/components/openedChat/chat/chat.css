@@ -90,7 +90,7 @@
 
         .chat-center__message {
           padding: 2rem;
-          background-color: rgba(var(--color-main), 0.3);
+          background-color: var(--color-message);
           border-radius: var(--border-radius-sm);
         }
         .chat-center__timestamp {
@@ -102,7 +102,7 @@
         align-self: end;
 
         .chat-center__message {
-          background-color: var(--color-violet-light-1);
+          background-color: var(--color-message-own);
         }
         .chat-center__timestamp {
           text-align: right;
@@ -157,7 +157,7 @@
 
     .chat-bottom__input {
       flex: 1;
-      background-color: rgba(var(--color-main), 0.5);
+      background-color: var(--color-input);
       border: none;
       outline: none;
       color: var(--color-white);

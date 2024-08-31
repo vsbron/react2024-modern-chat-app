@@ -10,7 +10,7 @@
 
     .search__bar {
       flex: 1;
-      background-color: rgba(var(--color-main), 0.5);
+      background-color: var(--color-input);
       display: flex;
       align-items: center;
       gap: 2rem;
@@ -38,7 +38,7 @@
     .search__add {
       width: 3.6rem;
       height: 3.6rem;
-      background-color: rgba(var(--color-main), 0.5);
+      background-color: var(--color-main-bg);
       padding: 1rem;
       border-radius: var(--border-radius-sm);
       cursor: pointer;

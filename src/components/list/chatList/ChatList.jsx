@@ -135,11 +135,11 @@ function ChatList() {
               style={{
                 backgroundColor:
                   chat.chatId === chatId
-                    ? "var(--color-violet-1)"
+                    ? "var(--color-chat-active)"
                     : chat.user.blocked.includes(currentUser.id)
-                    ? "rgb(var(--color-red),.3)"
+                    ? "var(--color-chat-blocked)"
                     : !chat.isSeen
-                    ? "var(--color-unread)"
+                    ? "var(--color-chat-unread)"
                     : "",
               }}
             >
