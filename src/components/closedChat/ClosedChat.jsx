@@ -3,8 +3,8 @@ import "./closedChat.css";
 function ClosedChat() {
   return (
     <>
-      <div className="start-message">
-        <div className="start-message__container">
+      <div className="closed-chat">
+        <div className="closed-chat__message">
           <h2>Welcome to the Modern Chat App</h2>
           <p>
             We&apos;re thrilled to have you here! The Modern Chat App is your
@@ -25,9 +25,7 @@ function ClosedChat() {
             start chatting!
           </p>
         </div>
-      </div>
-      <div className="copyright">
-        <div className="copyright__container">
+        <div className="closed-chat__copyright">
           <img src="./mca-logo.svg" alt="MCA Logo" title="Modern Chat App" />
           <span>
             Built by VSBroN as a portfolio project

@@ -72,6 +72,7 @@
 
   --transition-easing: ease-out;
   --transition-bg-default: background-color 0.2s var(--transition-easing);
+  --transition-transform-default: transform 0.2s var(--transition-easing);
 }
 
 /* Blue color scheme */
@@ -111,6 +112,23 @@
   --color-message-own: var(--color-message-own-green);
   --color-chat-active: var(--color-chat-active-green);
   --color-chat-unread: var(--color-chat-unread-green);
+}
+
+::selection {
+  background-color: var(--color-message);
+  color: var(--color-white);
+}
+::-webkit-scrollbar {
+  width: 1rem;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-main-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-chat-active);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-chat-unread-violet);
 }
 
 html {
@@ -161,11 +179,26 @@ body {
   display: flex;
   position: relative;
   z-index: 100;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 1700px) {
+  .container {
+    width: 93vw;
+  }
 }
 
 @media screen and (max-width: 1400px) {
   .container {
-    width: 93vw;
     height: 95vh;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: none;
+    border: none;
   }
 }

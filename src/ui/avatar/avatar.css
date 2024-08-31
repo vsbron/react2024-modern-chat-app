@@ -2,4 +2,9 @@
   border-radius: var(--border-radius-round);
   object-fit: cover;
   border: var(--color-border) 2px solid;
+
+  @media screen and (max-width: 1050px) {
+    transform: scale(0.9);
+    margin-right: -0.75rem;
+  }
 }

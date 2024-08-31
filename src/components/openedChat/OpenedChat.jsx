@@ -8,8 +8,9 @@ import Chat from "./chat/Chat";
 import Details from "./details/Details";
 
 function OpenedChat() {
-  // Setting the state for the current chat
+  // Setting the state for the current chat, and details section
   const [chat, setChat] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
 
   // Getting the chat id from the store
   const { chatId } = useChatStore();
@@ -28,8 +29,12 @@ function OpenedChat() {
 
   return (
     <>
-      <Chat chat={chat} />
-      <Details chat={chat} />
+      <Chat chat={chat} setShowDetails={setShowDetails} />
+      <Details
+        chat={chat}
+        showDetails={showDetails}
+        setShowDetails={setShowDetails}
+      />
     </>
   );
 }

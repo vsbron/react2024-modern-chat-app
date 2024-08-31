@@ -21,7 +21,7 @@ const fileInitialState = {
   type: "",
 };
 
-function Chat({ chat }) {
+function Chat({ chat, setShowDetails }) {
   // State for Emoji Picker module, Input text and uploaded file
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
@@ -159,6 +159,14 @@ function Chat({ chat }) {
           </div>
         </div>
         <div className="chat-top__icons">
+          <img
+            src="./info.svg"
+            alt={`More info about ${user.username}`}
+            title={`More info about ${user.username}`}
+            onClick={() => {
+              setShowDetails(true);
+            }}
+          />
           <img
             src="./close.svg"
             alt={`Close chat with ${user.username}`}

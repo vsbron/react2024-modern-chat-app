@@ -6,7 +6,7 @@
   padding: 3rem;
   transform: translateX(-100%);
   overflow-y: scroll;
-  transition: transform 0.2s ease-out;
+  transition: var(--transition-transform-default);
 
   &.settings--visible {
     transform: translateX(0);

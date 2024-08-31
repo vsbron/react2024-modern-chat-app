@@ -5,7 +5,7 @@
   .search {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     padding: 2rem;
 
     .search__bar {
@@ -24,10 +24,7 @@
         color: var(--color-white);
         flex: 1;
         height: 2rem;
-
-        @media screen and (max-width: 1400px) {
-          width: 100%;
-        }
+        width: 100%;
       }
       .search__icon {
         width: 2rem;

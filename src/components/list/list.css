@@ -4,4 +4,13 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
+
+  @media screen and (max-width: 1050px) {
+    flex: auto;
+    max-width: 25rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 30rem;
+  }
 }

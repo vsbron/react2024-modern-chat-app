@@ -1,7 +1,6 @@
 .chat {
   flex: 2;
   border-left: var(--border-default);
-  border-right: var(--border-default);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -164,6 +163,11 @@
       padding: 2rem;
       border-radius: var(--border-radius-sm);
       font-size: 1.6rem;
+
+      @media screen and (max-width: 800px) {
+        flex: auto;
+        width: 20rem;
+      }
 
       &:disabled {
         background-color: var(--color-gray);

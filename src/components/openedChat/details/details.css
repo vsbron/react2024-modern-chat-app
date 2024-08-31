@@ -1,7 +1,12 @@
 .details {
   flex: 1;
   overflow-x: hidden;
+  border-left: var(--border-default);
   min-width: 23rem;
+
+  .details__close {
+    display: none;
+  }
 
   .details__user {
     padding: 3rem 2rem;
@@ -144,6 +149,41 @@
       &:hover {
         background-color: rgba(var(--color-red), 0.9);
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .details {
+    flex: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30rem;
+    transform: translateX(100%);
+    background: var(--color-main-bg);
+    transition: var(--transition-transform-default);
+
+    &.details--active {
+      flex: auto;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 30rem;
+      transform: translateX(0);
+      background: var(--color-main-bg);
+      border-left: var(--border-default);
+    }
+
+    .details__close {
+      display: block;
+      position: absolute;
+      top: 4rem;
+      right: 2rem;
+      height: 2rem;
+      cursor: pointer;
     }
   }
 }

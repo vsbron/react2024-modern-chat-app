@@ -18,11 +18,25 @@
     color: var(--color-gray-light);
     font-size: 1.5rem;
   }
+
+  @media screen and (max-width: 1050px) {
+    h2 {
+      font-size: 1.8rem;
+    }
+    p {
+      color: var(--color-gray-light);
+      font-size: 1.2rem;
+    }
+  }
 }
 
 .icons {
   display: flex;
   gap: 1.5rem;
+
+  @media screen and (max-width: 1050px) {
+    flex-direction: column;
+  }
 
   img {
     width: 2rem;

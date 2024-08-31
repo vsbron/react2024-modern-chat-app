@@ -10,7 +10,7 @@ import Avatar from "../../../ui/avatar/Avatar";
 
 import "./details.css";
 
-function Details({ chat }) {
+function Details({ chat, showDetails, setShowDetails }) {
   // State for the images and files sections
   const [showImages, setShowImages] = useState(false);
   const [showFiles, setShowFiles] = useState(false);
@@ -57,7 +57,17 @@ function Details({ chat }) {
 
   // Returned JSX
   return (
-    <section className="details">
+    <section className={`details ${showDetails ? "details--active" : ""}`}>
+      <img
+        src="./close.svg"
+        alt="Close details"
+        title="Close details"
+        className="details__close"
+        onClick={() => {
+          setShowDetails(false);
+        }}
+      />
+
       {/* User info */}
       <div className="details__user">
         <Avatar src={user.avatar} size="10rem" altTitle={user.username} />
