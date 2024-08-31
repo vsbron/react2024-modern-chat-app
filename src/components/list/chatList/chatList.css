@@ -8,6 +8,10 @@
     gap: 1rem;
     padding: 2rem;
 
+    @media screen and (max-width: 800px) {
+      padding: 1.5rem;
+    }
+
     .search__bar {
       flex: 1;
       background-color: var(--color-input);
@@ -48,6 +52,10 @@
     gap: 2rem;
     padding: 2rem;
     cursor: pointer;
+
+    @media screen and (max-width: 800px) {
+      padding: 1.5rem;
+    }
 
     &:not(:last-of-type) {
       border-bottom: var(--border-default);

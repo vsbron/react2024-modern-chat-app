@@ -43,6 +43,14 @@
         height: 2rem;
         cursor: pointer;
       }
+
+      .chat-top__icons--details {
+        display: none;
+
+        @media screen and (max-width: 1400px) {
+          display: block;
+        }
+      }
     }
   }
 

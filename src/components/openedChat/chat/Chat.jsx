@@ -163,6 +163,7 @@ function Chat({ chat, setShowDetails }) {
             src="./info.svg"
             alt={`More info about ${user.username}`}
             title={`More info about ${user.username}`}
+            className="chat-top__icons--details"
             onClick={() => {
               setShowDetails(true);
             }}

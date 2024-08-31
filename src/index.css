@@ -14,7 +14,7 @@
   --color-border: #e5e7eb35;
   --color-chat-blocked: rgba(var(--color-red), 0.5);
 
-  --color-main-bg: rgba(39, 20, 43, 0.8);
+  --color-main-bg: rgba(39, 20, 43, 0.85);
   --color-main-bg-light: rgba(39, 20, 43, 0.4);
   --color-input: #1c0e1f;
   --color-button: #a21caf;
@@ -24,17 +24,7 @@
   --color-chat-active: rgba(162, 28, 175, 0.4);
   --color-chat-unread: rgba(162, 28, 175, 0.8);
 
-  --color-main-bg-violet: rgba(39, 20, 43, 0.8);
-  --color-main-bg-light-violet: rgba(39, 20, 43, 0.4);
-  --color-input-violet: #1c0e1f;
-  --color-button-violet: #a21caf;
-  --color-button-hover-violet: #c026d3;
-  --color-message-violet: #6e4576;
-  --color-message-own-violet: #946c93;
-  --color-chat-active-violet: rgba(162, 28, 175, 0.4);
-  --color-chat-unread-violet: rgba(162, 28, 175, 0.8);
-
-  --color-main-bg-blue: rgba(19, 27, 42, 0.8);
+  --color-main-bg-blue: rgba(19, 27, 42, 0.85);
   --color-main-bg-light-blue: rgba(19, 27, 42, 0.4);
   --color-input-blue: #0e1520;
   --color-button-blue: #1d44af;
@@ -44,7 +34,7 @@
   --color-chat-active-blue: rgba(29, 68, 175, 0.4);
   --color-chat-unread-blue: rgba(29, 68, 175, 0.8);
 
-  --color-main-bg-orange: rgba(42, 24, 19, 0.8);
+  --color-main-bg-orange: rgba(42, 24, 19, 0.85);
   --color-main-bg-light-orange: rgba(42, 24, 19, 0.4);
   --color-input-orange: #20110e;
   --color-button-orange: #af461d;
@@ -54,7 +44,7 @@
   --color-chat-active-orange: rgba(175, 70, 29, 0.4);
   --color-chat-unread-orange: rgba(175, 70, 29, 0.8);
 
-  --color-main-bg-green: rgba(20, 42, 19, 0.8);
+  --color-main-bg-green: rgba(20, 42, 19, 0.85);
   --color-main-bg-light-green: rgba(20, 42, 19, 0.4);
   --color-input-green: #0f200e;
   --color-button-green: #15841b;
@@ -63,6 +53,11 @@
   --color-message-own-green: #6b9472;
   --color-chat-active-green: rgba(29, 175, 36, 0.4);
   --color-chat-unread-green: rgba(29, 175, 36, 0.8);
+
+  --color-scheme-violet: var(--color-button);
+  --color-scheme-blue: var(--color-button-blue);
+  --color-scheme-orange: var(--color-button-orange);
+  --color-scheme-green: var(--color-button-green);
 
   --border-default: var(--color-border) 1px solid;
   --border-dashed: var(--color-border) 2px dashed;
@@ -152,11 +147,13 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/bg.png");
+  background: url("/bg.png") no-repeat center center;
   background-size: cover;
-  background-position: center;
   z-index: 1;
-  pointer-events: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .color-scheme-blue .bg-image {
@@ -173,7 +170,7 @@ body {
   width: 80vw;
   height: 90vh;
   background-color: var(--color-main-bg);
-  backdrop-filter: blur(19px) saturate(180%);
+  backdrop-filter: blur(5px);
   border: rgba(255, 255, 255, 0.125) 1px solid;
   border-radius: var(--border-radius-sm);
   display: flex;

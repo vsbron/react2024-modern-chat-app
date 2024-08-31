@@ -161,6 +161,7 @@
     right: 0;
     bottom: 0;
     width: 30rem;
+    backdrop-filter: blur(5px);
     transform: translateX(100%);
     background: var(--color-main-bg);
     transition: var(--transition-transform-default);

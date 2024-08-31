@@ -36,16 +36,18 @@ const App = () => {
 
   // Returned JSX
   return (
-    <div className="container">
-      {currentUser ? (
-        <>
-          <List />
-          {chatId ? <OpenedChat /> : <ClosedChat />}
-        </>
-      ) : (
-        <Login />
-      )}
-      <Notifications />
+    <div className="bg-image">
+      <div className="container">
+        {currentUser ? (
+          <>
+            <List />
+            {chatId ? <OpenedChat /> : <ClosedChat />}
+          </>
+        ) : (
+          <Login />
+        )}
+        <Notifications />
+      </div>
     </div>
   );
 };

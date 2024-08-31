@@ -32,7 +32,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 - Styles are managed via Vanilla CSS with the BEM methodology;
 - Notifications are managed via the Toastify library;
 - State management is handled via Zustand;
-- The design is responsive, supporting mobile devices with a minimum width of 670px;
+- The design is responsive, supporting mobile devices with a minimum width of 665px;
 
 ## Improvements of the Original Project
 
