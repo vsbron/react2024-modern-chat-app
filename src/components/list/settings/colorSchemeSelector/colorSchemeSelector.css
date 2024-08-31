@@ -1,0 +1,25 @@
+.color-scheme {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .color-scheme__colors {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+
+    .color-circle {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--border-radius-round);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .color-circle.active {
+      border-color: var(--color-white);
+    }
+  }
+}

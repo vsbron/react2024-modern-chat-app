@@ -108,6 +108,7 @@ function Login() {
         email,
         avatar: imgUrl,
         id: res.user.uid,
+        color: "violet",
         blocked: [],
       });
 
