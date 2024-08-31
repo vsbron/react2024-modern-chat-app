@@ -1,38 +1,54 @@
 # Modern Chat App
 
-Little chat app SPA written on React with the use of Firebase service
+A single-page application (SPA) chat app built with React and Firebase.
 
 ## Features
 
 ### Login page
 
-- When not authenticated login page displays the Log In or Sign Up options;
-- To Log In user must enter registered email and a valid password;
-- To Sign Up user must enter a valid email, unique username, password and avatar;
+- When not authenticated, the login page displays Log In and Sign Up options;
+- To log in, users must enter their registered email and a valid password;
+- To sign up, users must enter a valid email, a unique username, a password, and an avatar;
 
 ### Main page
 
-- Main chat page is divided to three columns: Chat list, main chat section, details section;
-- Chat list section contains the main user info, search bar and the list of available chats;
-- Search bar features an input to filter out the current chat list and Add User button;
-- Add user modal lets user to search other users and start chat with them;
-- Already added users cannot be added to the chat list again;
-- Center section shows the currently selected chat with the info of the interlocutor;
-- Current chat allows to send and receive text/emojis as well as a emojis;
-- Right section lists chat's details including some settings, images, and some buttons;
-- Image part shows all images that were sent in the chat with the option to download them individually;
-- Right section buttons are for logging out and blocking user, disabling the option to chat with him;
+- The main chat page is divided into three columns: Chat List, Main Chat Section, and Details Section;
+- The Chat List section contains the main user information, settings icon, log out button, a search bar, and a list of available chats;
+- Settings menu allows user to update his avatar, username, password, description and password;
+- The search bar features an input to filter the current chat list and an Add User button;
+- The Add User modal allows users to search for others and start a chat with them;
+- The center section displays the currently selected chat, including information about the interlocutor;
+- The current chat allows sending and receiving text, emojis, and images;
+- The right section lists the interlocutor's details, list of shared images and files and option to block him;
+- The images and files sections shows all files shared in the chat, with the option to download them individually;
+- The block button in the right section prevents the interlocutor from sending or receiving messages;
 
 ## Details
 
-- Signing Up and Logging In are handled via Firebase service;
-- Data fetching is handled via Firebase service;
-- All the data is stored in the Firestore database;
-- Styles are handled via Vanilla CSS with BEM;
-- Notifications are handled via Toastify library;
+- Signing up and logging in are handled via Firebase;
+- Data fetching is handled via Firebase;
+- All data is stored in the Firestore database;
+- Styles are managed via Vanilla CSS with the BEM methodology;
+- Notifications are managed via the Toastify library;
 - State management is handled via Zustand;
-- A big number of improvements were added to the layout and some logic of the original project;
-- Responsive design supporting mobile devices with a width of at least 1200px;
+- The design is responsive, supporting mobile devices with a minimum width of 1200px;
+
+## Improvements of the Original Project
+
+- Updated color scheme;
+- Created a logo and a new favicon;
+- Each user's email is now displayed;
+- Removed all unused icons from the UI and replaced the remaining ones with SVGs;
+- Settings menu with profile customizations;
+- In the Add Users feature, users can be found by their username or email;
+- Users cannot add themselves or others who are already in their chat list;
+- If a user has blocked the current user, their name and avatar are still visible;
+- When a chat is open, an "X" icon allows users to close it and return to the start section;
+- The Add User and Emoji modals now close when clicking outside or pressing the Esc key;
+- Messages can now be sent by pressing the Enter key;
+- When attaching a file or image, it is properly displayed near the input with the filename and an option to remove it;
+- Attached files/images are now correctly displayed in the chat window, with the file name (for files) and an option to download it;
+- All shared files and images are listed in the right part of the chat under respective dropdowns, with options to download them;
 
 ### Live version
 

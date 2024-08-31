@@ -4,22 +4,16 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
+import { isUsernameUnique, isValidEmail } from "../../utils/helpers";
 import { auth, db } from "../../lib/firebase";
 import upload from "../../lib/upload";
 
 import Avatar from "../../ui/avatar/Avatar";
+import Button from "../../ui/button/Button";
 
 import "./login.css";
-import Button from "../../ui/button/Button";
 
 function Login() {
   // State for an avatar image
@@ -51,6 +45,10 @@ function Login() {
 
     // Log in input validation
     if (!email || !password) return toast.warn("Please enter log in inputs!");
+
+    // Checking if email is written in the correct format
+    if (!isValidEmail(email))
+      return toast.warn("Please check of your email is written correctly");
 
     // Enabling the loading state
     setLoading(true);
@@ -84,11 +82,13 @@ function Login() {
       return toast.warn("Please enter register inputs!");
     if (!avatar.name) return toast.warn("Please upload an avatar!");
 
+    // Checking if email is written in the correct format
+    if (!isValidEmail(email))
+      return toast.warn("Please check of your email is written correctly");
+
     // Checking if username is unique
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("username", "==", username));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
+    const usernameUnique = await isUsernameUnique(username);
+    if (!usernameUnique) {
       return toast.warn("Select another username");
     }
 

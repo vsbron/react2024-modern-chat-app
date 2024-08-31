@@ -63,9 +63,9 @@ function Details({ chat }) {
         <Avatar src={user.avatar} size="10rem" altTitle={user.username} />
         <h2 className="details__user-name">{user.username || "User"}</h2>
         <p className="details__email">{user.email || "User"}</p>
-        <p className="details__user-text">
-          Lorem ipsum, dolor sit amet consectetur.
-        </p>
+        {user.description && (
+          <p className="details__user-text">{user.description}</p>
+        )}
       </div>
 
       {/* Togglers to show all images and files in the chat */}

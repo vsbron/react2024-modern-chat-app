@@ -6,7 +6,7 @@ import Avatar from "../../../ui/avatar/Avatar";
 
 import "./userInfo.css";
 
-function UserInfo() {
+function UserInfo({ setShowSettings }) {
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
   const { resetChat } = useChatStore();
@@ -32,7 +32,12 @@ function UserInfo() {
         </div>
       </div>
       <div className="icons">
-        <img src="./settings.svg" alt="Settings" title="Settings" />
+        <img
+          src="./settings.svg"
+          alt="Settings"
+          title="Settings"
+          onClick={() => setShowSettings(true)}
+        />
         <img
           src="./logout.svg"
           alt="Log out"

@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { create } from "zustand";
 
 import { db } from "./firebase";
@@ -22,6 +22,22 @@ export const useUserStore = create((set) => ({
     } catch (err) {
       console.error(err.message);
       return set({ currentUser: null, isLoading: false }); // Set user to null on error
+    }
+  },
+  updateUserInfo: async (uid, updatedData) => {
+    try {
+      // Getting the reference to the database table
+      const docRef = doc(db, "users", uid);
+
+      // Merge new data with the existing one
+      await setDoc(docRef, updatedData, { merge: true });
+
+      // Update the local state with new data
+      set((state) => ({
+        currentUser: { ...state.currentUser, ...updatedData },
+      }));
+    } catch (err) {
+      throw new Error("Failed to update user");
     }
   },
 }));

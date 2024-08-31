@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   arrayUnion,
   collection,
@@ -135,8 +136,8 @@ function AddUser({ setAddMode }) {
     }
   };
 
-  // Returned JSX
-  return (
+  // Returned JSX (using create portal for exiting the relative parent)
+  return createPortal(
     <div className="add-user">
       {/* Input field for searching users */}
       <form className="add-user__form" onSubmit={handleSearch}>
@@ -171,7 +172,8 @@ function AddUser({ setAddMode }) {
           </Button>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
 
