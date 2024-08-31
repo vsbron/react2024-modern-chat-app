@@ -34,35 +34,35 @@
   --color-chat-active-violet: rgba(162, 28, 175, 0.4);
   --color-chat-unread-violet: rgba(162, 28, 175, 0.8);
 
-  --color-main-bg-blue: rgba(30, 27, 75, 0.8);
-  --color-main-bg-light-blue: rgba(30, 27, 75, 0.4);
-  --color-input-blue: #141a2e;
-  --color-button-blue: #1d4ed8;
-  --color-button-hover-blue: #2563eb;
-  --color-message-blue: #1e40af;
-  --color-message-own-blue: #6366f1;
-  --color-chat-active-blue: rgba(59, 130, 246, 0.4);
-  --color-chat-unread-blue: rgba(59, 130, 246, 0.8);
+  --color-main-bg-blue: rgba(19, 27, 42, 0.8);
+  --color-main-bg-light-blue: rgba(19, 27, 42, 0.4);
+  --color-input-blue: #0e1520;
+  --color-button-blue: #1d44af;
+  --color-button-hover-blue: #275ad3;
+  --color-message-blue: #465777;
+  --color-message-own-blue: #6b7194;
+  --color-chat-active-blue: rgba(29, 68, 175, 0.4);
+  --color-chat-unread-blue: rgba(29, 68, 175, 0.8);
 
-  --color-main-bg-orange: rgba(42, 28, 19, 0.8);
-  --color-main-bg-light-orange: rgba(42, 28, 19, 0.4);
-  --color-input-orange: #271411;
-  --color-button-orange: #c75c12;
-  --color-button-hover-orange: #f97316;
-  --color-message-orange: #161514;
-  --color-message-own-orange: #ff5722;
-  --color-chat-active-orange: rgba(255, 87, 34, 0.4);
-  --color-chat-unread-orange: rgba(255, 87, 34, 0.8);
+  --color-main-bg-orange: rgba(42, 24, 19, 0.8);
+  --color-main-bg-light-orange: rgba(42, 24, 19, 0.4);
+  --color-input-orange: #20110e;
+  --color-button-orange: #af461d;
+  --color-button-hover-orange: #d35227;
+  --color-message-orange: #775046;
+  --color-message-own-orange: #947b6b;
+  --color-chat-active-orange: rgba(175, 70, 29, 0.4);
+  --color-chat-unread-orange: rgba(175, 70, 29, 0.8);
 
-  --color-main-bg-green: rgba(29, 75, 27, 0.8);
-  --color-main-bg-light-green: rgba(29, 75, 27, 0.4);
-  --color-input-green: #0d2b0f;
-  --color-button-green: #43a047;
-  --color-button-hover-green: #66bb6a;
-  --color-message-green: #2e7d32;
-  --color-message-own-green: #43a047;
-  --color-chat-active-green: rgba(56, 142, 60, 0.4);
-  --color-chat-unread-green: rgba(56, 142, 60, 0.8);
+  --color-main-bg-green: rgba(20, 42, 19, 0.8);
+  --color-main-bg-light-green: rgba(20, 42, 19, 0.4);
+  --color-input-green: #0f200e;
+  --color-button-green: #15841b;
+  --color-button-hover-green: #1fa821;
+  --color-message-green: #477746;
+  --color-message-own-green: #6b9472;
+  --color-chat-active-green: rgba(29, 175, 36, 0.4);
+  --color-chat-unread-green: rgba(29, 175, 36, 0.8);
 
   --border-default: var(--color-border) 1px solid;
   --border-dashed: var(--color-border) 2px dashed;
@@ -72,19 +72,6 @@
 
   --transition-easing: ease-out;
   --transition-bg-default: background-color 0.2s var(--transition-easing);
-}
-
-/* Violet color scheme */
-.color-scheme-violet {
-  --color-main-bg: var(--color-main-bg-violet);
-  --color-main-bg-light: var(--color-main-bg-light-violet);
-  --color-input: var(--color-input-violet);
-  --color-button: var(--color-button-violet);
-  --color-button-hover: var(--color-button-hover-violet);
-  --color-message: var(--color-message-violet);
-  --color-message-own: var(--color-message-own-violet);
-  --color-chat-active: var(--color-chat-active-violet);
-  --color-chat-unread: var(--color-chat-unread-violet);
 }
 
 /* Blue color scheme */
@@ -139,7 +126,6 @@ body {
   justify-content: center;
   font-size: 1.6rem;
   line-height: 1.4;
-  background-image: url("./bg.png");
   color: var(--color-white);
   position: relative;
 }
@@ -148,10 +134,9 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("./bg.png");
+  background-image: url("/bg.png");
   background-size: cover;
   background-position: center;
-  filter: hue-rotate(0);
   z-index: 1;
   pointer-events: none;
 }
