@@ -28,16 +28,19 @@ function ClosedChat() {
       </div>
       <div className="copyright">
         <div className="copyright__container">
-          Built by VSBroN as a portfolio project
-          <br />
-          This project is available on{" "}
-          <a
-            href="https://github.com/vsbron/react2024-modern-chat-app"
-            target="_blank"
-          >
-            GitHub
-          </a>
-          <br />© 2024. All rights reserved
+          <img src="./mca-logo.svg" alt="MCA Logo" title="Modern Chat App" />
+          <span>
+            Built by VSBroN as a portfolio project
+            <br />
+            This project is available on{" "}
+            <a
+              href="https://github.com/vsbron/react2024-modern-chat-app"
+              target="_blank"
+            >
+              GitHub
+            </a>
+            <br />© 2024. All rights reserved
+          </span>
         </div>
       </div>
     </>

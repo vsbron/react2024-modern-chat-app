@@ -48,10 +48,10 @@ function AddUser({ setAddMode }) {
     const userChatsDoc = await getDoc(doc(db, "userchats", currentUser.id));
     const userChats = userChatsDoc.data()?.chats || [];
 
-    // Check if the searched user is already in the chat list
-    const alreadyAdded = userChats.some(
-      (chat) => chat.receiverId === searchedUser.id
-    );
+    // Check if the searched user is already in the chat list or is it the your user
+    const alreadyAdded =
+      searchedUser.id === currentUser.id ||
+      userChats.some((chat) => chat.receiverId === searchedUser.id);
 
     // Update the state to reflect if the user is already added
     setIsAlreadyAdded(alreadyAdded);
