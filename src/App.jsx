@@ -36,7 +36,6 @@ const App = () => {
 
   // Returned JSX
   return (
-    <div className="bg-image">
       <div className="container">
         {currentUser ? (
           <>
@@ -48,7 +47,6 @@ const App = () => {
         )}
         <Notifications />
       </div>
-    </div>
   );
 };
 
