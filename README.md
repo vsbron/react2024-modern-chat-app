@@ -36,6 +36,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 
 ## Improvements of the Original Project
 
+- App is written as React ASP with TypeScript;
 - Updated color scheme;
 - Added partial responsive support;
 - Created a logo and a new favicon;
