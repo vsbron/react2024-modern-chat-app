@@ -21,6 +21,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",

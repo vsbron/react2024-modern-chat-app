@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { format } from "timeago.js";
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { saveAs } from "file-saver";
 
 import { db } from "../../../lib/firebase";
 import { useChatStore } from "../../../lib/chatStore";
 import { useUserStore } from "../../../lib/userStore";
+import { ChatProps, FileState, MessageType } from "../../../lib/types";
 import upload from "../../../lib/upload";
 
 import EmojiModal from "./emojiModal/EmojiModal";
 import Avatar from "../../../ui/avatar/Avatar";
 import Button from "../../../ui/button/Button";
-import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
+import LoaderSmall from "../../../ui/loader/LoaderSmall";
 import "./chat.css";
 
 // Initial state for an empty file
@@ -22,20 +29,21 @@ const fileInitialState = {
   type: "",
 };
 
-function Chat({ chat, setShowDetails, isLoading }) {
+function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
   // State for Emoji Picker module, Input text and uploaded file
-  const [openEmoji, setOpenEmoji] = useState(false);
-  const [inputText, setInputText] = useState("");
-  const [file, setFile] = useState(fileInitialState);
-  const [isSending, setIsSending] = useState(false);
+  const [openEmoji, setOpenEmoji] = useState<boolean>(false);
+  const [inputText, setInputText] = useState<string>("");
+  const [file, setFile] = useState<FileState>(fileInitialState);
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   // Getting the current user, other user and chat id variables from the store
   const { currentUser } = useUserStore();
   const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, resetChat } =
     useChatStore();
 
-  // / Reference for the end of the chat
-  const endRef = useRef(null);
+  // / Reference for the end of the chat and file input
+  const endRef = useRef<HTMLDivElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // useEffect to focus on the end of the chat
   useEffect(() => {
@@ -54,7 +62,7 @@ function Chat({ chat, setShowDetails, isLoading }) {
   };
 
   // Sending message handler
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     // Preventing default behavior
     e.preventDefault();
 
@@ -72,7 +80,7 @@ function Chat({ chat, setShowDetails, isLoading }) {
       }
 
       // Prepare the message data
-      const messageData = {
+      const messageData: MessageType = {
         senderId: currentUser.id,
         text: inputText,
         createdAt: new Date(),
@@ -105,7 +113,7 @@ function Chat({ chat, setShowDetails, isLoading }) {
           const userChatsData = userChatsSnapshot.data();
 
           const chatIndex = userChatsData.chats.findIndex(
-            (c) => c.chatId === chatId
+            (c: { chatId: string }) => c.chatId === chatId
           );
 
           userChatsData.chats[chatIndex].lastMessage = inputText;
@@ -116,8 +124,12 @@ function Chat({ chat, setShowDetails, isLoading }) {
           await updateDoc(userChatsRef, { chats: userChatsData.chats });
         }
       });
-    } catch (err) {
-      console.error(err.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error("Couldn't send a message due to unknown error");
+      }
     } finally {
       // Reset img state
       resetImage();
@@ -131,13 +143,22 @@ function Chat({ chat, setShowDetails, isLoading }) {
   };
 
   // File handler
-  const handleImage = (e) => {
-    e.target.files[0] &&
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]; // Optional chaining in case files is null
+    if (file) {
       setFile({
-        file: e.target.files[0],
-        url: URL.createObjectURL(e.target.files[0]),
-        type: e.target.files[0].type,
+        file,
+        url: URL.createObjectURL(file),
+        type: file.type,
       });
+    }
+  };
+
+  // Handle the label click
+  const handleLabelClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   // Helper function that resets the attached file
@@ -191,7 +212,7 @@ function Chat({ chat, setShowDetails, isLoading }) {
         {isLoading ? (
           <LoaderSmall />
         ) : (
-          chat.messages?.map((message) => (
+          chat.messages?.map((message: MessageType) => (
             <div
               className={`chat-center__message-container ${
                 message.senderId === currentUser.id &&
@@ -210,7 +231,7 @@ function Chat({ chat, setShowDetails, isLoading }) {
                       height={40}
                       alt="Attached file"
                       onClick={() => {
-                        saveAs(message.file);
+                        saveAs(message.file as File);
                       }}
                     />
                   </div>
@@ -223,7 +244,7 @@ function Chat({ chat, setShowDetails, isLoading }) {
                     height={80}
                     alt="Attached image"
                     onClick={() => {
-                      saveAs(message.img);
+                      saveAs(message.img as string);
                     }}
                   />
                 )}
@@ -269,12 +290,13 @@ function Chat({ chat, setShowDetails, isLoading }) {
         )}
         <form onSubmit={handleSendMessage}>
           <div className="chat-bottom__icons">
-            <label htmlFor="file">
+            <label onClick={handleLabelClick}>
               <img src="./attach.svg" alt="Attach file" title="Attach file" />
             </label>
             <input
               type="file"
               id="file"
+              ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleImage}
             />
