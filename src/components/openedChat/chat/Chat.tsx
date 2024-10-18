@@ -1,12 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { format } from "timeago.js";
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { saveAs } from "file-saver";
 
 import { db } from "../../../lib/firebase";
@@ -14,6 +7,7 @@ import { useChatStore } from "../../../lib/chatStore";
 import { useUserStore } from "../../../lib/userStore";
 import { ChatProps, FileState, MessageType } from "../../../lib/types";
 import upload from "../../../lib/upload";
+import { formatDate } from "../../../utils/helpers";
 
 import EmojiModal from "./emojiModal/EmojiModal";
 import Avatar from "../../../ui/avatar/Avatar";
@@ -92,7 +86,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
           messageData.img = fileUrl;
         } else {
           messageData.file = fileUrl;
-          messageData.fileName = file.file.name;
+          messageData.fileName = file.file!.name;
         }
       }
 
@@ -218,7 +212,11 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
                 message.senderId === currentUser.id &&
                 "chat-center__message-container--own"
               }`}
-              key={message.createdAt}
+              key={
+                message.createdAt instanceof Date
+                  ? message.createdAt.getTime()
+                  : message.createdAt.seconds
+              }
             >
               <div className="chat-center__texts">
                 {/* Display attached file */}
@@ -254,7 +252,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
                 )}
                 {/* Display the timestamp */}
                 <span className="chat-center__timestamp">
-                  {format(message.createdAt.toDate())}
+                  {formatDate(message.createdAt)}
                 </span>
               </div>
             </div>

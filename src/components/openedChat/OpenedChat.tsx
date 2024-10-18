@@ -7,6 +7,8 @@ import { db } from "../../lib/firebase";
 
 import Chat from "./chat/Chat";
 import Details from "./details/Details";
+import Loader from "../../ui/loader/Loader";
+import LoaderSmall from "../../ui/loader/LoaderSmall";
 
 function OpenedChat() {
   // Setting the state for the current chat, and details section

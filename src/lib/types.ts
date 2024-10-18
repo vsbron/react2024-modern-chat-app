@@ -1,12 +1,18 @@
 // Global Types
 export type ChatType = {
-  createdAt: { seconds: number; nanoseconds: number };
+  createdAt: CreatedAtType;
   messages: MessageType[];
+};
+export type CreatedAtType = { seconds: number; nanoseconds: number } | Date;
+export type FileType = {
+  file: File;
+  url: string;
+  type: string;
 };
 export type MessageType = {
   senderId: string;
   text: string;
-  createdAt: any;
+  createdAt: CreatedAtType;
   img?: string;
   file?: File;
   fileName?: string;
@@ -48,7 +54,7 @@ export type CloseModalProps = {
 
 // State Types
 export type FileState = {
-  file: any;
+  file: File | null;
   url: string;
   type: string;
 };
