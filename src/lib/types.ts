@@ -30,6 +30,13 @@ export type DetailsProps = {
   showDetails: boolean;
   setShowDetails: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export type EmojiModalProps = {
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
+  setOpenEmoji: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export type UserInfoProps = {
+  setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 // UI Types
 export type AvatarProps = {
@@ -53,6 +60,10 @@ export type CloseModalProps = {
 };
 
 // State Types
+export type AvatarState = {
+  file: File | null;
+  src: string;
+};
 export type FileState = {
   file: File | null;
   url: string;

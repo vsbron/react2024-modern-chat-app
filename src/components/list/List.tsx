@@ -7,7 +7,7 @@ import UserInfo from "./userInfo/UserInfo";
 import "./list.css";
 
 function List() {
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
 
   // Returned JSX
   return (

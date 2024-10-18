@@ -1,12 +1,13 @@
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 
 import useCloseModal from "../../../../utils/useCloseModal";
 
 import "./emojiModal.css";
+import { EmojiModalProps } from "../../../../lib/types";
 
-function EmojiModal({ setInputText, setOpenEmoji }) {
+function EmojiModal({ setInputText, setOpenEmoji }: EmojiModalProps) {
   // Click handler that adds the emoji after clicking it in the module
-  const handleEmoji = (e) => {
+  const handleEmoji = (e: EmojiClickData) => {
     setInputText((currentText) => currentText + e.emoji);
     setOpenEmoji(false);
   };

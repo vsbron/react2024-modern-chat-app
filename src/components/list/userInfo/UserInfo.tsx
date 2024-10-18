@@ -1,12 +1,13 @@
 import { useChatStore } from "../../../lib/chatStore";
 import { auth } from "../../../lib/firebase";
+import { UserInfoProps } from "../../../lib/types";
 import { useUserStore } from "../../../lib/userStore";
 
 import Avatar from "../../../ui/avatar/Avatar";
 
 import "./userInfo.css";
 
-function UserInfo({ setShowSettings }) {
+function UserInfo({ setShowSettings }: UserInfoProps) {
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
   const { resetChat } = useChatStore();
