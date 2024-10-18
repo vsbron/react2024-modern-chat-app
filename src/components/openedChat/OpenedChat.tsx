@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 
 import { useChatStore } from "../../lib/chatStore";
+import { ChatType } from "../../lib/types";
 import { db } from "../../lib/firebase";
 
 import Chat from "./chat/Chat";
 import Details from "./details/Details";
-import { ChatType } from "../../lib/types";
 
 function OpenedChat() {
   // Setting the state for the current chat, and details section
-  const [chat, setChat] = useState<ChatType | string>("");
+  const [chat, setChat] = useState<ChatType | undefined>(undefined);
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -21,7 +21,6 @@ function OpenedChat() {
   useEffect(() => {
     setIsLoading(true);
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
-      console.log(res.data());
       setChat(res.data() as ChatType);
       setIsLoading(false);
     });
@@ -32,6 +31,10 @@ function OpenedChat() {
     };
   }, [chatId]);
 
+  // Guard clause
+  if (chat === undefined) return null;
+
+  // Returned JSX
   return (
     <>
       <Chat chat={chat} setShowDetails={setShowDetails} isLoading={isLoading} />

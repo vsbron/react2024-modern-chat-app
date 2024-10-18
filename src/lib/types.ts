@@ -14,15 +14,15 @@ export type MessageType = {
 
 // Components Types
 export type ChatProps = {
-  chat: any;
-  setShowDetails: any;
+  chat: ChatType;
+  setShowDetails: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
 };
 export type DetailsProps = {
   key: string;
-  chat: any;
-  showDetails: any;
-  setShowDetails: any;
+  chat: ChatType;
+  showDetails: boolean;
+  setShowDetails: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // UI Types
