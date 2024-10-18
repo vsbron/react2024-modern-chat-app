@@ -11,6 +11,7 @@ import upload from "../../../lib/upload";
 import EmojiModal from "./emojiModal/EmojiModal";
 import Avatar from "../../../ui/avatar/Avatar";
 import Button from "../../../ui/button/Button";
+import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
 import "./chat.css";
 
@@ -21,7 +22,7 @@ const fileInitialState = {
   type: "",
 };
 
-function Chat({ chat, setShowDetails }) {
+function Chat({ chat, setShowDetails, isLoading }) {
   // State for Emoji Picker module, Input text and uploaded file
   const [openEmoji, setOpenEmoji] = useState(false);
   const [inputText, setInputText] = useState("");
@@ -149,85 +150,95 @@ function Chat({ chat, setShowDetails }) {
     <section className="chat">
       {/* Top part */}
       <div className="chat-top">
-        <div className="chat-top__user">
-          <Avatar src={user.avatar} size="6rem" altTitle={user.username} />
-          <div className="chat-top__texts">
-            <span className="chat-top__user-name">
-              {user.username || "User"}
-            </span>
-            <p className="chat-top__user-email">{user.email || ""}</p>
-          </div>
-        </div>
-        <div className="chat-top__icons">
-          <img
-            src="./info.svg"
-            alt={`More info about ${user.username}`}
-            title={`More info about ${user.username}`}
-            className="chat-top__icons--details"
-            onClick={() => {
-              setShowDetails(true);
-            }}
-          />
-          <img
-            src="./close.svg"
-            alt={`Close chat with ${user.username}`}
-            title={`Close chat with ${user.username}`}
-            onClick={() => {
-              resetChat();
-            }}
-          />
-        </div>
+        {isLoading ? (
+          <LoaderSmall />
+        ) : (
+          <>
+            <div className="chat-top__user">
+              <Avatar src={user.avatar} size="6rem" altTitle={user.username} />
+              <div className="chat-top__texts">
+                <span className="chat-top__user-name">
+                  {user.username || "User"}
+                </span>
+                <p className="chat-top__user-email">{user.email || ""}</p>
+              </div>
+            </div>
+            <div className="chat-top__icons">
+              <img
+                src="./info.svg"
+                alt={`More info about ${user.username}`}
+                title={`More info about ${user.username}`}
+                className="chat-top__icons--details"
+                onClick={() => {
+                  setShowDetails(true);
+                }}
+              />
+              <img
+                src="./close.svg"
+                alt={`Close chat with ${user.username}`}
+                title={`Close chat with ${user.username}`}
+                onClick={() => {
+                  resetChat();
+                }}
+              />
+            </div>
+          </>
+        )}
       </div>
 
       {/* Center part */}
       <div className="chat-center">
-        {chat.messages?.map((message) => (
-          <div
-            className={`chat-center__message-container ${
-              message.senderId === currentUser.id &&
-              "chat-center__message-container--own"
-            }`}
-            key={message.createdAt}
-          >
-            <div className="chat-center__texts">
-              {/* Display attached file */}
-              {message.file && (
-                <div className="chat-center__file">
-                  <span>{message.fileName}</span>
+        {isLoading ? (
+          <LoaderSmall />
+        ) : (
+          chat.messages?.map((message) => (
+            <div
+              className={`chat-center__message-container ${
+                message.senderId === currentUser.id &&
+                "chat-center__message-container--own"
+              }`}
+              key={message.createdAt}
+            >
+              <div className="chat-center__texts">
+                {/* Display attached file */}
+                {message.file && (
+                  <div className="chat-center__file">
+                    <span>{message.fileName}</span>
+                    <img
+                      src="./file.svg"
+                      className="chat-center__attached"
+                      height={40}
+                      alt="Attached file"
+                      onClick={() => {
+                        saveAs(message.file);
+                      }}
+                    />
+                  </div>
+                )}
+                {/* Display attached img */}
+                {message.img && (
                   <img
-                    src="./file.svg"
+                    src={message.img}
                     className="chat-center__attached"
-                    height={40}
-                    alt="Attached file"
+                    height={80}
+                    alt="Attached image"
                     onClick={() => {
-                      saveAs(message.file);
+                      saveAs(message.img);
                     }}
                   />
-                </div>
-              )}
-              {/* Display attached img */}
-              {message.img && (
-                <img
-                  src={message.img}
-                  className="chat-center__attached"
-                  height={80}
-                  alt="Attached image"
-                  onClick={() => {
-                    saveAs(message.img);
-                  }}
-                />
-              )}
-              {/* Display sent text */}
-              {message.text && (
-                <p className="chat-center__message">{message.text}</p>
-              )}
-              {/* Display the timestamp */}
-              <span className="chat-center__timestamp">
-                {format(message.createdAt.toDate())}
-              </span>
+                )}
+                {/* Display sent text */}
+                {message.text && (
+                  <p className="chat-center__message">{message.text}</p>
+                )}
+                {/* Display the timestamp */}
+                <span className="chat-center__timestamp">
+                  {format(message.createdAt.toDate())}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
 
         <div ref={endRef}></div>
       </div>

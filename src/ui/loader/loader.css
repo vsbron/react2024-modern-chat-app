@@ -8,6 +8,8 @@
   mask: var(--_m);
   mask-composite: subtract;
   animation: rotate 1.25s infinite linear;
+  position: relative;
+  z-index: 1000;
 
   &.loader-small {
     width: 2.5rem;

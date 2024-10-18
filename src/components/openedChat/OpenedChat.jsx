@@ -11,15 +11,18 @@ function OpenedChat() {
   // Setting the state for the current chat, and details section
   const [chat, setChat] = useState("");
   const [showDetails, setShowDetails] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Getting the chat id from the store
   const { chatId } = useChatStore();
 
   // useEffect to set the current chat
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", chatId), (res) =>
-      setChat(res.data())
-    );
+    setIsLoading(true);
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
+      setChat(res.data());
+      setIsLoading(false);
+    });
 
     // Cleanup function when component unmounts
     return () => {
@@ -29,11 +32,12 @@ function OpenedChat() {
 
   return (
     <>
-      <Chat chat={chat} setShowDetails={setShowDetails} />
+      <Chat chat={chat} setShowDetails={setShowDetails} isLoading={isLoading} />
       <Details
         chat={chat}
         showDetails={showDetails}
         setShowDetails={setShowDetails}
+        // isLoading={isLoading}
       />
     </>
   );

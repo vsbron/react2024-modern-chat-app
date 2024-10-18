@@ -1,16 +1,22 @@
 import { useEffect } from "react";
+import { CloseModalProps } from "../lib/types";
 
 // Custom hook that adds event listeners for Modal outside clicks and Esc key handlers
-function useCloseModal({ setter, triggerClass, modalClass }) {
+function useCloseModal({ setter, triggerClass, modalClass }: CloseModalProps) {
   useEffect(() => {
     // Outside click handler
-    const handleClickOutside = (e) =>
-      !e.target.closest("." + modalClass) &&
-      !e.target.className.includes(triggerClass) &&
-      setter(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      // Casting the target to HTML element
+      const target = e.target as HTMLElement;
+
+      !target.closest("." + modalClass) &&
+        !target.className.includes(triggerClass) &&
+        setter(false);
+    };
 
     //Escape key press handler
-    const handleEscKeyPress = (e) => e.key === "Escape" && setter(false);
+    const handleEscKeyPress = (e: KeyboardEvent) =>
+      e.key === "Escape" && setter(false);
 
     // Add event listeners
     document.addEventListener("mousedown", handleClickOutside);

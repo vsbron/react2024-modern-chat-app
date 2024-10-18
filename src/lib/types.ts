@@ -11,3 +11,10 @@ export type ButtonProps = {
   onClick: React.MouseEventHandler;
   disabled: boolean;
 };
+
+// Utils Types
+export type CloseModalProps = {
+  setter: React.Dispatch<React.SetStateAction<boolean>>;
+  triggerClass: string;
+  modalClass: string;
+};
