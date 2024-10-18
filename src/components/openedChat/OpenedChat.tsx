@@ -6,12 +6,13 @@ import { db } from "../../lib/firebase";
 
 import Chat from "./chat/Chat";
 import Details from "./details/Details";
+import { ChatType } from "../../lib/types";
 
 function OpenedChat() {
   // Setting the state for the current chat, and details section
-  const [chat, setChat] = useState("");
-  const [showDetails, setShowDetails] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [chat, setChat] = useState<ChatType | string>("");
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Getting the chat id from the store
   const { chatId } = useChatStore();
@@ -20,7 +21,8 @@ function OpenedChat() {
   useEffect(() => {
     setIsLoading(true);
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
-      setChat(res.data());
+      console.log(res.data());
+      setChat(res.data() as ChatType);
       setIsLoading(false);
     });
 
@@ -34,10 +36,10 @@ function OpenedChat() {
     <>
       <Chat chat={chat} setShowDetails={setShowDetails} isLoading={isLoading} />
       <Details
+        key={chatId}
         chat={chat}
         showDetails={showDetails}
         setShowDetails={setShowDetails}
-        // isLoading={isLoading}
       />
     </>
   );

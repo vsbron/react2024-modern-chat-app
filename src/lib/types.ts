@@ -18,6 +18,12 @@ export type ChatProps = {
   setShowDetails: any;
   isLoading: boolean;
 };
+export type DetailsProps = {
+  key: string;
+  chat: any;
+  showDetails: any;
+  setShowDetails: any;
+};
 
 // UI Types
 export type AvatarProps = {

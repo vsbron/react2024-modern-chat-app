@@ -125,11 +125,11 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
         }
       });
     } catch (e: unknown) {
-      if (e instanceof Error) {
-        console.error(e.message);
-      } else {
-        console.error("Couldn't send a message due to unknown error");
-      }
+      console.error(
+        e instanceof Error
+          ? e.message
+          : "Couldn't send a message due to unknown error"
+      );
     } finally {
       // Reset img state
       resetImage();

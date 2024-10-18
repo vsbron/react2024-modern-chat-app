@@ -4,16 +4,17 @@ import { saveAs } from "file-saver";
 
 import { useChatStore } from "../../../lib/chatStore";
 import { db } from "../../../lib/firebase";
+import { DetailsProps, MessageType } from "../../../lib/types";
 import { useUserStore } from "../../../lib/userStore";
 
 import Avatar from "../../../ui/avatar/Avatar";
 
 import "./details.css";
 
-function Details({ chat, showDetails, setShowDetails }) {
+function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
   // State for the images and files sections
-  const [showImages, setShowImages] = useState(false);
-  const [showFiles, setShowFiles] = useState(false);
+  const [showImages, setShowImages] = useState<boolean>(false);
+  const [showFiles, setShowFiles] = useState<boolean>(false);
 
   // Get the current user, other user and blocking constants from the store
   const { currentUser } = useUserStore();
@@ -21,8 +22,12 @@ function Details({ chat, showDetails, setShowDetails }) {
     useChatStore();
 
   // Getting all the messages with images and files
-  const messagesWithImages = chat?.messages?.filter((msg) => msg.img).reverse();
-  const messagesWithFiles = chat?.messages?.filter((msg) => msg.file).reverse();
+  const messagesWithImages = chat?.messages
+    ?.filter((msg: MessageType) => msg.img)
+    .reverse();
+  const messagesWithFiles = chat?.messages
+    ?.filter((msg: MessageType) => msg.file)
+    .reverse();
 
   // Block user handler
   const handleBlock = async () => {
@@ -40,8 +45,12 @@ function Details({ chat, showDetails, setShowDetails }) {
 
       // Use the function from the store
       changeBlocked();
-    } catch (err) {
-      console.error(err.message);
+    } catch (e: unknown) {
+      console.error(
+        e instanceof Error
+          ? e.message
+          : "Couldn't block the user due to unknown error"
+      );
     }
   };
 
@@ -54,7 +63,6 @@ function Details({ chat, showDetails, setShowDetails }) {
   const toggleFiles = () => {
     setShowFiles((show) => !show);
   };
-
   // Returned JSX
   return (
     <section className={`details ${showDetails ? "details--active" : ""}`}>
@@ -92,13 +100,13 @@ function Details({ chat, showDetails, setShowDetails }) {
           {showImages && (
             <div className="details__images">
               {messagesWithImages?.map(
-                (message, i) =>
+                (message: MessageType, i: number) =>
                   message.img && (
                     <div
                       className="details__images-item"
                       key={i}
                       onClick={() => {
-                        saveAs(message.img);
+                        saveAs(message.img as string);
                       }}
                     >
                       <div className="details__images-container">
@@ -123,7 +131,7 @@ function Details({ chat, showDetails, setShowDetails }) {
           {showFiles && (
             <div className="details__files">
               {messagesWithFiles?.map(
-                (message, i) =>
+                (message: MessageType, i: number) =>
                   message.file && (
                     <div className="details__files-container" key={i}>
                       <img src="./file.svg" alt="Shared file" />
@@ -137,7 +145,7 @@ function Details({ chat, showDetails, setShowDetails }) {
                         alt="Download file"
                         title={`Download ${message.fileName}`}
                         onClick={() => {
-                          saveAs(message.file);
+                          saveAs(message.file as File);
                         }}
                       />
                     </div>
