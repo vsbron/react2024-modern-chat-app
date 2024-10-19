@@ -34,6 +34,10 @@ export type EmojiModalProps = {
   setInputText: React.Dispatch<React.SetStateAction<string>>;
   setOpenEmoji: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export type SettingsProps = {
+  showSettings: boolean;
+  setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
+};
 export type UserInfoProps = {
   setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
 };

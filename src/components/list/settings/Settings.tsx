@@ -1,10 +1,11 @@
+import { SettingsProps } from "../../../lib/types";
 import UpdateUser from "./updateUserAndPassword/UpdateUser";
 import UpdatePassword from "./updateUserAndPassword/UpdatePassword";
 import ColorSchemeSelector from "./colorSchemeSelector/ColorSchemeSelector";
 
 import "./settings.css";
 
-function Settings({ showSettings, setShowSettings }) {
+function Settings({ showSettings, setShowSettings }: SettingsProps) {
   // Returned JSX
   return (
     <div className={`settings ${showSettings && "settings--visible"}`}>

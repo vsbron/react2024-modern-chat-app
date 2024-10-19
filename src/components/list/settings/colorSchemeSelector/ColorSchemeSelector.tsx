@@ -18,7 +18,7 @@ function ColorSchemeSelector() {
   }, [selectedColor]);
 
   // Handle color change
-  const handleColorChange = async (color) => {
+  const handleColorChange = async (color: string) => {
     if (color === selectedColor) return; // Avoid unnecessary updates
 
     try {
@@ -27,9 +27,12 @@ function ColorSchemeSelector() {
 
       // Update the local state
       setSelectedColor(color);
-    } catch (err) {
-      console.error(err.message);
-      // Handle errors if necessary
+    } catch (e: unknown) {
+      console.error(
+        e instanceof Error
+          ? e.message
+          : "Couldn't change the color scheme due to unknown error"
+      );
     }
   };
 
