@@ -19,7 +19,7 @@ export const useChatStore = create<ChatStoreState>((set) => ({
     const currentUser = useUserStore.getState().currentUser;
 
     // Guard clause
-    if (currentUser === null) return toast("Couldn't get the user data");
+    if (currentUser === null) return toast.error("Couldn't get the user data");
 
     // Check if other user is blocked current user
     if (userInfo.blocked.includes(currentUser.id)) {

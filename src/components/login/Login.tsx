@@ -14,10 +14,11 @@ import Avatar from "../../ui/avatar/Avatar";
 import Button from "../../ui/button/Button";
 
 import "./login.css";
+import { AvatarState } from "../../lib/types";
 
 function Login() {
   // State for an avatar image
-  const [avatar, setAvatar] = useState({
+  const [avatar, setAvatar] = useState<AvatarState>({
     file: null,
     src: "",
   });
@@ -26,28 +27,30 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   // Image upload handler
-  const handleAvatar = (e) => {
-    e.target.files[0] &&
+  const handleAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
       setAvatar({
         file: e.target.files[0],
-        url: URL.createObjectURL(e.target.files[0]),
+        src: URL.createObjectURL(e.target.files[0]),
       });
+    }
   };
 
   // Login handler for the form
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     // Preventing default behavior
     e.preventDefault();
 
     // Getting the form values from form to constants
-    const formData = new FormData(e.target);
-    const { email, password } = Object.fromEntries(formData);
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string; // Type assertion
+    const password = formData.get("password") as string; // Type assertion
 
     // Log in input validation
     if (!email || !password) return toast.warn("Please enter log in inputs!");
 
     // Checking if email is written in the correct format
-    if (!isValidEmail(email))
+    if (!isValidEmail(email as string))
       return toast.warn("Please check of your email is written correctly");
 
     // Enabling the loading state
@@ -59,9 +62,14 @@ function Login() {
 
       // Showing success message
       toast.success("You have successfully logged in");
-    } catch (err) {
-      console.error(err);
-      toast.error(err.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+        toast.error(e.message);
+      } else {
+        console.error(e);
+        toast.error("Couldn't sign in due to unknown error");
+      }
     } finally {
       // Disabling the loading state
       setLoading(false);
@@ -69,18 +77,21 @@ function Login() {
   };
 
   // Registration handler that creates the user in the database
-  const handleRegister = async (e) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     // Preventing default behavior
     e.preventDefault();
 
     // Getting the form values from form to constants
-    const formData = new FormData(e.target);
-    const { username, email, password, avatar } = Object.fromEntries(formData);
+    const formData = new FormData(e.currentTarget);
+    const username = formData.get("username") as string; // Type assertion
+    const email = formData.get("email") as string; // Type assertion
+    const password = formData.get("password") as string; // Type assertion
+    const avatar = formData.get("avatar") as File | null; // Type assertion
 
     // Register input validation
     if (!username || !email || !password)
       return toast.warn("Please enter register inputs!");
-    if (!avatar.name) return toast.warn("Please upload an avatar!");
+    if (!avatar?.name) return toast.warn("Please upload an avatar!");
 
     // Checking if email is written in the correct format
     if (!isValidEmail(email))
@@ -119,9 +130,14 @@ function Login() {
 
       // Showing success message
       toast.success("Account created! You can log in now");
-    } catch (err) {
-      console.error(err);
-      toast.error(err.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+        toast.error(e.message);
+      } else {
+        console.error(e);
+        toast.error("Couldn't create an account due to unknown error");
+      }
     } finally {
       // Disabling the loading state
       setLoading(false);
@@ -151,7 +167,7 @@ function Login() {
         <h2>Create an Account</h2>
         <form className="login__form" onSubmit={handleRegister}>
           <label htmlFor="file" className="login__avatar">
-            <Avatar size="5rem" src={avatar.url} />
+            <Avatar size="5rem" src={avatar.src || "./avatar.png"} />
             Upload an image
           </label>
           <input

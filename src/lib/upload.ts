@@ -2,7 +2,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 import { storage } from "./firebase";
 
-const upload = async (file) => {
+const upload = async (file: File) => {
   // Determine the folder based on file type
   const isImage = file.type.startsWith("image/");
   const folder = isImage ? "images" : "files";

@@ -45,7 +45,7 @@ export type UserInfoProps = {
 // UI Types
 export type AvatarProps = {
   src: string;
-  altTitle: string;
+  altTitle?: string;
   size: string;
 };
 
