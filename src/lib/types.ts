@@ -2,6 +2,7 @@
 export type ChatType = {
   createdAt: CreatedAtType;
   messages: MessageType[];
+  receiverId?: string;
 };
 export type CreatedAtType = { seconds: number; nanoseconds: number } | Date;
 export type FileType = {
@@ -19,6 +20,9 @@ export type MessageType = {
 };
 
 // Components Types
+export type AddUserProps = {
+  setAddMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
 export type ChatProps = {
   chat: ChatType;
   setShowDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,7 +57,7 @@ export type ButtonProps = {
   children: string;
   padding: string;
   onClick?: React.MouseEventHandler;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 // Utils Types

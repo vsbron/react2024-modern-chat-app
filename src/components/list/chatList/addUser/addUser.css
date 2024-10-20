@@ -52,6 +52,12 @@
       }
     }
   }
+  .add-user__not-found {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: var(--color-border) 2px dashed;
+    font-size: 1.4rem;
+  }
 }
 
 @keyframes appear {

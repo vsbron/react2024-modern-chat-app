@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { toast } from "react-toastify";
 import {
   arrayUnion,
   collection,
@@ -14,6 +15,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../../../../lib/firebase";
+import { AddUserProps, ChatType, User } from "../../../../lib/types";
 import { useUserStore } from "../../../../lib/userStore";
 import useCloseModal from "../../../../utils/useCloseModal";
 
@@ -22,13 +24,13 @@ import Button from "../../../../ui/button/Button";
 
 import "./addUser.css";
 
-function AddUser({ setAddMode }) {
+function AddUser({ setAddMode }: AddUserProps) {
   // Getting the current user from the store
   const { currentUser } = useUserStore();
 
   // Setting the state for the user and whether he's already added to chat list
-  const [searchedUser, setSearchedUser] = useState(null);
-  const [isAlreadyAdded, setIsAlreadyAdded] = useState(false);
+  const [searchedUser, setSearchedUser] = useState<User | null>(null);
+  const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
 
   // Custom hook that adds the click handlers that will close the Add User module
   useCloseModal({
@@ -44,6 +46,9 @@ function AddUser({ setAddMode }) {
     }
   }, [searchedUser]);
 
+  if (!currentUser)
+    return toast.warn("Couldn't get the user data. Please sign in again");
+
   const checkIfUserIsAlreadyAdded = async () => {
     // Get the current user's chat list
     const userChatsDoc = await getDoc(doc(db, "userchats", currentUser.id));
@@ -51,20 +56,20 @@ function AddUser({ setAddMode }) {
 
     // Check if the searched user is already in the chat list or is it the your user
     const alreadyAdded =
-      searchedUser.id === currentUser.id ||
-      userChats.some((chat) => chat.receiverId === searchedUser.id);
+      searchedUser?.id === currentUser.id ||
+      userChats.some((chat: ChatType) => chat.receiverId === searchedUser?.id);
 
     // Update the state to reflect if the user is already added
     setIsAlreadyAdded(alreadyAdded);
   };
 
   // Search submit handle
-  const handleSearch = async (e) => {
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior
     e.preventDefault();
 
     // Getting the form data and the username
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const searchInput = formData.get("username");
 
     try {
@@ -83,14 +88,15 @@ function AddUser({ setAddMode }) {
 
       // If a user is found by username or email, set the state with user data
       if (!usernameSnapshot.empty) {
-        setSearchedUser(usernameSnapshot.docs[0].data());
+        setSearchedUser(usernameSnapshot.docs[0].data() as User);
       } else if (!emailSnapshot.empty) {
-        setSearchedUser(emailSnapshot.docs[0].data());
+        setSearchedUser(emailSnapshot.docs[0].data() as User);
       } else {
         setSearchedUser(null);
       }
-    } catch (err) {
-      console.error(err.message);
+    } catch (e) {
+      toast.warn("Couldn't find user due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
     }
   };
 
@@ -111,7 +117,7 @@ function AddUser({ setAddMode }) {
       });
 
       // Adding the chat to our chat list
-      await updateDoc(doc(userChatsRef, searchedUser.id), {
+      await updateDoc(doc(userChatsRef, searchedUser?.id), {
         chats: arrayUnion({
           chatId: newChatRef.id,
           lastMessage: "",
@@ -125,7 +131,7 @@ function AddUser({ setAddMode }) {
         chats: arrayUnion({
           chatId: newChatRef.id,
           lastMessage: "",
-          receiverId: searchedUser.id,
+          receiverId: searchedUser?.id,
           updatedAt: Date.now(),
         }),
       });
@@ -146,7 +152,7 @@ function AddUser({ setAddMode }) {
       </form>
 
       {/* Found users list */}
-      {searchedUser && (
+      {searchedUser ? (
         <div className="add-user__user">
           <div
             className={`add-user__user-details ${
@@ -170,6 +176,10 @@ function AddUser({ setAddMode }) {
           >
             {!isAlreadyAdded ? "Add user" : "Added"}
           </Button>
+        </div>
+      ) : (
+        <div className="add-user__not-found">
+          Sorry, no user was found. Please try again...
         </div>
       )}
     </div>,
