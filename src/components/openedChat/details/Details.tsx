@@ -86,9 +86,7 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
         <Avatar src={user?.avatar} size="10rem" altTitle={user.username} />
         <h2 className="details__user-name">{user.username || "User"}</h2>
         <p className="details__email">{user.email || "User"}</p>
-        {user.description && (
-          <p className="details__user-text">{user.description}</p>
-        )}
+        {user.description && <p>{user.description}</p>}
       </div>
 
       {/* Togglers to show all images and files in the chat */}
@@ -104,22 +102,28 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
           </div>
           {showImages && (
             <div className="details__images">
-              {messagesWithImages?.map(
-                (message: MessageType, i: number) =>
-                  message.img && (
-                    <div
-                      className="details__images-item"
-                      key={i}
-                      onClick={() => {
-                        saveAs(message.img as string);
-                      }}
-                    >
-                      <div className="details__images-container">
-                        <img src={message.img} alt="Shared image" />
-                        <div className="details__images-overlay"></div>
+              {messagesWithImages.length === 0 ? (
+                <div className="details__note">
+                  There are no shared images in this chat
+                </div>
+              ) : (
+                messagesWithImages.map(
+                  (message: MessageType, i: number) =>
+                    message.img && (
+                      <div
+                        className="details__images-item"
+                        key={i}
+                        onClick={() => {
+                          saveAs(message.img as string);
+                        }}
+                      >
+                        <div className="details__images-container">
+                          <img src={message.img} alt="Shared image" />
+                          <div className="details__images-overlay"></div>
+                        </div>
                       </div>
-                    </div>
-                  )
+                    )
+                )
               )}
             </div>
           )}
@@ -135,26 +139,32 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
           </div>
           {showFiles && (
             <div className="details__files">
-              {messagesWithFiles?.map(
-                (message: MessageType, i: number) =>
-                  message.file && (
-                    <div className="details__files-container" key={i}>
-                      <img src="./file.svg" alt="Shared file" />
-                      <span className="details__filename">
-                        {message.fileName}
-                      </span>
-                      <img
-                        src="./download.svg"
-                        className="details__files-download"
-                        height={20}
-                        alt="Download file"
-                        title={`Download ${message.fileName}`}
-                        onClick={() => {
-                          saveAs(message.file as File);
-                        }}
-                      />
-                    </div>
-                  )
+              {messagesWithFiles.length === 0 ? (
+                <div className="details__note">
+                  There are no shared files in this chat
+                </div>
+              ) : (
+                messagesWithFiles.map(
+                  (message: MessageType, i: number) =>
+                    message.file && (
+                      <div className="details__files-container" key={i}>
+                        <img src="./file.svg" alt="Shared file" />
+                        <span className="details__filename">
+                          {message.fileName}
+                        </span>
+                        <img
+                          src="./download.svg"
+                          className="details__files-download"
+                          height={20}
+                          alt="Download file"
+                          title={`Download ${message.fileName}`}
+                          onClick={() => {
+                            saveAs(message.file as File);
+                          }}
+                        />
+                      </div>
+                    )
+                )
               )}
             </div>
           )}

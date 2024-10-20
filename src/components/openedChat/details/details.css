@@ -22,8 +22,6 @@
       color: var(--color-gray-light);
       margin-bottom: 1rem;
     }
-    .details__user-text {
-    }
   }
   .details__info {
     padding: 2rem;
@@ -135,6 +133,10 @@
             }
           }
         }
+      }
+
+      .details__note {
+        font-size: 1.4rem;
       }
     }
     .details__info-block {
