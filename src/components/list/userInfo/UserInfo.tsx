@@ -24,13 +24,13 @@ function UserInfo({ setShowSettings }: UserInfoProps) {
     <div className="user-info">
       <div className="user">
         <Avatar
-          src={currentUser.avatar}
+          src={currentUser!.avatar}
           size="5rem"
-          altTitle={currentUser.username}
+          altTitle={currentUser!.username}
         />
         <div>
-          <h2>{currentUser.username}</h2>
-          <p>{currentUser.email}</p>
+          <h2>{currentUser!.username}</h2>
+          <p>{currentUser!.email}</p>
         </div>
       </div>
       <div className="icons">

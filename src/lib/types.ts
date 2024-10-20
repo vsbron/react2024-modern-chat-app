@@ -85,6 +85,7 @@ export interface ChatStoreState {
   isCurrentUserBlocked: boolean;
   isReceiverBlocked: boolean;
   changeBlocked: () => void;
+  resetChat: () => void;
 }
 export interface UserStoreState {
   currentUser: User | null;
@@ -99,10 +100,11 @@ export type ChangeChatProps = {
 };
 
 export type UpdatedDataType = {
-  username: string;
-  email: string;
-  description: string;
+  username?: string;
+  email?: string;
+  description?: string;
   avatar?: string;
+  color?: string;
 };
 
 export type User = {

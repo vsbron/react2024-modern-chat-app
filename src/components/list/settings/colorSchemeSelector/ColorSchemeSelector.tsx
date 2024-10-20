@@ -10,7 +10,7 @@ function ColorSchemeSelector() {
   const { currentUser, updateUserInfo } = useUserStore();
 
   // Creating the state for the selected color
-  const [selectedColor, setSelectedColor] = useState(currentUser.color);
+  const [selectedColor, setSelectedColor] = useState(currentUser?.color);
 
   useEffect(() => {
     // Apply the color scheme class to the body or a root element
@@ -23,7 +23,7 @@ function ColorSchemeSelector() {
 
     try {
       // Update the user's color scheme
-      await updateUserInfo(currentUser.id, { color });
+      await updateUserInfo(currentUser!.id, { color });
 
       // Update the local state
       setSelectedColor(color);

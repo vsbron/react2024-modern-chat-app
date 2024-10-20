@@ -22,7 +22,7 @@ const App = () => {
   // useEffect with event listener for the auth change state
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      fetchUserInfo(user?.uid);
+      if (user) fetchUserInfo(user.uid);
     });
 
     // Cleanup function when component unmounts

@@ -30,9 +30,7 @@ function UpdatePassword() {
     const passwordConfirm = formData.get("passwordConfirm") as string; // Type assertion
 
     // Guard clause if no user is authenticated
-    if (!user) {
-      return toast.warn("No user is currently logged in.");
-    }
+    if (!user) return toast.warn("No user is currently logged in.");
 
     // Guard clause for empty fields
     if (!currentPassword)

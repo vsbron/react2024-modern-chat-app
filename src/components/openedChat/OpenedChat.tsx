@@ -7,8 +7,6 @@ import { db } from "../../lib/firebase";
 
 import Chat from "./chat/Chat";
 import Details from "./details/Details";
-import Loader from "../../ui/loader/Loader";
-import LoaderSmall from "../../ui/loader/LoaderSmall";
 
 function OpenedChat() {
   // Setting the state for the current chat, and details section
@@ -18,6 +16,12 @@ function OpenedChat() {
 
   // Getting the chat id from the store
   const { chatId } = useChatStore();
+
+  // Ensure chatId is not null
+  if (!chatId) {
+    console.error("chatId is null");
+    return;
+  }
 
   // useEffect to set the current chat
   useEffect(() => {
@@ -41,7 +45,7 @@ function OpenedChat() {
     <>
       <Chat chat={chat} setShowDetails={setShowDetails} isLoading={isLoading} />
       <Details
-        key={chatId}
+        key={chatId!}
         chat={chat}
         showDetails={showDetails}
         setShowDetails={setShowDetails}

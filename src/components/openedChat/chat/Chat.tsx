@@ -75,7 +75,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
 
       // Prepare the message data
       const messageData: MessageType = {
-        senderId: currentUser.id,
+        senderId: currentUser!.id,
         text: inputText,
         createdAt: new Date(),
       };
@@ -83,11 +83,17 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
       // Add the file data if fileUrl exists
       if (fileUrl !== null) {
         if (file.type.startsWith("image/")) {
-          messageData.img = fileUrl;
+          messageData.img = fileUrl as string;
         } else {
-          messageData.file = fileUrl;
+          messageData.file = fileUrl as File;
           messageData.fileName = file.file!.name;
         }
+      }
+
+      // Ensure chatId is not null
+      if (!chatId) {
+        console.error("chatId is null");
+        return;
       }
 
       // Add the sent message to the messages array in the database
@@ -96,7 +102,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
       });
 
       // Create an array of both IDs to loop through them
-      const userIds = [currentUser.id, user.id];
+      const userIds = [currentUser!.id, user!.id];
 
       // Update each chat in the userchats with the last message, seen and updatedAt data
       userIds.forEach(async (id) => {
@@ -112,7 +118,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
 
           userChatsData.chats[chatIndex].lastMessage = inputText;
           userChatsData.chats[chatIndex].isSeen =
-            id === currentUser.id ? true : false;
+            id === currentUser!.id ? true : false;
           userChatsData.chats[chatIndex].updatedAt = Date.now();
 
           await updateDoc(userChatsRef, { chats: userChatsData.chats });
@@ -170,19 +176,23 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
         ) : (
           <>
             <div className="chat-top__user">
-              <Avatar src={user.avatar} size="6rem" altTitle={user.username} />
+              <Avatar
+                src={user!.avatar}
+                size="6rem"
+                altTitle={user!.username}
+              />
               <div className="chat-top__texts">
                 <span className="chat-top__user-name">
-                  {user.username || "User"}
+                  {user!.username || "User"}
                 </span>
-                <p className="chat-top__user-email">{user.email || ""}</p>
+                <p className="chat-top__user-email">{user!.email || ""}</p>
               </div>
             </div>
             <div className="chat-top__icons">
               <img
                 src="./info.svg"
-                alt={`More info about ${user.username}`}
-                title={`More info about ${user.username}`}
+                alt={`More info about ${user!.username}`}
+                title={`More info about ${user!.username}`}
                 className="chat-top__icons--details"
                 onClick={() => {
                   setShowDetails(true);
@@ -190,8 +200,8 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
               />
               <img
                 src="./close.svg"
-                alt={`Close chat with ${user.username}`}
-                title={`Close chat with ${user.username}`}
+                alt={`Close chat with ${user!.username}`}
+                title={`Close chat with ${user!.username}`}
                 onClick={() => {
                   resetChat();
                 }}
@@ -209,7 +219,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
           chat.messages?.map((message: MessageType) => (
             <div
               className={`chat-center__message-container ${
-                message.senderId === currentUser.id &&
+                message.senderId === currentUser!.id &&
                 "chat-center__message-container--own"
               }`}
               key={

@@ -2,12 +2,12 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { create } from "zustand";
 
 import { db } from "./firebase";
-import { User, UserStoreState } from "./types";
+import { UpdatedDataType, User, UserStoreState } from "./types";
 
 export const useUserStore = create<UserStoreState>((set) => ({
   currentUser: null,
   isLoading: true,
-  fetchUserInfo: async (uid) => {
+  fetchUserInfo: async (uid: string) => {
     // Guard clause
     if (!uid) return set({ currentUser: null, isLoading: false });
 
@@ -29,7 +29,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
       return set({ currentUser: null, isLoading: false }); // Set user to null on error
     }
   },
-  updateUserInfo: async (uid, updatedData) => {
+  updateUserInfo: async (uid: string, updatedData: UpdatedDataType) => {
     try {
       // Getting the reference to the database table
       const docRef = doc(db, "users", uid);
