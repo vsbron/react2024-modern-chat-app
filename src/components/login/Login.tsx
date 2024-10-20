@@ -15,6 +15,7 @@ import Button from "../../ui/button/Button";
 
 import "./login.css";
 import { AvatarState } from "../../lib/types";
+import { FirebaseError } from "firebase/app";
 
 function Login() {
   // State for an avatar image
@@ -62,10 +63,12 @@ function Login() {
 
       // Showing success message
       toast.success("You have successfully logged in");
-    } catch (e) {
-      if (e instanceof Error) {
+    } catch (e: any) {
+      if (e instanceof FirebaseError) {
         console.error(e.message);
-        toast.error(e.message);
+        if (e.code === "auth/invalid-credential") {
+          toast.error("Wrong username or password. Please try again");
+        }
       } else {
         console.error(e);
         toast.error("Couldn't sign in due to unknown error");

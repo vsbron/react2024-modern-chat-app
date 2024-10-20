@@ -9,25 +9,30 @@ import Button from "../../../../ui/button/Button";
 
 function UpdatePassword() {
   // Creating the states for password fields
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [currentPassword, setCurrentPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
   // Setting the state for updating process
-  const [updating, setUpdating] = useState(false);
+  const [updating, setUpdating] = useState<boolean>(false);
 
   // Update password handler
-  const handleUpdatePassword = async (e) => {
+  const handleUpdatePassword = async (e: React.FormEvent<HTMLFormElement>) => {
     // Preventing default behavior
     e.preventDefault();
 
     // Getting the current user from the auth
     const user = auth.currentUser;
-
     // Getting the form values from form to constants
-    const formData = new FormData(e.target);
-    const { currentPassword, password, passwordConfirm } =
-      Object.fromEntries(formData);
+    const formData = new FormData(e.currentTarget);
+    const currentPassword = formData.get("currentPassword") as string; // Type assertion
+    const password = formData.get("password") as string; // Type assertion
+    const passwordConfirm = formData.get("passwordConfirm") as string; // Type assertion
+
+    // Guard clause if no user is authenticated
+    if (!user) {
+      return toast.warn("No user is currently logged in.");
+    }
 
     // Guard clause for empty fields
     if (!currentPassword)
@@ -42,7 +47,7 @@ function UpdatePassword() {
       return toast.warn("Passwords do not match");
 
     const credential = EmailAuthProvider.credential(
-      user.email,
+      user.email as string,
       currentPassword
     );
     await reauthenticateWithCredential(user, credential);
