@@ -98,6 +98,7 @@ export type UpdatedDataType = {
   username: string;
   email: string;
   description: string;
+  avatar?: string;
 };
 
 export type User = {

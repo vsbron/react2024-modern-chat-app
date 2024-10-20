@@ -16,30 +16,37 @@ function UpdateUser() {
   // Getting the current user from the store
   const { currentUser, updateUserInfo } = useUserStore();
 
+  if (currentUser === null)
+    return toast.error("Couldn't update the user. Please sign in again");
+
   // Setting the state for all user's details
-  const [avatar, setAvatar] = useState(currentUser.avatar);
-  const [username, setUsername] = useState(currentUser.username);
-  const [email, setEmail] = useState(currentUser.email);
-  const [description, setDescription] = useState(currentUser.description);
+  const [avatar, setAvatar] = useState<any>(currentUser.avatar);
+  const [username, setUsername] = useState<string>(currentUser.username);
+  const [email, setEmail] = useState<string>(currentUser.email);
+  const [description, setDescription] = useState<string>(
+    currentUser.description
+  );
 
   // Setting the state for updating process
-  const [updating, setUpdating] = useState(false);
+  const [updating, setUpdating] = useState<boolean>(false);
 
   // Update profile handler
-  const handleUpdateUser = async (e) => {
+  const handleUpdateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     // Preventing default behavior
     e.preventDefault();
 
     // Getting the form values from form to constants
-    const formData = new FormData(e.target);
-    const { username, email, description } = Object.fromEntries(formData);
+    const formData = new FormData(e.currentTarget);
+    const username = formData.get("username") as string; // Type assertion
+    const email = formData.get("email") as string; // Type assertion
+    const description = formData.get("description") as string; // Type assertion
 
     // Guard clause for empty fields
     if (!username || !email || !description)
       return toast.warn("Make sure all user fields are filled");
 
     // Checking if email is written in the correct format
-    if (!isValidEmail(email))
+    if (!isValidEmail(email as string))
       return toast.warn("Please check of your email is written correctly");
 
     // Check if username or email is different from current values
@@ -48,7 +55,7 @@ function UpdateUser() {
 
     // Checking if username is unique
     if (usernameChanged) {
-      const usernameUnique = await isUsernameUnique(username);
+      const usernameUnique = await isUsernameUnique(username as string);
       if (!usernameUnique) {
         return toast.warn("This username is already taken");
       }
@@ -56,7 +63,7 @@ function UpdateUser() {
 
     // Checking if email is unique
     if (emailChanged) {
-      const emailUnique = await isEmailUnique(email);
+      const emailUnique = await isEmailUnique(email as string);
       if (!emailUnique) {
         return toast.warn("This email is already taken");
       }
@@ -70,6 +77,7 @@ function UpdateUser() {
       username,
       email,
       description,
+      avatar,
     };
 
     // If avatar has changed, add it to the update data
@@ -77,10 +85,9 @@ function UpdateUser() {
       try {
         const avatarUrl = await upload(avatar.file); // Upload the new avatar
         updatedData.avatar = avatarUrl; // Update the data with new avatar URL
-      } catch (err) {
-        // Show error if avatar upload fails
-        toast.error("Failed to upload avatar" + err.message);
-        return;
+      } catch (e) {
+        toast.error("Failed to upload the avatar");
+        console.error(e instanceof Error ? e.message : e);
       }
     }
 
@@ -92,9 +99,9 @@ function UpdateUser() {
       await updateUserInfo(currentUser.id, updatedData);
       // Show success message
       toast.success("User successfully updated");
-    } catch (err) {
-      // Show error
-      toast.error(err.message);
+    } catch (e) {
+      toast.error("Failed to update the user info");
+      console.error(e instanceof Error ? e.message : e);
     } finally {
       // Disabling the updating state
       setUpdating(false);
@@ -102,12 +109,13 @@ function UpdateUser() {
   };
 
   // Image upload handler
-  const handleAvatar = (e) => {
-    e.target.files[0] &&
+  const handleAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
       setAvatar({
         file: e.target.files[0],
-        url: URL.createObjectURL(e.target.files[0]),
+        src: URL.createObjectURL(e.target.files[0]),
       });
+    }
   };
 
   // Returned JSX
@@ -115,7 +123,7 @@ function UpdateUser() {
     <form className="settings__form" onSubmit={handleUpdateUser}>
       <h4>Update profile:</h4>
       <label htmlFor="file" className="settings__avatar">
-        <Avatar src={avatar.url || avatar} size="5rem" />
+        <Avatar src={avatar.src || avatar} size="5rem" />
         Change avatar
       </label>
       <input

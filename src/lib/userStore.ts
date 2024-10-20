@@ -14,8 +14,6 @@ export const useUserStore = create<UserStoreState>((set) => ({
     try {
       const docRef = doc(db, "users", uid); // Get the reference to the table
       const docSnap = await getDoc(docRef); // Try to get the user data
-
-      console.log(docSnap.data());
       const data = docSnap.data();
       // Set user if user data is found, set null if not found
       set({
@@ -33,8 +31,6 @@ export const useUserStore = create<UserStoreState>((set) => ({
   },
   updateUserInfo: async (uid, updatedData) => {
     try {
-      console.log(updatedData);
-
       // Getting the reference to the database table
       const docRef = doc(db, "users", uid);
 
