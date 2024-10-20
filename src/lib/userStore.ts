@@ -38,8 +38,13 @@ export const useUserStore = create<UserStoreState>((set) => ({
       await setDoc(docRef, updatedData, { merge: true });
 
       // Update the local state with new data
-      set((state: any) => ({
-        currentUser: { ...state.currentUser, ...updatedData },
+      set((state) => ({
+        currentUser: state.currentUser
+          ? {
+              ...state.currentUser,
+              ...updatedData,
+            }
+          : null,
       }));
     } catch (err) {
       throw new Error("Failed to update user");

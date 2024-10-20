@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 import upload from "../../../../lib/upload";
+import { AvatarState, UpdatedDataType } from "../../../../lib/types";
 import { useUserStore } from "../../../../lib/userStore";
 import {
   isEmailUnique,
@@ -16,11 +17,15 @@ function UpdateUser() {
   // Getting the current user from the store
   const { currentUser, updateUserInfo } = useUserStore();
 
-  if (currentUser === null)
-    return toast.error("Couldn't update the user. Please sign in again");
+  if (currentUser === null) {
+    toast.error("Couldn't update the user. Please sign in again");
+    return null;
+  }
 
   // Setting the state for all user's details
-  const [avatar, setAvatar] = useState<any>(currentUser.avatar);
+  const [avatar, setAvatar] = useState<AvatarState | string>(
+    currentUser.avatar
+  );
   const [username, setUsername] = useState<string>(currentUser.username);
   const [email, setEmail] = useState<string>(currentUser.email);
   const [description, setDescription] = useState<string>(
@@ -70,24 +75,26 @@ function UpdateUser() {
     }
 
     // Checking if avatar was changed
-    const isAvatarUnchanged = avatar === currentUser.avatar;
+    const isAvatarUnchanged =
+      typeof avatar === "string" ? avatar === currentUser.avatar : false;
 
     // Collecting all data into object
-    const updatedData = {
+    const updatedData: UpdatedDataType = {
       username,
       email,
       description,
-      avatar,
+      avatar: typeof avatar === "string" ? avatar : undefined,
     };
 
     // If avatar has changed, add it to the update data
-    if (!isAvatarUnchanged) {
+    if (!isAvatarUnchanged && typeof avatar === "object" && avatar.file) {
       try {
-        const avatarUrl = await upload(avatar.file); // Upload the new avatar
+        const avatarUrl = (await upload(avatar.file)) as string; // Upload the new avatar
         updatedData.avatar = avatarUrl; // Update the data with new avatar URL
       } catch (e) {
         toast.error("Failed to upload the avatar");
         console.error(e instanceof Error ? e.message : e);
+        return;
       }
     }
 
@@ -123,7 +130,10 @@ function UpdateUser() {
     <form className="settings__form" onSubmit={handleUpdateUser}>
       <h4>Update profile:</h4>
       <label htmlFor="file" className="settings__avatar">
-        <Avatar src={avatar.src || avatar} size="5rem" />
+        <Avatar
+          src={typeof avatar === "string" ? avatar : avatar.src}
+          size="5rem"
+        />{" "}
         Change avatar
       </label>
       <input

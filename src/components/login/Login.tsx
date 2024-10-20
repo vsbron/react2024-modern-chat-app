@@ -63,7 +63,7 @@ function Login() {
 
       // Showing success message
       toast.success("You have successfully logged in");
-    } catch (e: any) {
+    } catch (e: unknown) {
       if (e instanceof FirebaseError) {
         console.error(e.message);
         if (e.code === "auth/invalid-credential") {
