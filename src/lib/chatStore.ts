@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { create } from "zustand";
 
 import { useUserStore } from "./userStore";
@@ -16,6 +17,9 @@ export const useChatStore = create<ChatStoreState>((set) => ({
   },
   changeChat: ({ chatId, userInfo }: ChangeChatProps) => {
     const currentUser = useUserStore.getState().currentUser;
+
+    // Guard clause
+    if (currentUser === null) return toast("Couldn't get the user data");
 
     // Check if other user is blocked current user
     if (userInfo.blocked.includes(currentUser.id)) {

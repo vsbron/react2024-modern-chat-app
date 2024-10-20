@@ -82,13 +82,25 @@ export interface ChatStoreState {
   isReceiverBlocked: boolean;
   changeBlocked: () => void;
 }
+export interface UserStoreState {
+  currentUser: User | null;
+  isLoading: boolean;
+  fetchUserInfo: (uid: string) => void;
+  updateUserInfo: (uid: string, updatedData: UpdatedDataType) => void;
+}
 
 export type ChangeChatProps = {
   chatId: string;
   userInfo: User;
 };
 
-type User = {
+export type UpdatedDataType = {
+  username: string;
+  email: string;
+  description: string;
+};
+
+export type User = {
   id: string;
   username: string;
   avatar: string;

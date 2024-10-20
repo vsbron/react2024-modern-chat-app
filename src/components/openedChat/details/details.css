@@ -151,6 +151,15 @@
       &:hover {
         background-color: rgba(var(--color-red), 0.9);
       }
+
+      &.details__info-block--blocked {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          background-color: rgba(var(--color-red), 0.7);
+        }
+      }
     }
   }
 }

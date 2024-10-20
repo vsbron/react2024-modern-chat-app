@@ -36,7 +36,7 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
     if (!user) return;
 
     // Get a reference to the user
-    const userDocRef = doc(db, "users", currentUser.id);
+    const userDocRef = doc(db, "users", currentUser!.id);
 
     // Update the blocked list
     try {
@@ -171,7 +171,12 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
         </div>
 
         {/* Block user button */}
-        <button className="details__info-block" onClick={handleBlock}>
+        <button
+          className={`details__info-block ${
+            isCurrentUserBlocked ? "details__info-block--blocked" : ""
+          }`}
+          onClick={handleBlock}
+        >
           {isCurrentUserBlocked
             ? "You are blocked"
             : isReceiverBlocked
