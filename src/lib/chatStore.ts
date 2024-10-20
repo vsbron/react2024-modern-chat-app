@@ -1,16 +1,20 @@
 import { create } from "zustand";
 
 import { useUserStore } from "./userStore";
+import { ChangeChatProps, ChatStoreState } from "./types";
 
-export const useChatStore = create((set) => ({
+export const useChatStore = create<ChatStoreState>((set) => ({
   chatId: null,
   user: null,
   isCurrentUserBlocked: false,
   isReceiverBlocked: false,
   changeBlocked: () => {
-    set((state) => ({ ...state, isReceiverBlocked: !state.isReceiverBlocked }));
+    set((state) => ({
+      ...state,
+      isReceiverBlocked: !state.isReceiverBlocked,
+    }));
   },
-  changeChat: (chatId, userInfo) => {
+  changeChat: ({ chatId, userInfo }: ChangeChatProps) => {
     const currentUser = useUserStore.getState().currentUser;
 
     // Check if other user is blocked current user

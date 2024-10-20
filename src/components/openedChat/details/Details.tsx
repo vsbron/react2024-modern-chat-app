@@ -8,6 +8,7 @@ import { DetailsProps, MessageType } from "../../../lib/types";
 import { useUserStore } from "../../../lib/userStore";
 
 import Avatar from "../../../ui/avatar/Avatar";
+import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
 import "./details.css";
 
@@ -63,6 +64,10 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
   const toggleFiles = () => {
     setShowFiles((show) => !show);
   };
+
+  // Guard clause
+  if (user === null) return <LoaderSmall />;
+
   // Returned JSX
   return (
     <section className={`details ${showDetails ? "details--active" : ""}`}>
@@ -78,7 +83,7 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
 
       {/* User info */}
       <div className="details__user">
-        <Avatar src={user.avatar} size="10rem" altTitle={user.username} />
+        <Avatar src={user?.avatar} size="10rem" altTitle={user.username} />
         <h2 className="details__user-name">{user.username || "User"}</h2>
         <p className="details__email">{user.email || "User"}</p>
         {user.description && (

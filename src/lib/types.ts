@@ -73,3 +73,27 @@ export type FileState = {
   url: string;
   type: string;
 };
+
+// Stores Props
+export interface ChatStoreState {
+  chatId: string | null;
+  user: User | null;
+  isCurrentUserBlocked: boolean;
+  isReceiverBlocked: boolean;
+  changeBlocked: () => void;
+}
+
+export type ChangeChatProps = {
+  chatId: string;
+  userInfo: User;
+};
+
+type User = {
+  id: string;
+  username: string;
+  avatar: string;
+  blocked: string[];
+  description: string;
+  color: string;
+  email: string;
+};

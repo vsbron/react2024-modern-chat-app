@@ -88,7 +88,7 @@ function ChatList() {
       });
 
       // Calling the change chat function to display a chat
-      changeChat(chat.chatId, chat.user);
+      changeChat({ chatId: chat.chatId, userInfo: chat.user });
     } catch (err) {
       console.error(err.message);
     }
