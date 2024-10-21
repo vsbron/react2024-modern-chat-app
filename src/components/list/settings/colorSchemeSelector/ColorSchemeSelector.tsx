@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { useUserStore } from "../../../../lib/userStore";
 import { COLORS } from "../../../../utils/constants";
@@ -28,11 +29,8 @@ function ColorSchemeSelector() {
       // Update the local state
       setSelectedColor(color);
     } catch (e: unknown) {
-      console.error(
-        e instanceof Error
-          ? e.message
-          : "Couldn't change the color scheme due to unknown error"
-      );
+      toast.error("Couldn't change the color scheme due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
     }
   };
 

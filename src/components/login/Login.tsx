@@ -133,14 +133,9 @@ function Login() {
 
       // Showing success message
       toast.success("Account created! You can log in now");
-    } catch (e) {
-      if (e instanceof Error) {
-        console.error(e.message);
-        toast.error(e.message);
-      } else {
-        console.error(e);
-        toast.error("Couldn't create an account due to unknown error");
-      }
+    } catch (e: unknown) {
+      toast.error("Couldn't create an account due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
     } finally {
       // Disabling the loading state
       setLoading(false);

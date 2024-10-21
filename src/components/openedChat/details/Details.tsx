@@ -11,6 +11,7 @@ import Avatar from "../../../ui/avatar/Avatar";
 import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
 import "./details.css";
+import { toast } from "react-toastify";
 
 function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
   // State for the images and files sections
@@ -47,11 +48,8 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
       // Use the function from the store
       changeBlocked();
     } catch (e: unknown) {
-      console.error(
-        e instanceof Error
-          ? e.message
-          : "Couldn't block the user due to unknown error"
-      );
+      toast.error("Couldn't block the user due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
     }
   };
 

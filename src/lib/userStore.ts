@@ -3,6 +3,7 @@ import { create } from "zustand";
 
 import { db } from "./firebase";
 import { UpdatedDataType, User, UserStoreState } from "./types";
+import { toast } from "react-toastify";
 
 export const useUserStore = create<UserStoreState>((set) => ({
   currentUser: null,
@@ -20,12 +21,9 @@ export const useUserStore = create<UserStoreState>((set) => ({
         currentUser: docSnap.exists() && data ? (data as User) : null,
         isLoading: false,
       });
-    } catch (e) {
-      console.error(
-        e instanceof Error
-          ? e.message
-          : "Couldn't get the User Data due to unknown error"
-      );
+    } catch (e: unknown) {
+      toast.error("Couldn't get the User Data due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
       return set({ currentUser: null, isLoading: false }); // Set user to null on error
     }
   },
@@ -46,7 +44,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
             }
           : null,
       }));
-    } catch (err) {
+    } catch (e: unknown) {
       throw new Error("Failed to update user");
     }
   },

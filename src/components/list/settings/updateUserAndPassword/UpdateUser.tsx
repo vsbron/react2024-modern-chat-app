@@ -92,7 +92,7 @@ function UpdateUser() {
       try {
         const avatarUrl = (await upload(avatar.file)) as string; // Upload the new avatar
         updatedData.avatar = avatarUrl; // Update the data with new avatar URL
-      } catch (e) {
+      } catch (e: unknown) {
         toast.error("Failed to upload the avatar");
         console.error(e instanceof Error ? e.message : e);
         return;
@@ -107,7 +107,7 @@ function UpdateUser() {
       await updateUserInfo(currentUser.id, updatedData);
       // Show success message
       toast.success("User successfully updated");
-    } catch (e) {
+    } catch (e: unknown) {
       toast.error("Failed to update the user info");
       console.error(e instanceof Error ? e.message : e);
     } finally {

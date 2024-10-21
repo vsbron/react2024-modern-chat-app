@@ -59,10 +59,9 @@ function UpdatePassword() {
         // Showing success message
         toast.success("Password is updated successfully");
       })
-      .catch((err) => {
-        // Showing errors
-        console.error(err);
-        toast.error(err.message);
+      .catch((e: unknown) => {
+        toast.error("Couldn't update the password due to unknown error");
+        console.error(e instanceof Error ? e.message : e);
       });
 
     // Disabling the updating state

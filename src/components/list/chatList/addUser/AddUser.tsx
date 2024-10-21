@@ -21,6 +21,7 @@ import useCloseModal from "../../../../utils/useCloseModal";
 
 import Avatar from "../../../../ui/avatar/Avatar";
 import Button from "../../../../ui/button/Button";
+import LoaderSmall from "../../../../ui/loader/LoaderSmall";
 
 import "./addUser.css";
 
@@ -28,9 +29,11 @@ function AddUser({ setAddMode }: AddUserProps) {
   // Getting the current user from the store
   const { currentUser } = useUserStore();
 
-  // Setting the state for the user and whether he's already added to chat list
+  // Setting the state for the user, whether he's already added to chat list, input field and a loading state
   const [searchedUser, setSearchedUser] = useState<User | null>(null);
   const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
+  const [searchInput, setSearchInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Custom hook that adds the click handlers that will close the Add User module
   useCloseModal({
@@ -68,9 +71,15 @@ function AddUser({ setAddMode }: AddUserProps) {
     // Prevent default behavior
     e.preventDefault();
 
+    // Enabling loading state
+    setIsLoading(true);
+
     // Getting the form data and the username
     const formData = new FormData(e.currentTarget);
     const searchInput = formData.get("username");
+
+    // Update search input state
+    setSearchInput((searchInput as string) || "");
 
     try {
       const userRef = collection(db, "users"); // Getting the users from database
@@ -94,9 +103,12 @@ function AddUser({ setAddMode }: AddUserProps) {
       } else {
         setSearchedUser(null);
       }
-    } catch (e) {
+    } catch (e: unknown) {
       toast.warn("Couldn't find user due to unknown error");
       console.error(e instanceof Error ? e.message : e);
+    } finally {
+      // Disabling loading state
+      setIsLoading(false);
     }
   };
 
@@ -137,8 +149,9 @@ function AddUser({ setAddMode }: AddUserProps) {
       });
 
       setAddMode(false);
-    } catch (err) {
-      console.error(err);
+    } catch (e: unknown) {
+      toast.error("Couldn't create a chat with the user. Please try again");
+      console.error(e instanceof Error ? e.message : e);
     }
   };
 
@@ -178,9 +191,15 @@ function AddUser({ setAddMode }: AddUserProps) {
           </Button>
         </div>
       ) : (
-        <div className="add-user__not-found">
-          Sorry, no user was found. Please try again...
-        </div>
+        searchInput && (
+          <div className="add-user__not-found">
+            {isLoading ? (
+              <LoaderSmall />
+            ) : (
+              "Sorry, no user was found. Please try again..."
+            )}
+          </div>
+        )
       )}
     </div>,
     document.body

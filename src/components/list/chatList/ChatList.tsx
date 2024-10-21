@@ -103,7 +103,7 @@ function ChatList() {
 
       // Calling the change chat function to display a chat
       changeChat({ chatId: chat.chatId, userInfo: chat.user });
-    } catch (e) {
+    } catch (e: unknown) {
       toast.error("Couldn't open the chat. Please try again");
       console.error(e instanceof Error ? e.message : e);
     }
@@ -126,9 +126,7 @@ function ChatList() {
               className="search__input"
               placeholder="Search"
               value={searchInput}
-              onChange={(e) => {
-                setSearchInput(e.target.value);
-              }}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
           </div>
           <img

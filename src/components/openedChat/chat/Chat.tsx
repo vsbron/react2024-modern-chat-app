@@ -15,6 +15,7 @@ import Button from "../../../ui/button/Button";
 
 import LoaderSmall from "../../../ui/loader/LoaderSmall";
 import "./chat.css";
+import { toast } from "react-toastify";
 
 // Initial state for an empty file
 const fileInitialState = {
@@ -125,11 +126,8 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
         }
       });
     } catch (e: unknown) {
-      console.error(
-        e instanceof Error
-          ? e.message
-          : "Couldn't send a message due to unknown error"
-      );
+      toast.error("Couldn't send a message due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
     } finally {
       // Reset img state
       resetImage();
