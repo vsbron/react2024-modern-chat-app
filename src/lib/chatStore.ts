@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { create } from "zustand";
 
 import { useUserStore } from "./userStore";
-import { ChangeChatProps, ChatStoreState } from "./types";
+import { ChatStoreState } from "./types";
 
 export const useChatStore = create<ChatStoreState>((set) => ({
   chatId: null,
@@ -15,7 +15,7 @@ export const useChatStore = create<ChatStoreState>((set) => ({
       isReceiverBlocked: !state.isReceiverBlocked,
     }));
   },
-  changeChat: ({ chatId, userInfo }: ChangeChatProps) => {
+  changeChat: ({ chatId, userInfo }) => {
     const currentUser = useUserStore.getState().currentUser;
 
     // Guard clause

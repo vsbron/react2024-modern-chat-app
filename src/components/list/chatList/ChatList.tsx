@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 import { useChatStore } from "../../../lib/chatStore";
 import { db } from "../../../lib/firebase";
+import { ChatObject, ChatType } from "../../../lib/types";
 import { useUserStore } from "../../../lib/userStore";
 
 import AddUser from "./addUser/AddUser";
@@ -12,26 +14,39 @@ import "./chatList.css";
 
 function ChatList() {
   // State for adding user mode, the chats list, search input and loading state
-  const [addMode, setAddMode] = useState(false);
-  const [chats, setChats] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
+  const [addMode, setAddMode] = useState<boolean>(false);
+  const [chats, setChats] = useState<ChatObject[]>([]);
+  const [searchInput, setSearchInput] = useState<string>("");
 
   // Getting the current user data from the store
   const { currentUser } = useUserStore();
 
-  // Getting the block/unblock function from the store
+  // Getting the chat ID and change chat function from the store
   const { chatId, changeChat } = useChatStore();
+
+  if (currentUser === null)
+    return toast.error("Couldn't get the user data. Please sign in again");
 
   useEffect(() => {
     // Getting the chats data from the user id in the real time
     const unSub = onSnapshot(
       doc(db, "userchats", currentUser.id),
       async (res) => {
+        // Getting the data from the query response
+        const resData = res.data();
+
+        // Guard clause
+        if (resData === undefined) return setChats([]);
+
         // Getting the chats data
-        const items = res.data().chats;
+        const items = resData.chats;
 
         // From each chat we also need to get the user id using receiverID
-        const promises = items.map(async (item) => {
+        const promises = items.map(async (item: ChatType) => {
+          // Guard clause
+          if (!item.receiverId)
+            return toast.error("Couldn't get the User data. Please try again");
+
           const userDocRef = doc(db, "users", item.receiverId);
           const userDocSnap = await getDoc(userDocRef);
 
@@ -57,15 +72,14 @@ function ChatList() {
   }, [currentUser.id]);
 
   // Creating a filtered chat list based on the search input
-  const filteredChats = chats.filter((c) =>
+  const filteredChats = chats.filter((c: ChatObject) =>
     c.user.username.toLowerCase().includes(searchInput.toLowerCase())
   );
 
   // Select chat handler
-  const handleSelect = async (chat) => {
+  const handleSelect = async (chat: ChatObject) => {
     // Getting the chat lists minus user data
-    const userChats = chats.map((item) => {
-      // eslint-disable-next-line no-unused-vars
+    const userChats = chats.map((item: ChatObject) => {
       const { user, ...rest } = item;
       return rest;
     });
@@ -89,8 +103,9 @@ function ChatList() {
 
       // Calling the change chat function to display a chat
       changeChat({ chatId: chat.chatId, userInfo: chat.user });
-    } catch (err) {
-      console.error(err.message);
+    } catch (e) {
+      toast.error("Couldn't open the chat. Please try again");
+      console.error(e instanceof Error ? e.message : e);
     }
   };
 
@@ -127,7 +142,7 @@ function ChatList() {
 
         {/* List of chats */}
         {filteredChats.length > 0 &&
-          filteredChats.map((chat, i) => (
+          filteredChats.map((chat: ChatObject, i: number) => (
             <div
               className="item"
               key={i}

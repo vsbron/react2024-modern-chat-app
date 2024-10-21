@@ -4,6 +4,14 @@ export type ChatType = {
   messages: MessageType[];
   receiverId?: string;
 };
+export type ChatObject = {
+  chatId: string;
+  isSeen: boolean;
+  lastMessage: string;
+  receiverId: string;
+  updatedAt: number;
+  user: User;
+};
 export type CreatedAtType = { seconds: number; nanoseconds: number } | Date;
 export type FileType = {
   file: File;
@@ -85,6 +93,7 @@ export interface ChatStoreState {
   isCurrentUserBlocked: boolean;
   isReceiverBlocked: boolean;
   changeBlocked: () => void;
+  changeChat: ({ chatId, userInfo }: ChangeChatProps) => void;
   resetChat: () => void;
 }
 export interface UserStoreState {

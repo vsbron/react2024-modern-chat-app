@@ -17,23 +17,24 @@ function UpdateUser() {
   // Getting the current user from the store
   const { currentUser, updateUserInfo } = useUserStore();
 
-  if (currentUser === null) {
-    toast.error("Couldn't update the user. Please sign in again");
-    return null;
-  }
-
   // Setting the state for all user's details
   const [avatar, setAvatar] = useState<AvatarState | string>(
-    currentUser.avatar
+    currentUser?.avatar || ""
   );
-  const [username, setUsername] = useState<string>(currentUser.username);
-  const [email, setEmail] = useState<string>(currentUser.email);
+  const [username, setUsername] = useState<string>(currentUser?.username || "");
+  const [email, setEmail] = useState<string>(currentUser?.email || "");
   const [description, setDescription] = useState<string>(
-    currentUser.description
+    currentUser?.description || ""
   );
 
   // Setting the state for updating process
   const [updating, setUpdating] = useState<boolean>(false);
+
+  // Guard clause
+  if (currentUser === null) {
+    toast.error("Couldn't update the user. Please sign in again");
+    return null;
+  }
 
   // Update profile handler
   const handleUpdateUser = async (e: React.FormEvent<HTMLFormElement>) => {
