@@ -54,6 +54,13 @@ A single-page application (SPA) chat app built with React and Firebase.
 - Attachments now appear in the chat window, with a **file name** (for files) and download option.
 - Shared files/images are organized under **dropdowns** in the Details section, each with a download button.
 
+## License
+
+© 2025 BroN
+
+This repository is intended for portfolio/demo purposes. Permission is granted to view and run the project for personal evaluation. Reuse, redistribution, or commercial use is not permitted without written permission.
+
+
 ### Live version
 
 https://vsbron-react2024-modern-chat-app.netlify.app/
