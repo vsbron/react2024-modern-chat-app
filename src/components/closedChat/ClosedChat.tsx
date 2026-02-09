@@ -26,7 +26,7 @@ function ClosedChat() {
           </p>
         </div>
         <div className="closed-chat__copyright">
-          <img src="./mca-logo.svg" alt="MCA Logo" title="Modern Chat App" />
+          <img src="/mca-logo.svg" alt="MCA Logo" title="Modern Chat App" />
           <span>
             Built by VSBroN as a portfolio project
             <br />

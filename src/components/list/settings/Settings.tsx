@@ -10,7 +10,7 @@ function Settings({ showSettings, setShowSettings }: SettingsProps) {
   return (
     <div className={`settings ${showSettings && "settings--visible"}`}>
       <img
-        src="./close.svg"
+        src="/close.svg"
         className="settings__close"
         onClick={() => setShowSettings(false)}
       />

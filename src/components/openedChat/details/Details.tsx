@@ -78,7 +78,7 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
   return (
     <section className={`details ${showDetails ? "details--active" : ""}`}>
       <img
-        src="./close.svg"
+        src="/close.svg"
         alt="Close details"
         title="Close details"
         className="details__close"
@@ -154,12 +154,12 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
                   (message: MessageType, i: number) =>
                     message.file && (
                       <div className="details__files-container" key={i}>
-                        <img src="./file.svg" alt="Shared file" />
+                        <img src="/file.svg" alt="Shared file" />
                         <span className="details__filename">
                           {message.fileName}
                         </span>
                         <img
-                          src="./download.svg"
+                          src="/download.svg"
                           className="details__files-download"
                           height={20}
                           alt="Download file"

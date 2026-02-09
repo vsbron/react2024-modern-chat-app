@@ -35,13 +35,13 @@ function UserInfo({ setShowSettings }: UserInfoProps) {
       </div>
       <div className="icons">
         <img
-          src="./settings.svg"
+          src="/settings.svg"
           alt="Settings"
           title="Settings"
           onClick={() => setShowSettings(true)}
         />
         <img
-          src="./logout.svg"
+          src="/logout.svg"
           alt="Log out"
           title="Log out"
           onClick={handleLogout}

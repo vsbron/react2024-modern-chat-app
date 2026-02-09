@@ -188,7 +188,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
             </div>
             <div className="chat-top__icons">
               <img
-                src="./info.svg"
+                src="/info.svg"
                 alt={`More info about ${user!.username}`}
                 title={`More info about ${user!.username}`}
                 className="chat-top__icons--details"
@@ -197,7 +197,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
                 }}
               />
               <img
-                src="./close.svg"
+                src="/close.svg"
                 alt={`Close chat with ${user!.username}`}
                 title={`Close chat with ${user!.username}`}
                 onClick={() => {
@@ -232,7 +232,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
                   <div className="chat-center__file">
                     <span>{message.fileName}</span>
                     <img
-                      src="./file.svg"
+                      src="/file.svg"
                       className="chat-center__attached"
                       height={40}
                       alt="Attached file"
@@ -287,7 +287,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
               </>
             )}
             <img
-              src="./close.svg"
+              src="/close.svg"
               className="chat-bottom__img-close"
               onClick={resetImage}
               height={20}
@@ -297,7 +297,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
         <form onSubmit={handleSendMessage}>
           <div className="chat-bottom__icons">
             <label onClick={handleLabelClick}>
-              <img src="./attach.svg" alt="Attach file" title="Attach file" />
+              <img src="/attach.svg" alt="Attach file" title="Attach file" />
             </label>
             <input
               type="file"
@@ -321,7 +321,7 @@ function Chat({ chat, setShowDetails, isLoading }: ChatProps) {
           />
           <div className="chat-bottom__icons">
             <img
-              src="./emoji.svg"
+              src="/emoji.svg"
               className="emoji-trigger"
               onClick={handleClick}
               alt="Add an Emoji"
