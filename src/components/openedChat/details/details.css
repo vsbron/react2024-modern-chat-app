@@ -73,7 +73,7 @@
               opacity: 0;
               position: absolute;
               inset: 0;
-              background: var(--color-main-bg) url("./download.svg") no-repeat
+              background: var(--color-main-bg) url("/download.svg") no-repeat
                 center center;
               background-size: 3rem;
               z-index: 100;
