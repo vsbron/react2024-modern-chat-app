@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 // Initializing the app
-// eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
 
 // Exporting the firebase tools

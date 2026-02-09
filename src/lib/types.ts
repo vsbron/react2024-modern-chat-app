@@ -101,6 +101,7 @@ export interface UserStoreState {
   isLoading: boolean;
   fetchUserInfo: (uid: string) => void;
   updateUserInfo: (uid: string, updatedData: UpdatedDataType) => void;
+  clearUserInfo: () => void;
 }
 
 export type ChangeChatProps = {

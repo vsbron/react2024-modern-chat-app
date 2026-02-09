@@ -14,7 +14,8 @@ import Loader from "./ui/loader/Loader";
 
 const App = () => {
   // Getting the user, loading state and fetch function from the store
-  const { currentUser, isLoading, fetchUserInfo } = useUserStore();
+  const { currentUser, isLoading, fetchUserInfo, clearUserInfo } =
+    useUserStore();
 
   // Getting the chatId from the store
   const { chatId } = useChatStore();
@@ -22,7 +23,11 @@ const App = () => {
   // useEffect with event listener for the auth change state
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      if (user) fetchUserInfo(user.uid);
+      if (user) {
+        fetchUserInfo(user.uid);
+      } else {
+        clearUserInfo();
+      }
     });
 
     // Cleanup function when component unmounts

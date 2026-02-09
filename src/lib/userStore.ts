@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 export const useUserStore = create<UserStoreState>((set) => ({
   currentUser: null,
   isLoading: true,
+
+  // Get user data
   fetchUserInfo: async (uid: string) => {
     // Guard clause
     if (!uid) return set({ currentUser: null, isLoading: false });
@@ -27,6 +29,8 @@ export const useUserStore = create<UserStoreState>((set) => ({
       return set({ currentUser: null, isLoading: false }); // Set user to null on error
     }
   },
+
+  // Update user data
   updateUserInfo: async (uid: string, updatedData: UpdatedDataType) => {
     try {
       // Getting the reference to the database table
@@ -46,6 +50,17 @@ export const useUserStore = create<UserStoreState>((set) => ({
       }));
     } catch (e: unknown) {
       throw new Error("Failed to update user");
+    }
+  },
+
+  // Clear user data
+  clearUserInfo: async () => {
+    try {
+      set({ currentUser: null, isLoading: false });
+    } catch (e: unknown) {
+      toast.error("Couldn't clear the user data");
+      console.error(e instanceof Error ? e.message : e);
+      return set({ currentUser: null, isLoading: false }); // Set user to null on error
     }
   },
 }));

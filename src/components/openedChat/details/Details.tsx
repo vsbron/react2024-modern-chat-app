@@ -14,12 +14,13 @@ import "./details.css";
 import { toast } from "react-toastify";
 
 function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
-  // State for the images and files sections
+  // State for the images and files sections and fetching ststae
   const [showImages, setShowImages] = useState<boolean>(false);
   const [showFiles, setShowFiles] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   // Get the current user, other user and blocking constants from the store
-  const { currentUser } = useUserStore();
+  const { currentUser, fetchUserInfo } = useUserStore();
   const { user, changeBlocked, isReceiverBlocked, isCurrentUserBlocked } =
     useChatStore();
 
@@ -36,6 +37,9 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
     // If user blocked you, button does nothing
     if (!user) return;
 
+    // Enable fetching state
+    setIsFetching(true);
+
     // Get a reference to the user
     const userDocRef = doc(db, "users", currentUser!.id);
 
@@ -44,12 +48,16 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
       await updateDoc(userDocRef, {
         blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
       });
+      await fetchUserInfo(currentUser!.id);
 
       // Use the function from the store
       changeBlocked();
     } catch (e: unknown) {
       toast.error("Couldn't block the user due to unknown error");
       console.error(e instanceof Error ? e.message : e);
+    } finally {
+      // Disable fetching state
+      setIsFetching(false);
     }
   };
 
@@ -120,7 +128,7 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
                           <div className="details__images-overlay"></div>
                         </div>
                       </div>
-                    )
+                    ),
                 )
               )}
             </div>
@@ -161,7 +169,7 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
                           }}
                         />
                       </div>
-                    )
+                    ),
                 )
               )}
             </div>
@@ -171,15 +179,20 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
         {/* Block user button */}
         <button
           className={`details__info-block ${
-            isCurrentUserBlocked ? "details__info-block--blocked" : ""
-          }`}
+            isCurrentUserBlocked || isFetching
+              ? "details__info-block--blocked"
+              : ""
+          } `}
           onClick={handleBlock}
+          disabled={isFetching}
         >
-          {isCurrentUserBlocked
-            ? "You are blocked"
-            : isReceiverBlocked
-            ? "User blocked"
-            : "Block user"}
+          {isFetching
+            ? "Working..."
+            : isCurrentUserBlocked
+              ? "You are blocked"
+              : isReceiverBlocked
+                ? "User blocked"
+                : "Block user"}
         </button>
       </div>
     </section>

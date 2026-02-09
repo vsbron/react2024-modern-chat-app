@@ -89,7 +89,7 @@
         }
 
         .chat-center__attached {
-          align-self: end;
+          align-self: flex-start;
           border-radius: var(--border-radius-sm);
           object-fit: cover;
           cursor: pointer;
@@ -108,11 +108,19 @@
       &.chat-center__message-container--own {
         align-self: end;
 
+        .chat-center__attached {
+          align-self: flex-end;
+        }
+
         .chat-center__message {
           background-color: var(--color-message-own);
         }
         .chat-center__timestamp {
           text-align: right;
+        }
+
+        .chat-center__file {
+          justify-content: flex-end;
         }
       }
     }
