@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "emoji-picker-react": "^4.11.1",
     "file-saver": "^2.0.5",
     "firebase": "^10.13.0",

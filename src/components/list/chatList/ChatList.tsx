@@ -10,6 +10,11 @@ import { useUserStore } from "../../../lib/userStore";
 import AddUser from "./addUser/AddUser";
 import Avatar from "../../../ui/avatar/Avatar";
 
+import {
+  NoSymbolIcon,
+  LockClosedIcon,
+  LinkIcon,
+} from "@heroicons/react/24/solid";
 import "./chatList.css";
 
 function ChatList() {
@@ -62,7 +67,7 @@ function ChatList() {
 
         // Setting the chatData state while also sorting it by date
         setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
-      }
+      },
     );
 
     // Cleanup function when component unmounts
@@ -73,7 +78,7 @@ function ChatList() {
 
   // Creating a filtered chat list based on the search input
   const filteredChats = chats.filter((c: ChatObject) =>
-    c.user.username.toLowerCase().includes(searchInput.toLowerCase())
+    c.user.username.toLowerCase().includes(searchInput.toLowerCase()),
   );
 
   // Select chat handler
@@ -86,7 +91,7 @@ function ChatList() {
 
     // Searching for a chat we want to open
     const chatIndex = userChats.findIndex(
-      (item) => item.chatId === chat.chatId
+      (item) => item.chatId === chat.chatId,
     );
 
     // Setting the last message to "seen" if it wasn't
@@ -149,11 +154,9 @@ function ChatList() {
                 backgroundColor:
                   chat.chatId === chatId
                     ? "var(--color-chat-active)"
-                    : chat.user.blocked.includes(currentUser.id)
-                    ? "var(--color-chat-blocked)"
                     : !chat.isSeen
-                    ? "var(--color-chat-unread)"
-                    : "",
+                      ? "var(--color-chat-unread)"
+                      : "",
               }}
             >
               <Avatar
@@ -162,16 +165,26 @@ function ChatList() {
                 altTitle={chat.user.username}
               />
               <div className="item__texts">
-                <span>{chat.user.username}</span>
-                {chat.lastMessage && (
-                  <p>
-                    {chat.lastMessage.split(" ").length > 9
+                <div className="item__name-icons">
+                  <span>{chat.user.username}</span>
+                  {chat.user.blocked.includes(currentUser.id) ? (
+                    <LockClosedIcon />
+                  ) : (
+                    currentUser.blocked.includes(chat.user.id) && (
+                      <NoSymbolIcon />
+                    )
+                  )}
+                </div>
+                <p>
+                  {chat.lastMessage === ""
+                    ? "Attachment"
+                    : chat.lastMessage.split(" ").length > 9
                       ? chat.lastMessage.split(" ").slice(0, 9).join(" ") +
                         "..."
                       : chat.lastMessage}
-                  </p>
-                )}
+                </p>
               </div>
+              <LinkIcon />
             </div>
           ))}
       </div>

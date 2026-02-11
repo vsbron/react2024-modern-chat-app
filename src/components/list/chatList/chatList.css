@@ -8,6 +8,10 @@
     gap: 1rem;
     padding: 2rem;
 
+    @media screen and (max-width: 1200px) {
+      padding: 1rem;
+    }
+
     @media screen and (max-width: 800px) {
       padding: 1.5rem;
     }
@@ -47,32 +51,66 @@
   }
 
   .item {
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
     gap: 2rem;
     padding: 2rem;
     cursor: pointer;
 
-    @media screen and (max-width: 800px) {
-      padding: 1.5rem;
+    @media screen and (max-width: 1200px) {
+      padding: 1rem;
+      gap: 1.5rem;
     }
 
     &:not(:last-of-type) {
       border-bottom: var(--border-default);
     }
 
+    svg {
+      flex-basis: 15px;
+      width: 15px;
+      gap: 10px;
+    }
+
     .item__texts {
       display: flex;
+      width: 100%;
       flex-direction: column;
       gap: 0.5rem;
+      min-width: 0;
+
+      .item__name-icons {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
 
       span {
+        display: block;
         font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 14px;
+        }
+      }
+
+      .item__name-icons svg {
+        flex: 0 0 auto;
+        width: 15px;
+        height: 15px;
       }
 
       p {
         font-size: 14px;
         font-weight: 300;
+
+        @media screen and (max-width: 1200px) {
+          font-size: 13px;
+        }
       }
     }
   }

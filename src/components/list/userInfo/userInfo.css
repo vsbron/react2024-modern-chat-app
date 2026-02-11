@@ -5,8 +5,8 @@
   justify-content: space-between;
   gap: 2rem;
 
-  @media screen and (max-width: 800px) {
-    padding: 1.5rem;
+  @media screen and (max-width: 1200px) {
+    padding: 1rem;
   }
 }
 
@@ -19,6 +19,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @media screen and (max-width: 1200px) {
+    gap: 1.5rem;
+  }
+
   h2 {
     font-size: 2rem;
   }
@@ -27,7 +31,7 @@
     font-size: 1.5rem;
   }
 
-  @media screen and (max-width: 1050px) {
+  @media screen and (max-width: 1200px) {
     h2 {
       font-size: 1.8rem;
     }
@@ -54,9 +58,14 @@
     height: 2rem;
     cursor: pointer;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 1200px) {
       width: 1.75rem;
       height: 1.75rem;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 }
