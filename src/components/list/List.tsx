@@ -7,6 +7,7 @@ import UserInfo from "./userInfo/UserInfo";
 import "./list.css";
 
 function List() {
+  // Create state value for settings display
   const [showSettings, setShowSettings] = useState<boolean>(false);
 
   // Returned JSX

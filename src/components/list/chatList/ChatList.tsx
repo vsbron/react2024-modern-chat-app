@@ -66,7 +66,7 @@ function ChatList() {
         const chatData = await Promise.all(promises);
 
         // Setting the chatData state while also sorting it by date
-        setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+        setChats(chatData);
       },
     );
 
@@ -76,8 +76,17 @@ function ChatList() {
     };
   }, [currentUser.id]);
 
+  // Get the pinned and regular chats and sort them by date and then combine them
+  const pinnedChats: ChatObject[] = chats
+    .filter((chat) => currentUser.pinned.includes(chat.user.id))
+    .sort((a, b) => b.updatedAt - a.updatedAt);
+  const regularChats: ChatObject[] = chats
+    .filter((chat) => !currentUser.pinned.includes(chat.user.id))
+    .sort((a, b) => b.updatedAt - a.updatedAt);
+  const sortedChats = [...pinnedChats, ...regularChats];
+
   // Creating a filtered chat list based on the search input
-  const filteredChats = chats.filter((c: ChatObject) =>
+  const filteredChats = sortedChats.filter((c: ChatObject) =>
     c.user.username.toLowerCase().includes(searchInput.toLowerCase()),
   );
 

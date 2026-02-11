@@ -28,13 +28,17 @@ export const useChatStore = create<ChatStoreState>((set) => ({
     // Guard clause
     if (currentUser === null) return toast.error("Couldn't get the user data");
 
-    // Check if other user is blocked current user
+    // Check if chat is pinned
+    const isPinned = currentUser.pinned.includes(userInfo.id);
+
     if (userInfo.blocked.includes(currentUser.id)) {
+      // Check if other user is blocked current user
       return set({
         chatId,
         user: userInfo,
         isCurrentUserBlocked: true,
         isReceiverBlocked: false,
+        isChatPinned: isPinned,
       });
     }
 
@@ -45,6 +49,7 @@ export const useChatStore = create<ChatStoreState>((set) => ({
         user: userInfo,
         isCurrentUserBlocked: false,
         isReceiverBlocked: true,
+        isChatPinned: isPinned,
       });
     }
 
@@ -54,6 +59,7 @@ export const useChatStore = create<ChatStoreState>((set) => ({
       user: userInfo,
       isCurrentUserBlocked: false,
       isReceiverBlocked: false,
+      isChatPinned: isPinned,
     });
   },
   resetChat: () => {
@@ -62,6 +68,7 @@ export const useChatStore = create<ChatStoreState>((set) => ({
       user: null,
       isCurrentUserBlocked: false,
       isReceiverBlocked: false,
+      isChatPinned: false,
     });
   },
 }));
