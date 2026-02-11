@@ -124,6 +124,7 @@ function Login() {
         id: res.user.uid,
         color: "violet",
         blocked: [],
+        pinned: [],
       });
 
       // Creating the entry in the user chats database with the list of the chats

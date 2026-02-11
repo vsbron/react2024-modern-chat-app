@@ -1,3 +1,5 @@
+import React from "react";
+
 // Global Types
 export type ChatType = {
   createdAt: CreatedAtType;
@@ -62,7 +64,7 @@ export type AvatarProps = {
 };
 
 export type ButtonProps = {
-  children: string;
+  children: React.ReactNode;
   padding: string;
   onClick?: React.MouseEventHandler;
   disabled?: boolean;
@@ -122,6 +124,7 @@ export type User = {
   username: string;
   avatar: string;
   blocked: string[];
+  pinned: string[];
   description: string;
   color: string;
   email: string;

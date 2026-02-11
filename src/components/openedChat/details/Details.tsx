@@ -12,6 +12,14 @@ import LoaderSmall from "../../../ui/loader/LoaderSmall";
 
 import "./details.css";
 import { toast } from "react-toastify";
+import {
+  LinkIcon,
+  LinkSlashIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+  NoSymbolIcon,
+} from "@heroicons/react/24/solid";
+import Button from "../../../ui/button/Button";
 
 function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
   // State for the images and files sections and fetching ststae
@@ -177,23 +185,43 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
         </div>
 
         {/* Block user button */}
-        <button
-          className={`details__info-block ${
-            isCurrentUserBlocked || isFetching
-              ? "details__info-block--blocked"
-              : ""
-          } `}
-          onClick={handleBlock}
-          disabled={isFetching}
-        >
-          {isFetching
-            ? "Working..."
-            : isCurrentUserBlocked
-              ? "You are blocked"
-              : isReceiverBlocked
-                ? "User blocked"
-                : "Block user"}
-        </button>
+        <div className="details__buttons">
+          <Button padding="1.5rem 2rem">
+            <div>
+              <span className="details__button">
+                <LinkIcon /> Pin chat
+              </span>
+              <span className="details__button">
+                <LinkSlashIcon /> Unpin chat
+              </span>
+            </div>
+          </Button>
+          <button
+            className={`details__info-block ${
+              isCurrentUserBlocked || isFetching
+                ? "details__info-block--blocked"
+                : ""
+            } `}
+            onClick={handleBlock}
+            disabled={isFetching}
+          >
+            {isFetching ? (
+              "Working..."
+            ) : isCurrentUserBlocked ? (
+              <span className="details__button">
+                <NoSymbolIcon /> You are blocked
+              </span>
+            ) : isReceiverBlocked ? (
+              <span className="details__button">
+                <LockOpenIcon /> Unblock user
+              </span>
+            ) : (
+              <span className="details__button">
+                <LockClosedIcon /> Block user
+              </span>
+            )}
+          </button>
+        </div>
       </div>
     </section>
   );

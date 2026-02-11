@@ -168,10 +168,10 @@ function ChatList() {
                 <div className="item__name-icons">
                   <span>{chat.user.username}</span>
                   {chat.user.blocked.includes(currentUser.id) ? (
-                    <LockClosedIcon />
+                    <NoSymbolIcon />
                   ) : (
                     currentUser.blocked.includes(chat.user.id) && (
-                      <NoSymbolIcon />
+                      <LockClosedIcon />
                     )
                   )}
                 </div>
