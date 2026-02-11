@@ -7,12 +7,19 @@ import { ChatStoreState } from "./types";
 export const useChatStore = create<ChatStoreState>((set) => ({
   chatId: null,
   user: null,
+  isChatPinned: false,
   isCurrentUserBlocked: false,
   isReceiverBlocked: false,
   changeBlocked: () => {
     set((state) => ({
       ...state,
       isReceiverBlocked: !state.isReceiverBlocked,
+    }));
+  },
+  changePinned: () => {
+    set((state) => ({
+      ...state,
+      isChatPinned: !state.isChatPinned,
     }));
   },
   changeChat: ({ chatId, userInfo }) => {

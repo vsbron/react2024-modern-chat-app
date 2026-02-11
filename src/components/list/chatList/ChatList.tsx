@@ -184,7 +184,7 @@ function ChatList() {
                       : chat.lastMessage}
                 </p>
               </div>
-              <LinkIcon />
+              {currentUser.pinned.includes(chat.user.id) && <LinkIcon />}
             </div>
           ))}
       </div>

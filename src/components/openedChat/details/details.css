@@ -142,13 +142,14 @@
 
     .details__buttons {
       display: flex;
+      flex-direction: column;
       justify-content: stretch;
-      width: 100%;
+      max-width: 260px;
       gap: 15px;
 
       button {
         width: 100%;
-        padding: 1.5rem 2rem;
+        padding: 1.5rem;
         color: var(--color-white);
         border: none;
         border-radius: var(--border-radius-xs);

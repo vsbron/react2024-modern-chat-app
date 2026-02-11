@@ -22,15 +22,22 @@ import {
 import Button from "../../../ui/button/Button";
 
 function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
-  // State for the images and files sections and fetching ststae
+  // State for the images and files sections and fetching/pinning state
   const [showImages, setShowImages] = useState<boolean>(false);
   const [showFiles, setShowFiles] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [isPinning, setIsPinning] = useState<boolean>(false);
 
   // Get the current user, other user and blocking constants from the store
   const { currentUser, fetchUserInfo } = useUserStore();
-  const { user, changeBlocked, isReceiverBlocked, isCurrentUserBlocked } =
-    useChatStore();
+  const {
+    user,
+    changeBlocked,
+    isReceiverBlocked,
+    isCurrentUserBlocked,
+    isChatPinned,
+    changePinned,
+  } = useChatStore();
 
   // Getting all the messages with images and files
   const messagesWithImages = chat?.messages
@@ -66,6 +73,31 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
     } finally {
       // Disable fetching state
       setIsFetching(false);
+    }
+  };
+  // Pin chat handler
+  const handlePin = async () => {
+    // Enable pinning state
+    setIsPinning(true);
+
+    // Get a reference to the user
+    const userDocRef = doc(db, "users", currentUser!.id);
+
+    // Update the blocked list
+    try {
+      await updateDoc(userDocRef, {
+        pinned: isChatPinned ? arrayRemove(user!.id) : arrayUnion(user!.id),
+      });
+      await fetchUserInfo(currentUser!.id);
+
+      // Use the function from the store
+      changePinned();
+    } catch (e: unknown) {
+      toast.error("Couldn't pin chat due to unknown error");
+      console.error(e instanceof Error ? e.message : e);
+    } finally {
+      // Disable pinning state
+      setIsPinning(false);
     }
   };
 
@@ -186,15 +218,22 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
 
         {/* Block user button */}
         <div className="details__buttons">
-          <Button padding="1.5rem 2rem">
-            <div>
-              <span className="details__button">
-                <LinkIcon /> Pin chat
-              </span>
-              <span className="details__button">
-                <LinkSlashIcon /> Unpin chat
-              </span>
-            </div>
+          <Button
+            padding="1.5rem 2rem"
+            onClick={handlePin}
+            disabled={isPinning}
+          >
+            <span className="details__button">
+              {isChatPinned ? (
+                <>
+                  <LinkSlashIcon /> Unpin chat
+                </>
+              ) : (
+                <>
+                  <LinkIcon /> Pin chat
+                </>
+              )}
+            </span>
           </Button>
           <button
             className={`details__info-block ${

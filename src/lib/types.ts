@@ -95,6 +95,8 @@ export interface ChatStoreState {
   isCurrentUserBlocked: boolean;
   isReceiverBlocked: boolean;
   changeBlocked: () => void;
+  isChatPinned: boolean;
+  changePinned: () => void;
   changeChat: ({ chatId, userInfo }: ChangeChatProps) => void;
   resetChat: () => void;
 }
