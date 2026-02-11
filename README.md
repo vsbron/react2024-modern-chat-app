@@ -33,6 +33,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 - **Vanilla CSS** with **BEM methodology** for styling.
 - **Toastify** library manages notifications.
 - **Zustand** is used for state management.
+- **HeroIcons** are used for some icons.
 - Responsive design supports mobile devices with a minimum width of 665px.
 
 ## Improvements of the Original Project
@@ -48,6 +49,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 - **Color scheme selector** is now accessible in the settings menu.
 - **Blocked user visibility**: avatars and names remain visible even if a user has blocked another.
 - Close chats quickly with an **"X" icon** in the main chat.
+- **Pinned chats**: pin and unpin conversations for quick access.
 - **Modals** (Add User, Emoji) close on outside click or Esc key press.
 - Press **Enter** to send messages directly.
 - File/image attachments display next to the input with filename and removal option.
@@ -56,10 +58,9 @@ A single-page application (SPA) chat app built with React and Firebase.
 
 ## License
 
-© 2025 BroN
+© 2024 BroN
 
 This repository is intended for portfolio/demo purposes. Permission is granted to view and run the project for personal evaluation. Reuse, redistribution, or commercial use is not permitted without written permission.
-
 
 ### Live version
 

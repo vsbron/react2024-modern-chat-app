@@ -156,6 +156,11 @@
         cursor: pointer;
         transition: var(--transition-bg-default);
 
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
         .details__button {
           display: flex;
           justify-content: center;
@@ -179,9 +184,9 @@
         }
 
         &.details__info-block--blocked {
+          pointer-events: none;
           opacity: 0.5;
           cursor: not-allowed;
-
           &:hover {
             background-color: rgba(var(--color-red), 0.7);
           }

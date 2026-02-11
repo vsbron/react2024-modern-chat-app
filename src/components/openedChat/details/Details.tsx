@@ -224,7 +224,9 @@ function Details({ chat, showDetails, setShowDetails }: DetailsProps) {
             disabled={isPinning}
           >
             <span className="details__button">
-              {isChatPinned ? (
+              {isPinning ? (
+                "Working..."
+              ) : isChatPinned ? (
                 <>
                   <LinkSlashIcon /> Unpin chat
                 </>
