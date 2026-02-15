@@ -166,7 +166,11 @@ function Login() {
         <h2>Create an Account</h2>
         <form className="login__form" onSubmit={handleRegister}>
           <label htmlFor="file" className="login__avatar">
-            <Avatar size="5rem" src={avatar.src || "./avatar.png"} />
+            <Avatar
+              size="5rem"
+              src={avatar.src || "./avatar.png"}
+              altTitle="Avatar"
+            />
             Upload an image
           </label>
           <input

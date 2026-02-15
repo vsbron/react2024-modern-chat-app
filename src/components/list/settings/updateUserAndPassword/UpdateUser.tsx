@@ -19,12 +19,12 @@ function UpdateUser() {
 
   // Setting the state for all user's details
   const [avatar, setAvatar] = useState<AvatarState | string>(
-    currentUser?.avatar || ""
+    currentUser?.avatar || "",
   );
   const [username, setUsername] = useState<string>(currentUser?.username || "");
   const [email, setEmail] = useState<string>(currentUser?.email || "");
   const [description, setDescription] = useState<string>(
-    currentUser?.description || ""
+    currentUser?.description || "",
   );
 
   // Setting the state for updating process
@@ -134,6 +134,7 @@ function UpdateUser() {
         <Avatar
           src={typeof avatar === "string" ? avatar : avatar.src}
           size="5rem"
+          altTitle={currentUser!.username}
         />{" "}
         Change avatar
       </label>
