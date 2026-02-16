@@ -4,6 +4,12 @@
   display: flex;
   align-items: center;
 
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
   .login__item {
     flex: 1;
     display: flex;
@@ -12,12 +18,29 @@
     padding: 2rem;
     gap: 2rem;
 
+    @media screen and (max-width: 600px) {
+      gap: 1rem;
+      flex: 0;
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
     .login__form {
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
       gap: 2rem;
+
+      @media screen and (max-width: 600px) {
+        gap: 1rem;
+
+        button {
+          padding: 1rem 2rem !important;
+        }
+      }
 
       input {
         padding: 2rem;
@@ -26,6 +49,10 @@
         background-color: var(--color-input);
         color: var(--color-white);
         border-radius: var(--border-radius-xs);
+
+        @media screen and (max-width: 600px) {
+          padding: 1rem 2rem;
+        }
       }
     }
     .login__avatar {
@@ -35,11 +62,21 @@
       justify-content: space-between;
       cursor: pointer;
       text-decoration: underline;
+
+      @media screen and (max-width: 600px) {
+        height: 4rem;
+      }
     }
   }
   .login__separator {
     height: 80%;
     width: 0.2rem;
     background-color: var(--color-border);
+
+    @media screen and (max-width: 600px) {
+      height: 1px;
+      width: 60vw;
+      margin-top: 1rem;
+    }
   }
 }
