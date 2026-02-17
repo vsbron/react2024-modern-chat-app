@@ -9,6 +9,7 @@
     position: fixed;
     inset: 0;
     background: var(--color-main-bg-full);
+    border-left: none;
   }
 
   .chat-top {
@@ -18,10 +19,23 @@
     justify-content: space-between;
     border-bottom: var(--border-default);
 
+    @media screen and (max-width: 600px) {
+      padding: 1rem;
+    }
+
     .chat-top__user {
       display: flex;
       align-items: center;
       gap: 2rem;
+
+      @media screen and (max-width: 600px) {
+        gap: 1.5rem;
+
+        img {
+          width: 5rem !important;
+          height: 5rem !important;
+        }
+      }
 
       .chat-top__texts {
         display: flex;
@@ -30,12 +44,20 @@
         .chat-top__user-name {
           font-size: 1.8rem;
           font-weight: 700;
+
+          @media screen and (max-width: 600px) {
+            font-size: 1.6rem;
+          }
         }
 
         .chat-top__user-email {
           font-size: 1.4rem;
           font-weight: 300;
           color: var(--color-gray-light);
+
+          @media screen and (max-width: 600px) {
+            font-size: 1.2rem;
+          }
         }
       }
     }
@@ -43,6 +65,10 @@
     .chat-top__icons {
       display: flex;
       gap: 2rem;
+
+      @media screen and (max-width: 600px) {
+        gap: 1.5rem;
+      }
 
       img {
         width: 2rem;
@@ -68,6 +94,10 @@
     flex: 1;
     gap: 2rem;
 
+    @media screen and (max-width: 600px) {
+      padding: 1rem;
+    }
+
     .chat-center__message-container {
       max-width: 70%;
       display: flex;
@@ -80,6 +110,10 @@
         flex-direction: column;
         gap: 0.5rem;
 
+        @media screen and (max-width: 600px) {
+          gap: 0.25rem;
+        }
+
         .chat-center__file {
           display: flex;
           align-items: center;
@@ -91,6 +125,17 @@
             border-radius: var(--border-radius-sm);
             padding: 0.25rem 0.75rem;
             font-size: 1.4rem;
+
+            @media screen and (max-width: 600px) {
+              font-size: 1.2rem;
+            }
+          }
+
+          @media screen and (max-width: 600px) {
+            img {
+              width: 3rem;
+              height: 3rem;
+            }
           }
         }
 
@@ -99,15 +144,28 @@
           border-radius: var(--border-radius-sm);
           object-fit: cover;
           cursor: pointer;
+
+          @media screen and (max-width: 600px) {
+            height: 6rem;
+          }
         }
 
         .chat-center__message {
           padding: 2rem;
           background-color: var(--color-message);
           border-radius: var(--border-radius-sm);
+
+          @media screen and (max-width: 600px) {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.4rem;
+          }
         }
         .chat-center__timestamp {
           font-size: 1.2rem;
+
+          @media screen and (max-width: 600px) {
+            font-size: 1.1rem;
+          }
         }
       }
 
@@ -142,17 +200,37 @@
       align-items: center;
       gap: 2rem;
 
+      @media screen and (max-width: 600px) {
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+        font-size: 1.4rem;
+
+        img {
+          height: 3rem;
+        }
+      }
+
       .chat-bottom__file-name {
         background-color: rgba(255, 255, 255, 0.1);
         padding: 0.25rem 0.75rem;
         border-radius: var(--border-radius-sm);
         font-size: 1.4rem;
         margin-left: -1rem;
+
+        @media screen and (max-width: 600px) {
+          padding: 0.2rem 0.5rem;
+          font-size: 1.3rem;
+          margin-left: 0;
+        }
       }
 
       .chat-bottom__img-close {
         margin-left: auto;
         cursor: pointer;
+
+        @media screen and (max-width: 600px) {
+          height: 1.5rem;
+        }
       }
     }
 
@@ -162,6 +240,15 @@
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
+
+      @media screen and (max-width: 600px) {
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+
+        button {
+          padding: 0.75rem 1.25rem !important;
+        }
+      }
     }
 
     .chat-bottom__icons {
@@ -173,6 +260,11 @@
         width: 2rem;
         height: 2rem;
         cursor: pointer;
+
+        @media screen and (max-width: 600px) {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
     }
 
@@ -189,6 +281,10 @@
       @media screen and (max-width: 800px) {
         flex: auto;
         width: 20rem;
+      }
+      @media screen and (max-width: 600px) {
+        padding: 1rem;
+        font-size: 1.4rem;
       }
 
       &:disabled {
