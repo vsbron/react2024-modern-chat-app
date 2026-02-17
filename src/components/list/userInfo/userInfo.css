@@ -53,6 +53,12 @@
     width: 20px;
   }
 
+  @media screen and (max-width: 600px) {
+    flex-direction: row;
+    gap: 1.5rem;
+    width: 50px;
+  }
+
   img {
     width: 2rem;
     height: 2rem;
@@ -66,6 +72,11 @@
     @media screen and (max-width: 800px) {
       width: 1.5rem;
       height: 1.5rem;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 1.75rem;
+      height: 1.75rem;
     }
   }
 }
