@@ -12,6 +12,10 @@
     padding: 2rem;
   }
 
+  @media screen and (max-width: 600px) {
+    padding: 1.5rem;
+  }
+
   &.settings--visible {
     transform: translateX(0);
   }
@@ -28,6 +32,10 @@
       right: 1.5rem;
       height: 1.75rem;
     }
+
+    @media screen and (max-width: 600px) {
+      top: 2.25rem;
+    }
   }
 
   form {
@@ -35,6 +43,14 @@
     flex-direction: column;
     gap: 1.25rem;
     margin-top: 2.5rem;
+
+    @media screen and (max-width: 600px) {
+      gap: 1rem;
+
+      button {
+        padding: 1rem !important;
+      }
+    }
 
     & > label {
       display: flex;
