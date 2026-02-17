@@ -16,11 +16,24 @@
     gap: 0.5rem;
     border-bottom: var(--border-default);
 
+    @media screen and (max-width: 600px) {
+      padding: 1.5rem 1rem;
+
+      .details__user-name {
+        font-size: 1.8rem;
+      }
+    }
+
     .details__email {
       font-size: 1.4rem;
       font-weight: 300;
       color: var(--color-gray-light);
       margin-bottom: 1rem;
+
+      @media screen and (max-width: 600px) {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
     }
   }
   .details__info {
@@ -28,6 +41,10 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+
+    @media screen and (max-width: 600px) {
+      padding: 1.5rem;
+    }
 
     .details__info-option {
       .details__info-title {
@@ -42,6 +59,12 @@
           height: 3rem;
           padding: 0.5rem;
           border-radius: var(--border-radius-round);
+
+          @media screen and (max-width: 600px) {
+            padding: 0;
+            width: 2rem;
+            height: 2rem;
+          }
         }
       }
       .details__images {
@@ -128,6 +151,13 @@
             cursor: pointer;
             transition: var(--transition-bg-default);
 
+            @media screen and (max-width: 600px) {
+              margin-right: 0;
+              padding: 0.25rem;
+              height: 2rem;
+              border-radius: 0;
+            }
+
             &:hover {
               background-color: var(--color-main-bg);
             }
@@ -146,6 +176,10 @@
       justify-content: stretch;
       max-width: 260px;
       gap: 15px;
+
+      @media screen and (max-width: 600px) {
+        max-width: 100%;
+      }
 
       button {
         width: 100%;
@@ -171,11 +205,12 @@
             width: 15px;
           }
         }
+
+        @media screen and (max-width: 600px) {
+          padding: 1rem !important;
+        }
       }
 
-      .details__info-pin {
-        background-color: var(--color-);
-      }
       .details__info-block {
         background-color: rgba(var(--color-red), 0.7);
 
@@ -228,6 +263,11 @@
       right: 2rem;
       height: 2rem;
       cursor: pointer;
+
+      @media screen and (max-width: 600px) {
+        top: 2rem;
+        height: 1.75rem;
+      }
     }
   }
 }
