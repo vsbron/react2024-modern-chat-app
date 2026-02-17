@@ -10,9 +10,22 @@
   animation: appear 0.2s ease-out forwards;
   z-index: 200;
 
+  @media screen and (max-width: 600px) {
+    padding: 2rem;
+    background-color: var(--color-main-bg-full);
+  }
+
   .add-user__form {
     display: flex;
     gap: 2rem;
+
+    @media screen and (max-width: 600px) {
+      gap: 1.5rem;
+
+      button {
+        padding: 1rem 1.5rem !important;
+      }
+    }
 
     input {
       padding: 2rem;
@@ -20,6 +33,11 @@
       border: none;
       outline: none;
       min-width: 30rem;
+
+      @media screen and (max-width: 600px) {
+        padding: 1rem;
+        min-width: 0;
+      }
     }
   }
 
@@ -31,18 +49,40 @@
     justify-content: space-between;
     border-top: var(--color-border) 2px dashed;
 
+    @media screen and (max-width: 600px) {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+    }
+
     .add-user__user-details {
       display: flex;
       align-items: center;
       gap: 2rem;
 
+      @media screen and (max-width: 600px) {
+        gap: 1.25rem;
+
+        img {
+          width: 4rem !important;
+          height: 4rem !important;
+        }
+      }
+
       .add-user__user-name {
         display: flex;
         flex-direction: column;
 
+        @media screen and (max-width: 600px) {
+          font-size: 1.4rem;
+        }
+
         & span:last-of-type {
           font-size: 1.4rem;
           color: var(--color-gray-light);
+
+          @media screen and (max-width: 600px) {
+            font-size: 1.3rem;
+          }
         }
       }
 
@@ -57,6 +97,10 @@
     padding-top: 2.5rem;
     border-top: var(--color-border) 2px dashed;
     font-size: 1.4rem;
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.3rem;
+    }
   }
 }
 
