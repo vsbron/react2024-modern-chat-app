@@ -34,7 +34,7 @@ A single-page application (SPA) chat app built with React and Firebase.
 - **Toastify** library manages notifications.
 - **Zustand** is used for state management.
 - **HeroIcons** are used for some icons.
-- Responsive design supports mobile devices with a minimum width of 665px.
+- Responsive design supports mobile devices with a minimum width of 360px.
 
 ## Improvements of the Original Project
 

@@ -16,6 +16,7 @@
   --color-chat-blocked: rgba(var(--color-red), 0.5);
 
   --color-main-bg: rgba(39, 20, 43, 0.85);
+  --color-main-bg-full: rgb(39, 20, 43);
   --color-main-bg-light: rgba(39, 20, 43, 0.4);
   --color-input: #1c0e1f;
   --color-button: #a21caf;
@@ -26,6 +27,7 @@
   --color-chat-unread: rgba(162, 28, 175, 0.8);
 
   --color-main-bg-blue: rgba(19, 27, 42, 0.85);
+  --color-main-bg-blue-full: rgb(19, 27, 42);
   --color-main-bg-light-blue: rgba(19, 27, 42, 0.4);
   --color-input-blue: #0e1520;
   --color-button-blue: #1d44af;
@@ -36,6 +38,7 @@
   --color-chat-unread-blue: rgba(29, 68, 175, 0.8);
 
   --color-main-bg-orange: rgba(42, 24, 19, 0.85);
+  --color-main-bg-orange-full: rgb(42, 24, 19);
   --color-main-bg-light-orange: rgba(42, 24, 19, 0.4);
   --color-input-orange: #20110e;
   --color-button-orange: #af461d;
@@ -46,6 +49,7 @@
   --color-chat-unread-orange: rgba(175, 70, 29, 0.8);
 
   --color-main-bg-green: rgba(20, 42, 19, 0.85);
+  --color-main-bg-green-full: rgb(20, 42, 19);
   --color-main-bg-light-green: rgba(20, 42, 19, 0.4);
   --color-input-green: #0f200e;
   --color-button-green: #15841b;
@@ -74,6 +78,7 @@
 /* Blue color scheme */
 .color-scheme-blue {
   --color-main-bg: var(--color-main-bg-blue);
+  --color-main-bg-full: var(--color-main-bg-blue-full);
   --color-main-bg-light: var(--color-main-bg-light-blue);
   --color-input: var(--color-input-blue);
   --color-button: var(--color-button-blue);
@@ -87,6 +92,7 @@
 /* Blue color scheme */
 .color-scheme-orange {
   --color-main-bg: var(--color-main-bg-orange);
+  --color-main-bg-full: var(--color-main-bg-orange-full);
   --color-main-bg-light: var(--color-main-bg-light-orange);
   --color-input: var(--color-input-orange);
   --color-button: var(--color-button-orange);
@@ -100,6 +106,7 @@
 /* Blue color scheme */
 .color-scheme-green {
   --color-main-bg: var(--color-main-bg-green);
+  --color-main-bg-full: var(--color-main-bg-green-full);
   --color-main-bg-light: var(--color-main-bg-light-green);
   --color-input: var(--color-input-green);
   --color-button: var(--color-button-green);

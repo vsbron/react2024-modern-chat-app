@@ -5,6 +5,12 @@
   display: flex;
   flex-direction: column;
 
+  @media screen and (max-width: 600px) {
+    position: fixed;
+    inset: 0;
+    background: var(--color-main-bg-full);
+  }
+
   .chat-top {
     padding: 2rem;
     display: flex;
