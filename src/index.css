@@ -141,7 +141,7 @@ html {
 }
 
 body {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,7 +202,7 @@ body {
 @media screen and (max-width: 800px) {
   .container {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     border-radius: none;
     border: none;
   }
