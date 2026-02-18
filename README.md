@@ -2,6 +2,8 @@
 
 A single-page application (SPA) chat app built with React and Firebase.
 
+Originally created as a course project, this application was fully refactored and significantly expanded with improved architecture, state management, UI/UX enhancements, and additional product-level features.
+
 ## Features
 
 ### Login Page
@@ -30,31 +32,42 @@ A single-page application (SPA) chat app built with React and Firebase.
 
 - Authentication is managed via **Firebase**.
 - Data fetching and storage are handled by **Firestore**.
+- Real-time updates via **Firestore listeners** (`onSnapshot`).
 - **Vanilla CSS** with **BEM methodology** for styling.
 - **Toastify** library manages notifications.
 - **Zustand** is used for state management.
+- Code-splitting using React.lazy and Suspense to reduce initial bundle size
 - **HeroIcons** are used for some icons.
 - Responsive design supports mobile devices with a minimum width of 360px.
 
-## Improvements of the Original Project
+## Key Improvements over the Original project (Refactor + Feature Expansion)
 
-- **Rewritten** as a React SPA with **TypeScript**.
-- Enhanced color scheme and updated **responsive support**.
-- Added a custom **logo** and favicon.
-- User emails are now displayed in the app.
-- UI icons were optimized, unused icons removed, and active icons replaced with SVGs.
-- **Profile customization** options in the settings menu.
-- **Add Users** feature allows finding users by username or email.
-  - Self-addition or re-adding existing contacts is restricted.
-- **Color scheme selector** is now accessible in the settings menu.
-- **Blocked user visibility**: avatars and names remain visible even if a user has blocked another.
-- Close chats quickly with an **"X" icon** in the main chat.
-- **Pinned chats**: pin and unpin conversations for quick access.
-- **Modals** (Add User, Emoji) close on outside click or Esc key press.
-- Press **Enter** to send messages directly.
-- File/image attachments display next to the input with filename and removal option.
-- Attachments now appear in the chat window, with a **file name** (for files) and download option.
-- Shared files/images are organized under **dropdowns** in the Details section, each with a download button.
+This project started as a course-based chat app and was later fully rewritten and expanded into a more production-style SPA.
+
+### Engineering & Architecture
+
+- Rewritten as a React SPA with **TypeScript**
+- Improved UI structure and responsiveness (mobile min-width: 360px)
+- Optimized icon usage (removed unused assets, replaced active icons with SVGs)
+
+### UX & Product Features
+
+- Settings menu with profile customization (avatar, username, password, description)
+- Theme / color scheme selector
+- Add Users flow (search by username or email)
+  - Prevents self-add and duplicate chats
+- Pinned chats for quick access
+- Quick close chat action ("X" button)
+- Improved modal behavior (outside click + Esc to close)
+- Enter-to-send support
+
+### Messaging & Attachments
+
+- Send text, emojis, and images
+- File/image attachment preview + remove before sending
+- Attachments appear in chat with filename + download option
+- Shared files/images displayed in the Details panel with per-item download buttons
+- Block user support (prevents message exchange while keeping avatars/names visible)
 
 ## License
 

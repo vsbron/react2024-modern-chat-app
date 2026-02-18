@@ -1,16 +1,20 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "./lib/firebase";
 import { useChatStore } from "./lib/chatStore";
 import { useUserStore } from "./lib/userStore";
 
-import List from "./components/list/List";
-import Login from "./components/login/Login";
-import Notifications from "./components/notifications/Notifications";
-import OpenedChat from "./components/openedChat/OpenedChat";
-import ClosedChat from "./components/closedChat/ClosedChat";
 import Loader from "./ui/loader/Loader";
+
+// Lazy components
+const List = lazy(() => import("./components/list/List"));
+const Login = lazy(() => import("./components/login/Login"));
+const Notifications = lazy(
+  () => import("./components/notifications/Notifications"),
+);
+const OpenedChat = lazy(() => import("./components/openedChat/OpenedChat"));
+const ClosedChat = lazy(() => import("./components/closedChat/ClosedChat"));
 
 const App = () => {
   // Getting the user, loading state and fetch function from the store
@@ -42,15 +46,17 @@ const App = () => {
   // Returned JSX
   return (
     <div className="container">
-      {currentUser ? (
-        <>
-          <List />
-          {chatId ? <OpenedChat /> : <ClosedChat />}
-        </>
-      ) : (
-        <Login />
-      )}
-      <Notifications />
+      <Suspense fallback={<Loader />}>
+        {currentUser ? (
+          <>
+            <List />
+            {chatId ? <OpenedChat /> : <ClosedChat />}
+          </>
+        ) : (
+          <Login />
+        )}
+        <Notifications />
+      </Suspense>
     </div>
   );
 };
